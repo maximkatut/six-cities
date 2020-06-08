@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Maksim Baravy](https://up.htmlacademy.ru/react/4/user/388127).
-* Наставник: `Неизвестно`.
+* Наставник: [Александр Белокур](https://htmlacademy.ru/profile/alex-belokur).
 
 ---
 
