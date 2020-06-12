@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export const Main = (props) => {
-  // eslint-disable-next-line react/prop-types
+const Main = (props) => {
   const {rentCount} = props;
   return <div className="page page--gray page--main">
     <header className="header">
@@ -265,3 +265,9 @@ export const Main = (props) => {
   </div>
   ;
 };
+
+Main.propTypes = {
+  rentCount: PropTypes.number.isRequired
+};
+
+export default Main;
