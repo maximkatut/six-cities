@@ -94,7 +94,7 @@ const Main = (props) => {
             </form>
             <div className="cities__places-list places__list tabs__content">
               {rentNames.map((name, index) => {
-                return <article key={index} className="cities__place-card place-card">
+                return <article key={name + index} className="cities__place-card place-card">
                   <div className="place-card__mark">
                     <span>Premium</span>
                   </div>
