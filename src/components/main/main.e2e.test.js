@@ -2,7 +2,7 @@ import React from 'react';
 import Main from './main.jsx';
 import Adapter from "enzyme-adapter-react-16";
 import Enzyme from 'enzyme';
-import {rentNames} from '../../testdata.js';
+import {rentNames} from '../../utils/testdata.js';
 
 Enzyme.configure({
   adapter: new Adapter()
