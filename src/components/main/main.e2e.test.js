@@ -2,6 +2,7 @@ import React from 'react';
 import Main from './main.jsx';
 import Adapter from "enzyme-adapter-react-16";
 import Enzyme from 'enzyme';
+import {rentNames} from '../../testdata.js';
 
 Enzyme.configure({
   adapter: new Adapter()
@@ -14,13 +15,7 @@ describe(`Main e2e`, () => {
     const main = Enzyme.shallow(
         <Main
           rentCount = {5}
-          rentNames = {[
-            `Beautiful & luxurious apartment at great location`,
-            `Wood and stone place`,
-            `Nice, cozy, warm big bed apartment`,
-            `Canal View Prinsengracht`,
-            `Huge house with fireplace`
-          ]}
+          rentNames = {rentNames}
           onMainCardTitleClick = {onMainCardTitleClick}
         />
     );
@@ -30,6 +25,6 @@ describe(`Main e2e`, () => {
       title.simulate(`click`);
     });
 
-    expect(onMainCardTitleClick.mock.calls.length).toBe(5);
+    expect(onMainCardTitleClick.mock.calls.length).toBe(rentNames.length);
   });
 });
