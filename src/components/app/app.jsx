@@ -2,11 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 
+const mainCardTitleHandler = () => {};
+
 const App = (props) => {
   const {rentCount, rentNames} = props;
   return <Main
     rentCount = {rentCount}
     rentNames = {rentNames}
+    onMainCardTitleClick = {mainCardTitleHandler}
   />;
 };
 
