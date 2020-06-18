@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const OfferCard = (props) => {
   const {offerCard, onOfferCardHover, onMainCardTitleClick} = props;
-  const {title, offerType, imageSrc, premium, price, rate} = offerCard;
+  const {title, offerType, mainImage, premium, price, rate} = offerCard;
 
   return (
     <article className="cities__place-card place-card"
@@ -16,7 +16,7 @@ const OfferCard = (props) => {
       </div> : ``}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={imageSrc} width={260} height={200} alt="Place image" />
+          <img className="place-card__image" src={mainImage} width={260} height={200} alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -56,10 +56,9 @@ OfferCard.propTypes = {
   onMainCardTitleClick: PropTypes.func.isRequired,
   onOfferCardHover: PropTypes.func.isRequired,
   offerCard: PropTypes.shape({
-    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     offerType: PropTypes.string.isRequired,
-    imageSrc: PropTypes.string.isRequired,
+    mainImage: PropTypes.string.isRequired,
     premium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
     rate: PropTypes.number.isRequired

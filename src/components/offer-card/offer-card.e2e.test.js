@@ -1,7 +1,7 @@
-import React from 'react';
-import OfferCard from './offer-card.jsx';
 import Adapter from "enzyme-adapter-react-16";
 import Enzyme from 'enzyme';
+import OfferCard from './offer-card.jsx';
+import React from 'react';
 import {offerCards} from '../../utils/test-data.js';
 
 Enzyme.configure({

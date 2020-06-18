@@ -1,7 +1,7 @@
-import React from 'react';
 import OffersList from './offers-list.jsx';
-import renderer from 'react-test-renderer';
+import React from 'react';
 import {offerCards} from '../../utils/test-data.js';
+import renderer from 'react-test-renderer';
 
 describe(`OffersList`, () => {
   it(`OffersList component should render correctly`, () => {

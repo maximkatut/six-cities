@@ -1,7 +1,7 @@
-import React from 'react';
 import OfferCard from './offer-card.jsx';
-import renderer from 'react-test-renderer';
+import React from 'react';
 import {offerCards} from '../../utils/test-data.js';
+import renderer from 'react-test-renderer';
 
 describe(`OfferCard`, () => {
   it(`OfferCard component should render right`, () => {
