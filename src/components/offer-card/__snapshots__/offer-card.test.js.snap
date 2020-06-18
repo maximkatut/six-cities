@@ -5,7 +5,13 @@ exports[`OfferCard OfferCard component should render right 1`] = `
   className="cities__place-card place-card"
   onMouseOver={[Function]}
 >
-  
+  <div
+    className="place-card__mark"
+  >
+    <span>
+      Premium
+    </span>
+  </div>
   <div
     className="cities__image-wrapper place-card__image-wrapper"
   >
@@ -16,7 +22,7 @@ exports[`OfferCard OfferCard component should render right 1`] = `
         alt="Place image"
         className="place-card__image"
         height={200}
-        src="img/apartment-02.jpg"
+        src="img/apartment-01.jpg"
         width={260}
       />
     </a>
@@ -89,13 +95,13 @@ exports[`OfferCard OfferCard component should render right 1`] = `
         href="#"
         onClick={[Function]}
       >
-        Nice, cozy, warm big bed apartment
+        Nice, cozy, warm big bed house
       </a>
     </h2>
     <p
       className="place-card__type"
     >
-      Room
+      House
     </p>
   </div>
 </article>
