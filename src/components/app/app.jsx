@@ -4,38 +4,65 @@ import Main from '../main/main.jsx';
 import Offer from '../offer/offer.jsx';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {offerPropType} from '../../types';
 
-const handleMainCardTitleClick = () => {};
+class App extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeOffer: null
+    };
 
-const App = (props) => {
-  const {offerCards} = props;
-  const renderApp = () => {
+    this._handleMainCardTitleClick = this._handleMainCardTitleClick.bind(this);
+  }
+
+  _handleMainCardTitleClick(offer) {
+    this.setState({
+      activeOffer: offer
+    });
+  }
+
+  _renderApp() {
+    const {offers} = this.props;
+    if (this.state.activeOffer) {
+      return (
+        <Offer
+          offer={this.state.activeOffer}
+        />
+      );
+    } else {
+      return (
+        <Main
+          offers = {offers}
+          onMainCardTitleClick = {this._handleMainCardTitleClick}
+        />
+      );
+    }
+
+  }
+
+  render() {
+    const {offers} = this.props;
+
     return (
-      <Main
-        offerCards = {offerCards}
-        onMainCardTitleClick = {handleMainCardTitleClick}
-      />
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            {this._renderApp()}
+          </Route>
+          <Route exact path="/dev-offer">
+            <Offer
+              offer={offers[0]}
+            />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     );
-  };
-
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          {renderApp()}
-        </Route>
-        <Route exact path="/dev-offer">
-          <Offer
-            offerCard={offerCards[0]}
-          />
-        </Route>
-      </Switch>
-    </BrowserRouter>
-  );
-};
+  }
+}
 
 App.propTypes = {
-  offerCards: PropTypes.array.isRequired
+  offers: PropTypes.arrayOf(offerPropType).isRequired
 };
 
 export default App;
