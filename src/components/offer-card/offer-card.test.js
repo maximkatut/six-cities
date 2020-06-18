@@ -1,15 +1,15 @@
 import OfferCard from './offer-card.jsx';
 import React from 'react';
-import {offerCards} from '../../utils/test-data.js';
+import {offers} from '../../test-data';
 import renderer from 'react-test-renderer';
 
 describe(`OfferCard`, () => {
   it(`OfferCard component should render right`, () => {
     const tree = renderer.create(
         <OfferCard
-          offerCard = {offerCards[0]}
-          onOfferCardHover = {()=>{}}
-          onMainCardTitleClick = {()=>{}}
+          offer={offers[0]}
+          onOfferCardHover={() => { }}
+          onMainCardTitleClick={() => { }}
         />)
       .toJSON();
 

@@ -1,10 +1,7 @@
 import {getRandomArrayItem, getRandomArrayItems, getRandomBoolean, getRandomNumber} from '../utils/random.js';
 
+import {OfferTypes} from '../const.js';
 import {nanoid} from 'nanoid';
-
-const OfferTypes = [
-  `Apartment`, `Room`, `House`, `Hotel`
-];
 
 const OfferNames = [
   `Beautiful & luxurious apartment at great location`,
@@ -39,7 +36,7 @@ const Host = {
   AVATARS: [`img/avatar-angelina.jpg`, `img/avatar-max.jpg`],
 };
 
-const getRandomOfferCard = () => {
+const getRandomOffer = () => {
   return {
     appliences: getRandomArrayItems(Appliences),
     bedrooms: getRandomNumber(1, 3),
@@ -61,6 +58,6 @@ const getRandomOfferCard = () => {
   };
 };
 
-export const offerCards = new Array(4).fill(``).map(() => {
-  return getRandomOfferCard();
+export const offers = new Array(4).fill(``).map(() => {
+  return getRandomOffer();
 });

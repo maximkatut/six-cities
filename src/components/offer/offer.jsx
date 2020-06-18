@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
 import React from 'react';
+import {offerFullPropType} from '../../types';
 
-const Offer = ({offerCard}) => {
+const Offer = ({offer}) => {
   const {
     appliences,
     bedrooms,
@@ -14,7 +14,7 @@ const Offer = ({offerCard}) => {
     price,
     rate,
     title
-  } = offerCard;
+  } = offer;
 
   return (
     <div className="page">
@@ -309,24 +309,7 @@ const Offer = ({offerCard}) => {
 };
 
 Offer.propTypes = {
-  offerCard: PropTypes.shape({
-    appliences: PropTypes.arrayOf(PropTypes.string).isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    description: PropTypes.arrayOf(PropTypes.string).isRequired,
-    guests: PropTypes.number.isRequired,
-    host: PropTypes.shape({
-      avatar: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      super: PropTypes.bool.isRequired
-    }).isRequired,
-    imagesGallery: PropTypes.arrayOf(PropTypes.string).isRequired,
-    mainImage: PropTypes.string.isRequired,
-    offerType: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rate: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired
-  }).isRequired
+  offer: offerFullPropType
 };
 
 export default Offer;

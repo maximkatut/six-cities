@@ -1,14 +1,14 @@
 import Main from './main.jsx';
 import React from 'react';
-import {offerCards} from '../../utils/test-data.js';
+import {offers} from '../../test-data';
 import renderer from 'react-test-renderer';
 
 describe(`Main`, () => {
   it(`Main component should render correctly`, () => {
     const tree = renderer.create(
         <Main
-          offerCards = {offerCards}
-          onMainCardTitleClick = {() => {}}
+          offers={offers}
+          onMainCardTitleClick={() => { }}
         />)
       .toJSON();
 
