@@ -7,6 +7,11 @@ export const getRandomArrayItem = (array) => {
   return array[index];
 };
 
+export const getRandomArrayItems = (array) => {
+  const newArray = array.slice(0, getRandomNumber(1, array.length));
+  return newArray;
+};
+
 export const getRandomBoolean = () => {
   return Math.random() > 0.5;
 };
