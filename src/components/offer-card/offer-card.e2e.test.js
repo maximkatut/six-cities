@@ -24,13 +24,14 @@ describe(`OfferCard e2e`, () => {
     const title = card.find(`.place-card__name a`);
     title.simulate(`click`);
 
-    expect(onMainCardTitleClick.mock.calls.length).toBe(1);
+    expect(onMainCardTitleClick).toHaveBeenCalledTimes(1);
   });
 
-  it(`MouseOver event on article should be passed to handler`, () => {
+  it(`MouseOver event on article should pass object to handler`, () => {
     const article = card.find(`article`);
     article.simulate(`mouseOver`);
 
-    expect(onOfferCardHover.mock.calls.length).toBe(1);
+    expect(onOfferCardHover).toHaveBeenCalledTimes(1);
+    expect(onOfferCardHover.mock.calls[0][0]).toMatchObject(offerCards[0]);
   });
 });
