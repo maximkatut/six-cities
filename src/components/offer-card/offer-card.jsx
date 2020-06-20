@@ -1,14 +1,15 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import {offerPropType} from '../../types';
 
 const OfferCard = (props) => {
-  const {offerCard, onOfferCardHover, onMainCardTitleClick} = props;
-  const {title, offerType, imageSrc, premium, price, rate} = offerCard;
+  const {offer, onOfferCardHover, onMainCardTitleClick} = props;
+  const {title, offerType, mainImage, premium, price, rate} = offer;
 
   return (
     <article className="cities__place-card place-card"
       onMouseOver={() => {
-        onOfferCardHover(offerCard);
+        onOfferCardHover(offer);
       }}
     >
       {premium ? <div className="place-card__mark">
@@ -16,7 +17,7 @@ const OfferCard = (props) => {
       </div> : ``}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={imageSrc} width={260} height={200} alt="Place image" />
+          <img className="place-card__image" src={mainImage} width={260} height={200} alt="Place image" />
         </a>
       </div>
       <div className="place-card__info">
@@ -41,7 +42,9 @@ const OfferCard = (props) => {
         <h2 className="place-card__name">
           <a
             href="#"
-            onClick={onMainCardTitleClick}
+            onClick={() => {
+              onMainCardTitleClick(offer);
+            }}
           >
             {title}
           </a>
@@ -55,15 +58,7 @@ const OfferCard = (props) => {
 OfferCard.propTypes = {
   onMainCardTitleClick: PropTypes.func.isRequired,
   onOfferCardHover: PropTypes.func.isRequired,
-  offerCard: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    offerType: PropTypes.string.isRequired,
-    imageSrc: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    rate: PropTypes.number.isRequired
-  }).isRequired
+  offer: offerPropType
 };
 
 export default OfferCard;

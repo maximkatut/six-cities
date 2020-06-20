@@ -1,13 +1,13 @@
-import React from 'react';
 import App from './app.jsx';
+import React from 'react';
+import {offers} from '../../test-data';
 import renderer from 'react-test-renderer';
-import {offerCards} from '../../utils/test-data.js';
 
 describe(`App`, () => {
   it(`App should render correctly`, () => {
     const tree = renderer.create(
         <App
-          offerCards = {offerCards}
+          offers = {offers}
         />)
       .toJSON();
 

@@ -1,25 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import OfferCard from '../offer-card/offer-card.jsx';
+import PropTypes from 'prop-types';
+import React from 'react';
+import {offerPropType} from '../../types';
 
 class OffersList extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      activeOfferCard: null
+      activeOffer: null
     };
   }
 
   render() {
-    const {offerCards, onMainCardTitleClick} = this.props;
+    const {offers, onMainCardTitleClick} = this.props;
 
     return (
       <div className="cities__places-list places__list tabs__content">
-        {offerCards.map((offerCard) => {
+        {offers.map((offer) => {
           return (
             <OfferCard
-              key={offerCard.title + offerCard.id}
-              offerCard={offerCard}
+              key={offer.title + offer.id}
+              offer={offer}
               onMainCardTitleClick={onMainCardTitleClick}
               onOfferCardHover={(activeCard) => {
                 this.setState({
@@ -35,7 +36,7 @@ class OffersList extends React.PureComponent {
 }
 
 OffersList.propTypes = {
-  offerCards: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(offerPropType).isRequired,
   onMainCardTitleClick: PropTypes.func.isRequired
 };
 
