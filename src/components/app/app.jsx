@@ -2,20 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Main from '../main/main.jsx';
 
-const mainCardTitleHandler = () => {};
+const handleMainCardTitleClick = () => {};
 
 const App = (props) => {
-  const {rentCount, rentNames} = props;
+  const {offerCards} = props;
   return <Main
-    rentCount = {rentCount}
-    rentNames = {rentNames}
-    onMainCardTitleClick = {mainCardTitleHandler}
+    offerCards = {offerCards}
+    onMainCardTitleClick = {handleMainCardTitleClick}
   />;
 };
 
 App.propTypes = {
-  rentCount: PropTypes.number.isRequired,
-  rentNames: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+  offerCards: PropTypes.array.isRequired
 };
 
 export default App;

@@ -1,13 +1,14 @@
 import React from 'react';
-import App from './app.jsx';
+import OffersList from './offers-list.jsx';
 import renderer from 'react-test-renderer';
 import {offerCards} from '../../utils/test-data.js';
 
-describe(`App`, () => {
-  it(`App should render correctly`, () => {
+describe(`OffersList`, () => {
+  it(`OffersList component should render correctly`, () => {
     const tree = renderer.create(
-        <App
+        <OffersList
           offerCards = {offerCards}
+          onMainCardTitleClick = {()=>{}}
         />)
       .toJSON();
 
