@@ -32,3 +32,8 @@ export const offerFullPropType = shape({
   rate: number.isRequired,
   title: string.isRequired
 }).isRequired;
+
+export const citiesPropTypes = arrayOf(shape({
+  name: string.isRequired,
+  city: arrayOf(number).isRequired
+})).isRequired;

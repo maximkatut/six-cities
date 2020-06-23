@@ -50,3 +50,4 @@ export const offers = [
   }
 ];
 
+export const cities = [{city: [52.38333, 4.9], name: `Gomel`}];

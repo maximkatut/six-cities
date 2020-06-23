@@ -1,12 +1,11 @@
 import OfferList from '../offers-list/offers-list.jsx';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {offerPropType} from '../../types';
+import {offerPropType, citiesPropTypes} from '../../types';
 import Map from '../map/map.jsx';
-import {cities} from '../../mocks/cities.js';
 
 const Main = (props) => {
-  const {offers, onMainCardTitleClick} = props;
+  const {offers, cities, onMainCardTitleClick} = props;
   return <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -115,6 +114,7 @@ const Main = (props) => {
 
 Main.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
+  cities: citiesPropTypes,
   onMainCardTitleClick: PropTypes.func.isRequired
 };
 
