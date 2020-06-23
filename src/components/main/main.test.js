@@ -9,7 +9,10 @@ describe(`Main`, () => {
         <Main
           offers={offers}
           onMainCardTitleClick={() => { }}
-        />)
+        />,
+        {createNodeMock: () => {
+          return document.createElement(`div`);
+        }})
       .toJSON();
 
     expect(tree).toMatchSnapshot();
