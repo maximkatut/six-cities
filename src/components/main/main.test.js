@@ -1,6 +1,6 @@
 import Main from './main.jsx';
 import React from 'react';
-import {offers} from '../../test-data';
+import {offers, cities} from '../../test-data';
 import renderer from 'react-test-renderer';
 
 describe(`Main`, () => {
@@ -8,6 +8,7 @@ describe(`Main`, () => {
     const tree = renderer.create(
         <Main
           offers={offers}
+          cities={cities}
           onMainCardTitleClick={() => { }}
         />,
         {createNodeMock: () => {

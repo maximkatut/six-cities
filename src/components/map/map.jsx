@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
-import {offerPropType} from '../../types';
+import {offerPropType, citiesPropTypes} from '../../types';
 import {MAP_ZOOM, MAP_ICON_SIZE, MAP_ICON_URL} from '../../const.js';
 
 class Map extends React.PureComponent {
@@ -57,10 +57,7 @@ class Map extends React.PureComponent {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
-  cities: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    city: PropTypes.arrayOf(PropTypes.number).isRequired
-  })).isRequired
+  cities: citiesPropTypes
 };
 
 export default Map;
