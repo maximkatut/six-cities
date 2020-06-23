@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const {shape, string, number, bool, arrayOf, oneOf} = PropTypes;
 
 export const offerPropType = shape({
+  coordinates: arrayOf(number).isRequired,
   title: string.isRequired,
   offerType: oneOf(OfferTypes).isRequired,
   mainImage: string.isRequired,
@@ -15,6 +16,7 @@ export const offerPropType = shape({
 export const offerFullPropType = shape({
   appliences: arrayOf(string).isRequired,
   bedrooms: number.isRequired,
+  coordinates: arrayOf(number).isRequired,
   description: arrayOf(string).isRequired,
   guests: number.isRequired,
   host: shape({
