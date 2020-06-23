@@ -2,6 +2,8 @@ import OfferList from '../offers-list/offers-list.jsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {offerPropType} from '../../types';
+import Map from '../map/map.jsx';
+import {cities} from '../../mocks/cities.js';
 
 const Main = (props) => {
   const {offers, onMainCardTitleClick} = props;
@@ -100,7 +102,10 @@ const Main = (props) => {
             />
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map" />
+            <Map
+              offers={offers}
+              cities={cities}
+            />
           </div>
         </div>
       </div>
