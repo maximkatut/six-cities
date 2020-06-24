@@ -14,6 +14,7 @@ const Offer = ({offer}) => {
     premium,
     price,
     rate,
+    reviews,
     title
   } = offer;
 
@@ -132,8 +133,10 @@ const Offer = ({offer}) => {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews · <span className="reviews__amount">1</span></h2>
-                <ReviewsList />
+                <h2 className="reviews__title">Reviews · <span className="reviews__amount">{reviews.length}</span></h2>
+                <ReviewsList
+                  reviews={reviews}
+                />
                 <form className="reviews__form form" action="#" method="post">
                   <label className="reviews__label form__label" htmlFor="review">Your review</label>
                   <div className="reviews__rating-form form__rating">

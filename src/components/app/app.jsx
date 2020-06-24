@@ -28,6 +28,7 @@ class App extends React.PureComponent {
       return (
         <Offer
           offer={this.state.activeOffer}
+          reviews={this.state.activeOffer.reviews}
         />
       );
     } else {
