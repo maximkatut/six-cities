@@ -1,8 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {offerFullPropType} from '../../types';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
+import Map from '../map/map.jsx';
+import {citiesPropTypes} from '../../types';
 
-const Offer = ({offer}) => {
+const Offer = ({offer, offers, cities}) => {
   const {
     appliences,
     bedrooms,
@@ -182,7 +185,13 @@ const Offer = ({offer}) => {
               </section>
             </div>
           </div>
-          <section className="property__map map" />
+          <section className="property__map map">
+            <Map
+              activeOffer={offer}
+              offers={offers}
+              cities={cities}
+            />
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
@@ -290,7 +299,9 @@ const Offer = ({offer}) => {
 };
 
 Offer.propTypes = {
-  offer: offerFullPropType
+  offer: offerFullPropType.isRequired,
+  offers: PropTypes.arrayOf(offerFullPropType.isRequired),
+  cities: citiesPropTypes
 };
 
 export default Offer;

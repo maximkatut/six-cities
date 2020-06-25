@@ -41,7 +41,7 @@ export const offerFullPropType = shape({
     date: string.isRequired
   }).isRequired).isRequired,
   title: string.isRequired
-}).isRequired;
+});
 
 export const citiesPropTypes = arrayOf(shape({
   name: string.isRequired,
