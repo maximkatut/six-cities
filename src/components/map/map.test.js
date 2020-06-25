@@ -2,7 +2,6 @@ import Map from './map.jsx';
 import React from 'react';
 import {offers, cities} from '../../test-data';
 import renderer from 'react-test-renderer';
-// import leaflet from 'leaflet';
 
 describe(`Map`, () => {
   it(`Map component should render correctly`, () => {
@@ -10,11 +9,7 @@ describe(`Map`, () => {
         <Map
           offers={offers}
           cities={cities}
-        />,
-        {createNodeMock: () => {
-          return document.createElement(`div`);
-        }})
-      .toJSON();
+        />).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

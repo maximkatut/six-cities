@@ -10,11 +10,7 @@ describe(`Main`, () => {
           offers={offers}
           cities={cities}
           onMainCardTitleClick={() => { }}
-        />,
-        {createNodeMock: () => {
-          return document.createElement(`div`);
-        }})
-      .toJSON();
+        />).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
