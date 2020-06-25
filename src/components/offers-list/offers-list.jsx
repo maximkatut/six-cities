@@ -19,7 +19,7 @@ class OffersList extends React.PureComponent {
         {offers.map((offer) => {
           return (
             <OfferCard
-              key={offer.title + offer.id}
+              key={offer.id}
               offer={offer}
               onMainCardTitleClick={onMainCardTitleClick}
               onOfferCardHover={(activeCard) => {

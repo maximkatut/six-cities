@@ -4,7 +4,7 @@ import Main from '../main/main.jsx';
 import Offer from '../offer/offer.jsx';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {offerPropType} from '../../types';
+import {offerPropType, citiesPropTypes} from '../../types';
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -23,7 +23,7 @@ class App extends React.PureComponent {
   }
 
   _renderApp() {
-    const {offers} = this.props;
+    const {offers, cities} = this.props;
     if (this.state.activeOffer) {
       return (
         <Offer
@@ -33,7 +33,8 @@ class App extends React.PureComponent {
     } else {
       return (
         <Main
-          offers = {offers}
+          offers={offers}
+          cities={cities}
           onMainCardTitleClick = {this._handleMainCardTitleClick}
         />
       );
@@ -62,7 +63,8 @@ class App extends React.PureComponent {
 }
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(offerPropType).isRequired
+  offers: PropTypes.arrayOf(offerPropType).isRequired,
+  cities: citiesPropTypes
 };
 
 export default App;

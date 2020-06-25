@@ -1,6 +1,6 @@
 import App from './app.jsx';
 import React from 'react';
-import {offers} from '../../test-data';
+import {offers, cities} from '../../test-data';
 import renderer from 'react-test-renderer';
 
 describe(`App`, () => {
@@ -8,8 +8,8 @@ describe(`App`, () => {
     const tree = renderer.create(
         <App
           offers = {offers}
-        />)
-      .toJSON();
+          cities = {cities}
+        />).toJSON();
 
     expect(tree).toMatchSnapshot();
   });
