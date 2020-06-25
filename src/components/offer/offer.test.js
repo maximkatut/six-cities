@@ -10,6 +10,7 @@ describe(`Offer`, () => {
           offer = {offers[0]}
           offers={offers}
           cities={cities}
+          onMainCardTitleClick={() => { }}
         />)
       .toJSON();
 

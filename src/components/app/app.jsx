@@ -30,6 +30,7 @@ class App extends React.PureComponent {
           offer={this.state.activeOffer}
           offers={offers}
           cities={cities}
+          onMainCardTitleClick = {this._handleMainCardTitleClick}
         />
       );
     } else {
@@ -58,6 +59,7 @@ class App extends React.PureComponent {
               offer={offers[0]}
               offers={offers}
               cities={cities}
+              onMainCardTitleClick = {this._handleMainCardTitleClick}
             />
           </Route>
         </Switch>
