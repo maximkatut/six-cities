@@ -1,6 +1,6 @@
 import Offer from './offer.jsx';
 import React from 'react';
-import {offers} from '../../test-data';
+import {offers, cities} from '../../test-data';
 import renderer from 'react-test-renderer';
 
 describe(`Offer`, () => {
@@ -8,6 +8,8 @@ describe(`Offer`, () => {
     const tree = renderer.create(
         <Offer
           offer = {offers[0]}
+          offers={offers}
+          cities={cities}
         />)
       .toJSON();
 
