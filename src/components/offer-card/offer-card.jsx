@@ -3,11 +3,14 @@ import React from 'react';
 import {offerPropType} from '../../types';
 
 const OfferCard = (props) => {
-  const {offer, onOfferCardHover, onMainCardTitleClick} = props;
+  const {offer, onOfferCardHover, onMainCardTitleClick, isNearPlaces} = props;
   const {title, offerType, mainImage, premium, price, rate} = offer;
 
+  const placeCardClass = isNearPlaces ? `near-places__` : `cities__place-`;
+  const imageWrapperClass = isNearPlaces ? `near-places` : `cities`;
+
   return (
-    <article className="cities__place-card place-card"
+    <article className={`${placeCardClass}card place-card`}
       onMouseOver={() => {
         onOfferCardHover(offer);
       }}
@@ -15,7 +18,7 @@ const OfferCard = (props) => {
       {premium ? <div className="place-card__mark">
         <span>Premium</span>
       </div> : ``}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${imageWrapperClass}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
           <img className="place-card__image" src={mainImage} width={260} height={200} alt="Place image" />
         </a>
@@ -58,7 +61,8 @@ const OfferCard = (props) => {
 OfferCard.propTypes = {
   onMainCardTitleClick: PropTypes.func.isRequired,
   onOfferCardHover: PropTypes.func.isRequired,
-  offer: offerPropType
+  offer: offerPropType,
+  isNearPlaces: PropTypes.bool
 };
 
 export default OfferCard;

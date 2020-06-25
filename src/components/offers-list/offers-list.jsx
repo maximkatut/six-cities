@@ -12,13 +12,16 @@ class OffersList extends React.PureComponent {
   }
 
   render() {
-    const {offers, onMainCardTitleClick} = this.props;
+    const {offers, onMainCardTitleClick, isNearPlaces} = this.props;
+    const placeCardClass = isNearPlaces ? `near-places__` : `cities__places-`;
+    const tabsContentClass = isNearPlaces ? `` : `tabs__content`;
 
     return (
-      <div className="cities__places-list places__list tabs__content">
+      <div className={`${placeCardClass}list places__list ${tabsContentClass}`}>
         {offers.map((offer) => {
           return (
             <OfferCard
+              isNearPlaces={isNearPlaces}
               key={offer.id}
               offer={offer}
               onMainCardTitleClick={onMainCardTitleClick}
@@ -37,7 +40,8 @@ class OffersList extends React.PureComponent {
 
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
-  onMainCardTitleClick: PropTypes.func.isRequired
+  onMainCardTitleClick: PropTypes.func.isRequired,
+  isNearPlaces: PropTypes.bool
 };
 
 export default OffersList;

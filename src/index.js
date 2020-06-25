@@ -7,7 +7,7 @@ import {cities} from './mocks/cities.js';
 const init = () => {
   ReactDOM.render(
       <App
-        offers = {offers}
+        offers={offers}
         cities={cities}
       />,
       document.querySelector(`#root`)

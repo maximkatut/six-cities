@@ -30,10 +30,31 @@ export const offerFullPropType = shape({
   premium: bool.isRequired,
   price: number.isRequired,
   rate: number.isRequired,
+  reviews: arrayOf(shape({
+    id: string.isRequired,
+    user: shape({
+      userName: string.isRequired,
+      avatar: string.isRequired
+    }).isRequired,
+    content: string.isRequired,
+    rate: number.isRequired,
+    date: string.isRequired
+  }).isRequired).isRequired,
   title: string.isRequired
-}).isRequired;
+});
 
 export const citiesPropTypes = arrayOf(shape({
   name: string.isRequired,
   city: arrayOf(number).isRequired
 })).isRequired;
+
+export const reviewPropTypes = shape({
+  id: string.isRequired,
+  user: shape({
+    userName: string.isRequired,
+    avatar: string.isRequired
+  }).isRequired,
+  content: string.isRequired,
+  rate: number.isRequired,
+  date: string.isRequired
+}).isRequired;

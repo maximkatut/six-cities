@@ -28,6 +28,9 @@ class App extends React.PureComponent {
       return (
         <Offer
           offer={this.state.activeOffer}
+          offers={offers}
+          cities={cities}
+          onMainCardTitleClick = {this._handleMainCardTitleClick}
         />
       );
     } else {
@@ -43,7 +46,7 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {offers} = this.props;
+    const {offers, cities} = this.props;
 
     return (
       <BrowserRouter>
@@ -54,6 +57,9 @@ class App extends React.PureComponent {
           <Route exact path="/dev-offer">
             <Offer
               offer={offers[0]}
+              offers={offers}
+              cities={cities}
+              onMainCardTitleClick = {this._handleMainCardTitleClick}
             />
           </Route>
         </Switch>

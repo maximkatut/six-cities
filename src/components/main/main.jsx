@@ -87,13 +87,13 @@ const Main = (props) => {
                 <li className="places__option" tabIndex={0}>Top rated first</li>
               </ul>
               {/*
-        <select class="places__sorting-type" id="places-sorting">
-          <option class="places__option" value="popular" selected="">Popular</option>
-          <option class="places__option" value="to-high">Price: low to high</option>
-          <option class="places__option" value="to-low">Price: high to low</option>
-          <option class="places__option" value="top-rated">Top rated first</option>
-        </select>
-        */}
+              <select class="places__sorting-type" id="places-sorting">
+                <option class="places__option" value="popular" selected="">Popular</option>
+                <option class="places__option" value="to-high">Price: low to high</option>
+                <option class="places__option" value="to-low">Price: high to low</option>
+                <option class="places__option" value="top-rated">Top rated first</option>
+              </select>
+              */}
             </form>
             <OfferList
               offers = {offers}
@@ -101,10 +101,12 @@ const Main = (props) => {
             />
           </section>
           <div className="cities__right-section">
-            <Map
-              offers={offers}
-              cities={cities}
-            />
+            <section className="cities__map map">
+              <Map
+                offers={offers}
+                cities={cities}
+              />
+            </section>
           </div>
         </div>
       </div>

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
-import {offerPropType, citiesPropTypes} from '../../types';
-import {MAP_ZOOM, MAP_ICON_SIZE, MAP_ICON_URL} from '../../const.js';
+import {offerFullPropType, citiesPropTypes} from '../../types';
+import {MAP_ZOOM, MAP_ICON_SIZE, MAP_ICON_URL, MAP_ACTIVE_ICON_URL} from '../../const.js';
+import {findClosestOffers} from '../../utils';
 
 class Map extends React.PureComponent {
   constructor(props) {
@@ -14,7 +15,7 @@ class Map extends React.PureComponent {
   }
 
   componentDidMount() {
-    const {offers, cities} = this.props;
+    const {offers, cities, activeOffer} = this.props;
 
     const mapContainer = this._divRef.current;
 
@@ -22,6 +23,10 @@ class Map extends React.PureComponent {
     const zoom = MAP_ZOOM;
     const icon = leaflet.icon({
       iconUrl: MAP_ICON_URL,
+      iconSize: MAP_ICON_SIZE
+    });
+    const activeIcon = leaflet.icon({
+      iconUrl: MAP_ACTIVE_ICON_URL,
       iconSize: MAP_ICON_SIZE
     });
 
@@ -35,6 +40,17 @@ class Map extends React.PureComponent {
           attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
         })]
     });
+
+    if (activeOffer) {
+      const closestOffers = findClosestOffers(activeOffer, offers);
+      leaflet.marker(activeOffer.coordinates, {icon: activeIcon}).addTo(map);
+      this._renderMapMarkers(closestOffers, icon, map);
+    } else {
+      this._renderMapMarkers(offers, icon, map);
+    }
+  }
+
+  _renderMapMarkers(offers, icon, map) {
     offers.forEach((offer) => {
       leaflet.marker(offer.coordinates, {icon}).addTo(map);
     });
@@ -47,16 +63,18 @@ class Map extends React.PureComponent {
 
   render() {
     return (
-      <section className="cities__map map"
+      <div
         ref={this._divRef}
+        style={{height: `100%`}}
       >
-      </section>
+      </div>
     );
   }
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(offerPropType).isRequired,
+  activeOffer: offerFullPropType,
+  offers: PropTypes.arrayOf(offerFullPropType.isRequired).isRequired,
   cities: citiesPropTypes
 };
 

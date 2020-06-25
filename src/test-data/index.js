@@ -22,6 +22,18 @@ export const offers = [
     premium: true,
     price: 200,
     rate: 5,
+    reviews: [
+      {
+        id: `0`,
+        user: {
+          userName: `Max`,
+          avatar: `img/avatar-max.jpg`
+        },
+        content: `A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+        rate: 4,
+        date: `new Date()`
+      }
+    ],
     title: `Nice, cozy, warm big bed house`
   },
   {
@@ -46,8 +58,21 @@ export const offers = [
     premium: true,
     price: 300,
     rate: 4,
+    reviews: [
+      {
+        id: `1`,
+        user: {
+          userName: `Alex`,
+          avatar: `img/avatar-max.jpg`
+        },
+        content: `A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+        rate: 3,
+        date: `new Date()`
+      }
+    ],
     title: `Nice, cozy, warm big bed apartment`
   }
 ];
 
 export const cities = [{city: [52.38333, 4.9], name: `Gomel`}];
+
