@@ -15,3 +15,7 @@ export const findClosestOffers = (activeOffer, offers) => {
 
   return closestOffers;
 };
+
+export const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};
