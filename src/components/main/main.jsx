@@ -7,7 +7,7 @@ import CitiesList from '../cities-list/cities-list.jsx';
 import {connect} from 'react-redux';
 
 const Main = (props) => {
-  const {offers, cities, onMainCardTitleClick, activeCityName} = props;
+  const {offers, cities, onMainCardTitleClick} = props;
 
   return <div className="page page--gray page--main">
     <header className="header">
@@ -88,13 +88,11 @@ const Main = (props) => {
 Main.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
   onMainCardTitleClick: PropTypes.func.isRequired,
-  cities: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-  activeCityName: PropTypes.string.isRequired
+  cities: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired
 };
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
-  activeCityName: state.activeCityName,
   cities: state.cities
 });
 
