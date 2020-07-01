@@ -1,3 +1,5 @@
+import {MAX_COUNT_CITIES} from "../const";
+
 const MAX_COUNT_CLOSEST_OFFERS = 3;
 
 export const findClosestOffers = (activeOffer, offers) => {
@@ -18,4 +20,20 @@ export const findClosestOffers = (activeOffer, offers) => {
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
+};
+
+export const getCitiesList = (offers) => {
+  const cities = offers.reduce((acc, offer, index) => {
+    acc[index] = offer.city;
+    return acc;
+  }, []);
+  const uniqueCities = [...new Set(cities)];
+  if (uniqueCities.length > MAX_COUNT_CITIES) {
+    return uniqueCities.slice(MAX_COUNT_CITIES);
+  }
+  return uniqueCities;
+};
+
+export const getOffersByCity = (city, offers) => {
+  return offers.filter((offer) => offer.city.name === city);
 };
