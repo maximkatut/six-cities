@@ -1,14 +1,15 @@
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-
-import Main from '../main/main.jsx';
-import Offer from '../offer/offer.jsx';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {offerPropType, citiesPropTypes} from '../../types';
+import {connect} from 'react-redux';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {offerPropType} from '../../types';
+import Main from '../main/main.jsx';
+import Offer from '../offer/offer.jsx';
 
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
+
     this.state = {
       activeOffer: null
     };
@@ -23,21 +24,16 @@ class App extends React.PureComponent {
   }
 
   _renderApp() {
-    const {offers, cities} = this.props;
     if (this.state.activeOffer) {
       return (
         <Offer
           offer={this.state.activeOffer}
-          offers={offers}
-          cities={cities}
           onMainCardTitleClick = {this._handleMainCardTitleClick}
         />
       );
     } else {
       return (
         <Main
-          offers={offers}
-          cities={cities}
           onMainCardTitleClick = {this._handleMainCardTitleClick}
         />
       );
@@ -46,7 +42,7 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {offers, cities} = this.props;
+    const {offers} = this.props;
 
     return (
       <BrowserRouter>
@@ -57,8 +53,6 @@ class App extends React.PureComponent {
           <Route exact path="/dev-offer">
             <Offer
               offer={offers[0]}
-              offers={offers}
-              cities={cities}
               onMainCardTitleClick = {this._handleMainCardTitleClick}
             />
           </Route>
@@ -70,7 +64,10 @@ class App extends React.PureComponent {
 
 App.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
-  cities: citiesPropTypes
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  offers: state.offers
+});
+
+export default connect(mapStateToProps, null)(App);
