@@ -6,7 +6,7 @@ import {MAP_ZOOM, MAP_ICON_SIZE, MAP_ICON_URL, MAP_ACTIVE_ICON_URL} from '../../
 import {findClosestOffers} from '../../utils';
 import {connect} from 'react-redux';
 
-class Map extends React.Component {
+class Map extends React.PureComponent {
   constructor(props) {
     super(props);
     this._divRef = React.createRef();
@@ -27,6 +27,10 @@ class Map extends React.Component {
       this._map.flyTo(this._activeCity.coords);
       this._renderMapMarkers(offers, this._icon, this._map);
     }
+
+    if (prevProps.activeOffer !== this.props.activeOffer) {
+      this._renderMapMarkersOnOffer(this.props.activeOffer, offers, this._icon, this._map);
+    }
   }
 
   componentDidMount() {
@@ -40,7 +44,7 @@ class Map extends React.Component {
       iconUrl: MAP_ICON_URL,
       iconSize: MAP_ICON_SIZE
     });
-    const activeIcon = leaflet.icon({
+    this._activeIcon = leaflet.icon({
       iconUrl: MAP_ACTIVE_ICON_URL,
       iconSize: MAP_ICON_SIZE
     });
@@ -57,12 +61,16 @@ class Map extends React.Component {
     });
 
     if (activeOffer) {
-      const closestOffers = findClosestOffers(activeOffer, offers);
-      leaflet.marker(activeOffer.coordinates, {icon: activeIcon}).addTo(map);
-      this._renderMapMarkers(closestOffers, icon, map);
+      this._renderMapMarkersOnOffer(activeOffer, offers, this._icon, this._map);
     } else {
       this._renderMapMarkers(offers, icon, map);
     }
+  }
+
+  _renderMapMarkersOnOffer(activeOffer, offers, icon, map) {
+    const closestOffers = findClosestOffers(activeOffer, offers);
+    leaflet.marker(activeOffer.coordinates, {icon: this._activeIcon}).addTo(map);
+    this._renderMapMarkers(closestOffers, icon, map);
   }
 
   _renderMapMarkers(offers, icon, map) {
