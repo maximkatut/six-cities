@@ -1,40 +1,41 @@
 import reducer from './offers-reducer';
-import {offers} from '../mocks/offers';
-import {cities, offers as mockOffers} from '../test-data';
+import {initialState} from './offers-reducer';
+import {cities, offers} from '../test-data';
 import {ActionType} from '../actions/types';
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer has to return initial state if new state is undefined`, () => {
     expect(reducer(undefined, {}))
-    .toEqual({
-      activeCity: `Amsterdam`,
-      offers
-    });
+    .toEqual(initialState);
   });
 
   it(`Reducer should return new state with new city`, () => {
     expect(reducer({
-      activeCity: `Amsterdam`,
-      offers
+      activeCityName: `Amsterdam`,
+      offers,
+      cities
     }, {
       type: ActionType.CHANGE_CITY,
-      city: cities[0].name
+      payload: cities[0].name
     })).toEqual({
-      activeCity: `Gomel`,
-      offers
+      activeCityName: `Gomel`,
+      offers,
+      cities
     });
   });
 
   it(`Reducer should return new state with new offers`, () => {
     expect(reducer({
-      activeCity: `Amsterdam`,
-      offers
+      activeCityName: `Amsterdam`,
+      offers: [],
+      cities
     }, {
       type: ActionType.GET_OFFERS,
-      offers: mockOffers
+      payload: offers
     })).toEqual({
-      activeCity: `Amsterdam`,
-      offers: mockOffers
+      activeCityName: `Amsterdam`,
+      offers,
+      cities
     });
   });
 });

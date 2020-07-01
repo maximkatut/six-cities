@@ -5,7 +5,7 @@ import {ActionType} from '../actions/types';
 const cities = getCitiesList(offers);
 const filteredOffers = getOffersByCity(cities[0].name, offers);
 
-const initialState = {
+export const initialState = {
   activeCityName: cities[0].name,
   offers: filteredOffers,
   cities
