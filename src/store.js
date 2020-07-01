@@ -1,7 +1,7 @@
 import {createStore} from 'redux';
-import reducer from './reducers/offers-reducer';
+import rootReducer from './reducers/offers-reducer';
 
 export const store = createStore(
-    reducer,
+    rootReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
 );
