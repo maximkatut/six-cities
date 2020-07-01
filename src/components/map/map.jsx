@@ -52,12 +52,17 @@ class Map extends React.PureComponent {
     const map = this._map = leaflet.map(mapContainer, {
       center: cityCoords,
       zoom,
+      scrollWheelZoom: false,
       zoomControl: false,
       marker: true,
       layers: [
         leaflet.tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
           attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
         })]
+    });
+
+    map.once(`focus`, () => {
+      map.scrollWheelZoom.enable();
     });
 
     if (activeOffer) {
