@@ -8,5 +8,8 @@ export const store = mockStore({
     activeCityName: cities[0].name,
     offers,
     cities
+  },
+  map: {
+    cardIdOnHover: offers[0].id
   }
 });

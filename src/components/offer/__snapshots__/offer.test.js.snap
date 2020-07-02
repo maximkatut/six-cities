@@ -544,7 +544,8 @@ exports[`Offer Offer should render correctly 1`] = `
         >
           <article
             className="near-places__card place-card"
-            onMouseOver={[Function]}
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
             <div
               className="place-card__mark"

@@ -1,5 +1,4 @@
-import reducer from './offers-reducer';
-import {initialState} from './offers-reducer';
+import reducer, {initialState} from './offers-reducer';
 import {cities, offers} from '../test-data';
 import {ActionType} from '../actions/types';
 import {getOffersBySort} from '../utils';
