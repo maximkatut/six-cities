@@ -16,6 +16,10 @@ export const offerPropType = shape({
 export const offerFullPropType = shape({
   appliences: arrayOf(string).isRequired,
   bedrooms: number.isRequired,
+  city: shape({
+    name: string.isRequired,
+    coords: arrayOf(number).isRequired
+  }).isRequired,
   coordinates: arrayOf(number).isRequired,
   description: arrayOf(string).isRequired,
   guests: number.isRequired,
@@ -42,11 +46,6 @@ export const offerFullPropType = shape({
   }).isRequired).isRequired,
   title: string.isRequired
 });
-
-export const citiesPropTypes = arrayOf(shape({
-  name: string.isRequired,
-  city: arrayOf(number).isRequired
-})).isRequired;
 
 export const reviewPropTypes = shape({
   id: string.isRequired,

@@ -1,12 +1,13 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import {connect} from 'react-redux';
+import {MAX_COUNT_MARKERS} from '../../const';
 import {offerFullPropType} from '../../types';
-import ReviewsList from '../reviews-list/reviews-list.jsx';
 import Map from '../map/map.jsx';
-import {citiesPropTypes} from '../../types';
-import OfferList from '../offers-list/offers-list.jsx';
+import OffersList from '../offers-list/offers-list.jsx';
+import ReviewsList from '../reviews-list/reviews-list.jsx';
 
-const Offer = ({offer, offers, cities, onMainCardTitleClick}) => {
+const Offer = ({offer, offers, onMainCardTitleClick}) => {
   const {
     appliences,
     bedrooms,
@@ -22,7 +23,7 @@ const Offer = ({offer, offers, cities, onMainCardTitleClick}) => {
     title
   } = offer;
 
-  const offersClosest = offers.filter((_offer) => _offer !== offer);
+  const offersClosest = offers.filter((_offer) => _offer !== offer).splice(0, MAX_COUNT_MARKERS);
 
   return (
     <div className="page">
@@ -191,15 +192,13 @@ const Offer = ({offer, offers, cities, onMainCardTitleClick}) => {
           <section className="property__map map">
             <Map
               activeOffer={offer}
-              offers={offers}
-              cities={cities}
             />
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OfferList
+            <OffersList
               offers = {offersClosest}
               onMainCardTitleClick = {onMainCardTitleClick}
               isNearPlaces
@@ -214,8 +213,11 @@ const Offer = ({offer, offers, cities, onMainCardTitleClick}) => {
 Offer.propTypes = {
   offer: offerFullPropType.isRequired,
   offers: PropTypes.arrayOf(offerFullPropType.isRequired),
-  cities: citiesPropTypes,
   onMainCardTitleClick: PropTypes.func.isRequired
 };
 
-export default Offer;
+const mapStateToProps = (state) => ({
+  offers: state.offers
+});
+
+export default connect(mapStateToProps, null)(Offer);
