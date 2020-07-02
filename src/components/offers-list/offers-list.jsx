@@ -3,40 +3,26 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {offerPropType} from '../../types';
 
-class OffersList extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeOffer: null
-    };
-  }
+const OffersList = (props) => {
+  const {offers, onMainCardTitleClick, isNearPlaces} = props;
+  const placeCardClass = isNearPlaces ? `near-places__` : `cities__places-`;
+  const tabsContentClass = isNearPlaces ? `` : `tabs__content`;
 
-  render() {
-    const {offers, onMainCardTitleClick, isNearPlaces} = this.props;
-    const placeCardClass = isNearPlaces ? `near-places__` : `cities__places-`;
-    const tabsContentClass = isNearPlaces ? `` : `tabs__content`;
-
-    return (
-      <div className={`${placeCardClass}list places__list ${tabsContentClass}`}>
-        {offers.map((offer) => {
-          return (
-            <OfferCard
-              isNearPlaces={isNearPlaces}
-              key={offer.id}
-              offer={offer}
-              onMainCardTitleClick={onMainCardTitleClick}
-              onOfferCardHover={(activeCard) => {
-                this.setState({
-                  activeOfferCard: activeCard
-                });
-              }}
-            />
-          );
-        })}
-      </div>
-    );
-  }
-}
+  return (
+    <div className={`${placeCardClass}list places__list ${tabsContentClass}`}>
+      {offers.map((offer) => {
+        return (
+          <OfferCard
+            isNearPlaces={isNearPlaces}
+            key={offer.id}
+            offer={offer}
+            onMainCardTitleClick={onMainCardTitleClick}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,

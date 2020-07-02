@@ -15,21 +15,36 @@ class Map extends React.PureComponent {
 
   _getActiveCity() {
     const {cities, activeCityName} = this.props;
-    return cities.filter((city) => city.name === activeCityName)[0];
+    return cities.find((city) => city.name === activeCityName);
   }
 
   componentDidUpdate(prevProps) {
-    const {offers} = this.props;
+    const {offers, cardIdOnHover, activeCityName, activeOffer} = this.props;
 
-    if (prevProps.activeCityName !== this.props.activeCityName) {
+    if (cardIdOnHover === -1) {
+      this._markers.forEach((marker) => this._map.removeLayer(marker));
+      if (activeOffer) {
+        this._renderMapMarkersOnOffer(activeOffer, offers, this._icon, this._map);
+      } else {
+        this._renderMapMarkers(offers, this._icon, this._map);
+      }
+    } else {
+      if (prevProps.cardIdOnHover !== cardIdOnHover) {
+        const _activeOffer = offers.find((offer) => offer.id === cardIdOnHover);
+        this._markers.forEach((marker) => this._map.removeLayer(marker));
+        this._renderMapMarkersOnOffer(_activeOffer, offers, this._icon, this._map);
+      }
+    }
+
+    if (prevProps.activeCityName !== activeCityName) {
       this._activeCity = this._getActiveCity();
       this._markers.forEach((marker) => this._map.removeLayer(marker));
       this._map.flyTo(this._activeCity.coords);
       this._renderMapMarkers(offers, this._icon, this._map);
     }
 
-    if (prevProps.activeOffer !== this.props.activeOffer) {
-      this._renderMapMarkersOnOffer(this.props.activeOffer, offers, this._icon, this._map);
+    if (prevProps.activeOffer !== activeOffer) {
+      this._renderMapMarkersOnOffer(activeOffer, offers, this._icon, this._map);
     }
   }
 
@@ -107,13 +122,15 @@ Map.propTypes = {
   activeOffer: offerFullPropType,
   offers: PropTypes.arrayOf(offerFullPropType.isRequired).isRequired,
   cities: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-  activeCityName: PropTypes.string.isRequired
+  activeCityName: PropTypes.string.isRequired,
+  cardIdOnHover: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => ({
   cities: state.offers.cities,
   activeCityName: state.offers.activeCityName,
-  offers: state.offers.offers
+  offers: state.offers.offers,
+  cardIdOnHover: state.map.cardIdOnHover
 });
 
 export default connect(mapStateToProps, null)(Map);

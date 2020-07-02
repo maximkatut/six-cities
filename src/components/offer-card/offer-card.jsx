@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {offerPropType} from '../../types';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../actions/map-actions';
 
 const OfferCard = (props) => {
-  const {offer, onOfferCardHover, onMainCardTitleClick, isNearPlaces} = props;
+  const {offer, onMainCardTitleClick, onOfferCardHover, isNearPlaces} = props;
   const {title, offerType, mainImage, premium, price, rate} = offer;
 
   const placeCardClass = isNearPlaces ? `near-places__` : `cities__place-`;
@@ -11,8 +13,11 @@ const OfferCard = (props) => {
 
   return (
     <article className={`${placeCardClass}card place-card`}
-      onMouseOver={() => {
-        onOfferCardHover(offer);
+      onMouseEnter={() => {
+        onOfferCardHover(offer.id);
+      }}
+      onMouseLeave={() => {
+        onOfferCardHover(-1);
       }}
     >
       {premium ? <div className="place-card__mark">
@@ -60,9 +65,19 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   onMainCardTitleClick: PropTypes.func.isRequired,
-  onOfferCardHover: PropTypes.func.isRequired,
   offer: offerPropType,
+  onOfferCardHover: PropTypes.func.isRequired,
   isNearPlaces: PropTypes.bool
 };
 
-export default OfferCard;
+const mapStateToProps = (state) => ({
+  activeCard: state.map.activeCard
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onOfferCardHover(activeCard) {
+    dispatch(ActionCreator.changecardIdOnHover(activeCard));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);
