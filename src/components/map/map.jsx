@@ -89,8 +89,9 @@ class Map extends React.PureComponent {
 
   _renderMapMarkersOnOffer(activeOffer, offers, icon, map) {
     const closestOffers = findClosestOffers(activeOffer, offers);
-    leaflet.marker(activeOffer.coordinates, {icon: this._activeIcon}).addTo(map);
+    const marker = leaflet.marker(activeOffer.coordinates, {icon: this._activeIcon}).addTo(map);
     this._renderMapMarkers(closestOffers, icon, map);
+    this._markers.push(marker);
   }
 
   _renderMapMarkers(offers, icon, map) {
