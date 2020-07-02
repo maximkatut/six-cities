@@ -13,3 +13,11 @@ export const MAX_COUNT_CITIES = 6;
 
 // MARKERS
 export const MAX_COUNT_MARKERS = 3;
+
+// SORTING
+export const SortType = {
+  POPULAR: `Popular`,
+  LOW_HIGHT: `Price: low to high`,
+  HIGHT_LOW: `Price: high to low`,
+  TOP: `Top rated first`
+};

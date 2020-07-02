@@ -81,7 +81,7 @@ const Host = {
   AVATARS: [`img/avatar-angelina.jpg`, `img/avatar-max.jpg`],
 };
 
-const getRandomOffer = (coordinate, city) => {
+const getRandomOffer = (coordinate, city, id) => {
   return {
     appliences: getRandomArrayItems(Appliences),
     bedrooms: getRandomNumber(1, 3),
@@ -94,7 +94,7 @@ const getRandomOffer = (coordinate, city) => {
       name: getRandomArrayItem(Host.NAMES),
       super: getRandomBoolean()
     },
-    id: nanoid(),
+    id,
     imagesGallery: getRandomArrayItems(Images),
     mainImage: getRandomArrayItem(Images),
     offerType: getRandomArrayItem(OfferTypes),
@@ -127,7 +127,11 @@ const getRandomOffer = (coordinate, city) => {
   };
 };
 
+let counter = 0;
+
 export const offers = new Array(6).fill(``).map(() => {
+  const id = counter;
+  counter++;
   const city = Cities[getRandomNumber(0, 1)];
   let coordinate = [];
   const coordA = CoordinatesAmsterdam;
@@ -137,5 +141,5 @@ export const offers = new Array(6).fill(``).map(() => {
   } else {
     coordinate = coordP.shift();
   }
-  return getRandomOffer(coordinate, city);
+  return getRandomOffer(coordinate, city, id);
 });
