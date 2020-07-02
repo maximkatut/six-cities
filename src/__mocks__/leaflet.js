@@ -6,6 +6,7 @@ leaflet.map = () => {
   return {
     setView: () => {},
     remove: () => {},
+    once: () => {}
   };
 };
 

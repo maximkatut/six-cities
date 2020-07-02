@@ -5,6 +5,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {offerPropType} from '../../types';
 import Main from '../main/main.jsx';
 import Offer from '../offer/offer.jsx';
+import {offers} from '../../mocks/offers';
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -42,8 +43,6 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {offers} = this.props;
-
     return (
       <BrowserRouter>
         <Switch>

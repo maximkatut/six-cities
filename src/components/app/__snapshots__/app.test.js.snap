@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App App should render correctly 1`] = `
+exports[`App App should render with given state from Redux store 1`] = `
 <div
   className="page page--gray page--main"
 >
@@ -107,7 +107,8 @@ exports[`App App should render correctly 1`] = `
             className="places__found"
           >
             2
-             places to stay in Amsterdam
+             places to stay in 
+            Gomel
           </b>
           <form
             action="#"

@@ -1,13 +1,13 @@
-import OfferList from '../offers-list/offers-list.jsx';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {offerPropType} from '../../types';
-import Map from '../map/map.jsx';
-import CitiesList from '../cities-list/cities-list.jsx';
 import {connect} from 'react-redux';
+import {offerPropType} from '../../types';
+import CitiesList from '../cities-list/cities-list.jsx';
+import Map from '../map/map.jsx';
+import OfferList from '../offers-list/offers-list.jsx';
 
 const Main = (props) => {
-  const {offers, cities, onMainCardTitleClick, activeCityName} = props;
+  const {offers, onMainCardTitleClick, activeCityName} = props;
 
   return <div className="page page--gray page--main">
     <header className="header">
@@ -36,9 +36,7 @@ const Main = (props) => {
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
-          <CitiesList
-            cities={cities}
-          />
+          <CitiesList/>
         </section>
       </div>
       <div className="cities">
@@ -88,14 +86,12 @@ const Main = (props) => {
 Main.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
   onMainCardTitleClick: PropTypes.func.isRequired,
-  cities: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   activeCityName: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
-  activeCityName: state.activeCityName,
-  cities: state.cities
+  activeCityName: state.activeCityName
 });
 
 export default connect(mapStateToProps, null)(Main);

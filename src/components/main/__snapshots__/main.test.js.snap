@@ -107,7 +107,8 @@ exports[`Main Main component should render correctly 1`] = `
             className="places__found"
           >
             2
-             places to stay in Amsterdam
+             places to stay in 
+            Gomel
           </b>
           <form
             action="#"

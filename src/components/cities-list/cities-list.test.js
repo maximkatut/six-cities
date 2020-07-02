@@ -1,18 +1,38 @@
-import CitiesList from './cities-list.jsx';
 import React from 'react';
-import {cities} from '../../test-data';
 import renderer from 'react-test-renderer';
+import CitiesList from './cities-list.jsx';
+import {Provider} from 'react-redux';
+import {ActionCreator} from '../../actions/offers-actions';
+import {store} from '../../test-data/store';
 
 describe(`CitiesList`, () => {
-  it(`CitiesList component should render correctly`, () => {
-    const tree = renderer.create(
-        <CitiesList
-          cities={cities}
-          onCityClick={() => { }}
-          activeCityName={`Gomel`}
-        />)
-      .toJSON();
+  let component;
 
-    expect(tree).toMatchSnapshot();
+  beforeEach(() => {
+
+    store.dispatch = jest.fn();
+
+    component = renderer.create(
+        <Provider store={store}>
+          <CitiesList/>
+        </Provider>);
+  });
+
+  it(`CitiesList component should render correctly`, () => {
+    expect(component.toJSON()).toMatchSnapshot();
+  });
+
+  it(`CitiesList should dispatch an action on button click`, () => {
+    renderer.act(() => {
+      component.root.findByType(`a`).props.onClick();
+    });
+
+    expect(store.dispatch).toHaveBeenCalledTimes(2);
+    expect(store.dispatch).toHaveBeenCalledWith(
+        ActionCreator.changeCity(`Gomel`)
+    );
+    expect(store.dispatch).toHaveBeenCalledWith(
+        ActionCreator.getOffers(`Gomel`)
+    );
   });
 });
