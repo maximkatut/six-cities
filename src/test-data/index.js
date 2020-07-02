@@ -14,7 +14,7 @@ export const offers = [
       name: `Max`,
       super: true
     },
-    id: `1`,
+    id: 1,
     imagesGallery: [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,
@@ -55,7 +55,7 @@ export const offers = [
       name: `Anton`,
       super: false
     },
-    id: `2`,
+    id: 2,
     imagesGallery: [
       `img/apartment-01.jpg`,
       `img/apartment-03.jpg`,
