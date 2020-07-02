@@ -111,9 +111,9 @@ Map.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  cities: state.cities,
-  activeCityName: state.activeCityName,
-  offers: state.offers
+  cities: state.offers.cities,
+  activeCityName: state.offers.activeCityName,
+  offers: state.offers.offers
 });
 
 export default connect(mapStateToProps, null)(Map);

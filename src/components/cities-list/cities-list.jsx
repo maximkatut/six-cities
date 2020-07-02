@@ -37,8 +37,8 @@ CitiesList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeCityName: state.activeCityName,
-  cities: state.cities
+  activeCityName: state.offers.activeCityName,
+  cities: state.offers.cities
 });
 
 const mapDispatchToProps = (dispatch) => ({
