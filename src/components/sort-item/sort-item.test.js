@@ -24,7 +24,7 @@ describe(`SortItem`, () => {
 
   it(`SortItem should dispatch an action on sort-menu dropdown click`, () => {
     renderer.act(() => {
-      component.root.findAllByType(`li`)[0].props.onClick();
+      component.root.findByType(`li`).props.onClick();
     });
 
     expect(onSortClick).toHaveBeenCalledTimes(1);

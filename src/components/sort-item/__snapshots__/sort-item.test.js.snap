@@ -2,10 +2,8 @@
 
 exports[`SortItem SortItem component should render correctly 1`] = `
 <li
-  className="places__option "
+  className="places__option"
   onClick={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   tabIndex={0}
 >
   Popular

@@ -70,14 +70,10 @@ OfferCard.propTypes = {
   isNearPlaces: PropTypes.bool
 };
 
-const mapStateToProps = (state) => ({
-  activeCard: state.map.activeCard
-});
-
 const mapDispatchToProps = (dispatch) => ({
   onOfferCardHover(activeCard) {
     dispatch(ActionCreator.changecardIdOnHover(activeCard));
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(OfferCard);
+export default connect(null, mapDispatchToProps)(OfferCard);

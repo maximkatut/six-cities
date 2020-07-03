@@ -192,6 +192,7 @@ const Offer = ({offer, offers, onMainCardTitleClick}) => {
           <section className="property__map map">
             <Map
               activeOffer={offer}
+              offersClosest={offersClosest}
             />
           </section>
         </section>

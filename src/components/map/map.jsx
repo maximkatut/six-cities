@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import {offerFullPropType} from '../../types';
-import {MAP_ZOOM, MAP_ICON_SIZE, MAP_ICON_URL, MAP_ACTIVE_ICON_URL} from '../../const.js';
-import {findClosestOffers} from '../../utils';
+import {MapData} from '../../const.js';
 import {connect} from 'react-redux';
 
 class Map extends React.PureComponent {
@@ -19,17 +18,17 @@ class Map extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {offers, cardIdOnHover, activeCityName, activeOffer} = this.props;
+    const {offers, cardIdOnHover, activeCityName, activeOffer, offersClosest} = this.props;
 
-    if (cardIdOnHover === -1) {
-      this._markers.forEach((marker) => this._map.removeLayer(marker));
-      if (activeOffer) {
-        this._renderMapMarkersOnOffer(activeOffer, offers, this._icon, this._map);
+    if (prevProps.cardIdOnHover !== cardIdOnHover) {
+      if (cardIdOnHover === -1) {
+        this._markers.forEach((marker) => this._map.removeLayer(marker));
+        if (activeOffer) {
+          this._renderMapMarkersOnOffer(activeOffer, offersClosest, this._icon, this._map);
+        } else {
+          this._renderMapMarkers(offers, this._icon, this._map);
+        }
       } else {
-        this._renderMapMarkers(offers, this._icon, this._map);
-      }
-    } else {
-      if (prevProps.cardIdOnHover !== cardIdOnHover) {
         const _activeOffer = offers.find((offer) => offer.id === cardIdOnHover);
         this._markers.forEach((marker) => this._map.removeLayer(marker));
         this._renderMapMarkersOnOffer(_activeOffer, offers, this._icon, this._map);
@@ -49,19 +48,19 @@ class Map extends React.PureComponent {
   }
 
   componentDidMount() {
-    const {offers, activeOffer} = this.props;
+    const {offers, activeOffer, offersClosest} = this.props;
 
     const mapContainer = this._divRef.current;
     const cityCoords = this._activeCity.coords;
 
-    const zoom = MAP_ZOOM;
+    const zoom = MapData.MAP_ZOOM;
     const icon = this._icon = leaflet.icon({
-      iconUrl: MAP_ICON_URL,
-      iconSize: MAP_ICON_SIZE
+      iconUrl: MapData.MAP_ICON_URL,
+      iconSize: MapData.MAP_ICON_SIZE
     });
     this._activeIcon = leaflet.icon({
-      iconUrl: MAP_ACTIVE_ICON_URL,
-      iconSize: MAP_ICON_SIZE
+      iconUrl: MapData.MAP_ACTIVE_ICON_URL,
+      iconSize: MapData.MAP_ICON_SIZE
     });
 
     const map = this._map = leaflet.map(mapContainer, {
@@ -81,16 +80,16 @@ class Map extends React.PureComponent {
     });
 
     if (activeOffer) {
-      this._renderMapMarkersOnOffer(activeOffer, offers, this._icon, this._map);
+      this._renderMapMarkersOnOffer(activeOffer, offersClosest, this._icon, this._map);
     } else {
       this._renderMapMarkers(offers, icon, map);
     }
   }
 
   _renderMapMarkersOnOffer(activeOffer, offers, icon, map) {
-    const closestOffers = findClosestOffers(activeOffer, offers);
+    const offersWithoutActive = offers.filter((offer) => offer !== activeOffer);
     const marker = leaflet.marker(activeOffer.coordinates, {icon: this._activeIcon}).addTo(map);
-    this._renderMapMarkers(closestOffers, icon, map);
+    this._renderMapMarkers(offersWithoutActive, icon, map);
     this._markers.push(marker);
   }
 
@@ -122,6 +121,7 @@ class Map extends React.PureComponent {
 Map.propTypes = {
   activeOffer: offerFullPropType,
   offers: PropTypes.arrayOf(offerFullPropType.isRequired).isRequired,
+  offersClosest: PropTypes.arrayOf(offerFullPropType.isRequired),
   cities: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   activeCityName: PropTypes.string.isRequired,
   cardIdOnHover: PropTypes.number.isRequired
