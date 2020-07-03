@@ -1,6 +1,6 @@
 import {ActionType} from './types';
 import {offers} from '../mocks/offers';
-import {getOffersByCity} from '../utils';
+import {getOffersByCity, getOffersBySort} from '../utils';
 
 export const ActionCreator = {
   changeCity: (cityName) => {
@@ -14,6 +14,13 @@ export const ActionCreator = {
     return {
       type: ActionType.GET_OFFERS,
       payload: filteredOffers
+    };
+  },
+  changeSortType: (sortType, offersByCity) => {
+    const sortedOffers = getOffersBySort(sortType, offersByCity);
+    return {
+      type: ActionType.CHANGE_SORT_TYPE,
+      payload: sortedOffers
     };
   }
 };

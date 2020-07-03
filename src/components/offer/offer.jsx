@@ -192,6 +192,7 @@ const Offer = ({offer, offers, onMainCardTitleClick}) => {
           <section className="property__map map">
             <Map
               activeOffer={offer}
+              offersClosest={offersClosest}
             />
           </section>
         </section>
@@ -217,7 +218,7 @@ Offer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers
+  offers: state.offers.offers
 });
 
 export default connect(mapStateToProps, null)(Offer);

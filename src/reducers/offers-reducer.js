@@ -21,6 +21,10 @@ export default (state = initialState, action) => {
       return extend(state, {
         offers: action.payload
       });
+    case ActionType.CHANGE_SORT_TYPE:
+      return extend(state, {
+        offers: action.payload
+      });
     default:
       return state;
   }

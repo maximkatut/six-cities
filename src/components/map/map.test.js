@@ -12,6 +12,7 @@ describe(`Map`, () => {
         <Provider store={store}>
           <Map
             activeOffer={offers[0]}
+            offersClosest={offers}
           />
         </Provider>).toJSON();
 

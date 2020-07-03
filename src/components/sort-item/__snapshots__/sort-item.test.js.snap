@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SortItem SortItem component should render correctly 1`] = `
+<li
+  className="places__option"
+  onClick={[Function]}
+  tabIndex={0}
+>
+  Popular
+</li>
+`;

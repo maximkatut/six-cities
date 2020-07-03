@@ -1,6 +1,8 @@
 import {combineReducers} from 'redux';
-import offersReducer from './offers-reducer';
+import offers from './offers-reducer';
+import map from './map-reducer';
 
 export default combineReducers({
-  offers: offersReducer
+  offers,
+  map
 });

@@ -28,6 +28,7 @@ export const offerFullPropType = shape({
     name: string.isRequired,
     super: bool.isRequired
   }).isRequired,
+  id: number.isRequired,
   imagesGallery: arrayOf(string).isRequired,
   mainImage: string.isRequired,
   offerType: oneOf(OfferTypes).isRequired,
