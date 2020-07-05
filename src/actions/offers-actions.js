@@ -22,5 +22,11 @@ export const ActionCreator = {
       type: ActionType.CHANGE_SORT_TYPE,
       payload: sortedOffers
     };
+  },
+  changeActiveOffer: (activeOffer) => {
+    return {
+      type: ActionType.CHANGE_ACTIVE_OFFER,
+      payload: activeOffer
+    };
   }
 };
