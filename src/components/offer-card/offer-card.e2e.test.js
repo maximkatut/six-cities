@@ -54,7 +54,7 @@ describe(`OfferCard e2e`, () => {
 
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(
-        ActionCreator.changecardIdOnHover(1)
+        ActionCreator.changeCardIdOnHover(1)
     );
   });
 });
