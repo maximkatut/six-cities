@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {offerPropType} from '../../types';
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../actions/map-actions';
+import {ActionCreator as MapActionCreator} from '../../actions/map-actions';
+import {ActionCreator as OffersActionCreator} from '../../actions/offers-actions';
 
 const OfferCard = (props) => {
   const {offer, onMainCardTitleClick, onOfferCardHover, isNearPlaces} = props;
@@ -72,7 +73,10 @@ OfferCard.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onOfferCardHover(activeCard) {
-    dispatch(ActionCreator.changeCardIdOnHover(activeCard));
+    dispatch(MapActionCreator.changeCardIdOnHover(activeCard));
+  },
+  onMainCardTitleClick(activeOffer) {
+    dispatch(OffersActionCreator.changeActiveOffer(activeOffer));
   }
 });
 

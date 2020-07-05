@@ -4,7 +4,7 @@ import React from 'react';
 import {offerPropType} from '../../types';
 
 const OffersList = (props) => {
-  const {offers, onMainCardTitleClick, isNearPlaces} = props;
+  const {offers, isNearPlaces} = props;
   const placeCardClass = isNearPlaces ? `near-places__` : `cities__places-`;
   const tabsContentClass = isNearPlaces ? `` : `tabs__content`;
 
@@ -16,7 +16,6 @@ const OffersList = (props) => {
             isNearPlaces={isNearPlaces}
             key={offer.id}
             offer={offer}
-            onMainCardTitleClick={onMainCardTitleClick}
           />
         );
       })}
@@ -26,7 +25,6 @@ const OffersList = (props) => {
 
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
-  onMainCardTitleClick: PropTypes.func.isRequired,
   isNearPlaces: PropTypes.bool
 };
 

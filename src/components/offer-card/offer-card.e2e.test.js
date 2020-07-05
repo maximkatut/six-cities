@@ -6,55 +6,46 @@ import {offers} from '../../test-data';
 import {Provider} from 'react-redux';
 import {store} from '../../test-data/store';
 import renderer from 'react-test-renderer';
-import {ActionCreator} from '../../actions/map-actions';
+import {ActionCreator as MapActionCreator} from '../../actions/map-actions';
+import {ActionCreator as OffersActionCreator} from '../../actions/offers-actions';
 
 Enzyme.configure({
   adapter: new Adapter()
 });
 
 describe(`OfferCard e2e`, () => {
+  let component;
+  beforeEach(() => {
 
-  const onMainCardTitleClick = jest.fn();
-  const onOfferCardHover = jest.fn();
+    store.dispatch = jest.fn();
 
-  it(`Card title should be clicked`, () => {
-
-    const card = Enzyme.mount(
+    component = renderer.create(
         <Provider store={store}>
           <OfferCard
             offer={offers[0]}
-            onOfferCardHover={onOfferCardHover}
-            onMainCardTitleClick={onMainCardTitleClick}
           />
-        </Provider>
+        </Provider>);
+  });
+
+  it(`Card title should dispatch an action`, () => {
+    renderer.act(() => {
+      component.root.findAllByType(`a`)[1].props.onClick();
+    });
+
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
+    expect(store.dispatch).toHaveBeenCalledWith(
+        OffersActionCreator.changeActiveOffer(offers[0])
     );
-
-    const title = card.find(`.place-card__name a`);
-    title.simulate(`click`);
-
-    expect(onMainCardTitleClick).toHaveBeenCalledTimes(1);
   });
 
   it(`MouseOver should dispatch an action`, () => {
-    store.dispatch = jest.fn();
-
-    const component = renderer.create(
-        <Provider store={store}>
-          <OfferCard
-            offer={offers[0]}
-            onOfferCardHover={onOfferCardHover}
-            onMainCardTitleClick={onMainCardTitleClick}
-          />
-        </Provider>
-    );
-
     renderer.act(() => {
       component.root.findByType(`article`).props.onMouseEnter();
     });
 
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(
-        ActionCreator.changeCardIdOnHover(1)
+        MapActionCreator.changeCardIdOnHover(1)
     );
   });
 });

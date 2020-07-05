@@ -11,7 +11,7 @@ import withSortType from '../../hocs/with-sort-type/with-sort-type';
 const SortMenuWrapped = withSortType(SortMenu);
 
 const Main = (props) => {
-  const {offers, onMainCardTitleClick, activeCityName} = props;
+  const {offers, activeCityName} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -52,7 +52,6 @@ const Main = (props) => {
               <SortMenuWrapped/>
               <OfferList
                 offers = {offers}
-                onMainCardTitleClick = {onMainCardTitleClick}
               />
             </section>
             <div className="cities__right-section">
@@ -69,7 +68,6 @@ const Main = (props) => {
 
 Main.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
-  onMainCardTitleClick: PropTypes.func.isRequired,
   activeCityName: PropTypes.string.isRequired
 };
 
