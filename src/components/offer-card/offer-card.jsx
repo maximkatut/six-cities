@@ -72,7 +72,7 @@ OfferCard.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   onOfferCardHover(activeCard) {
-    dispatch(ActionCreator.changecardIdOnHover(activeCard));
+    dispatch(ActionCreator.changeCardIdOnHover(activeCard));
   }
 });
 

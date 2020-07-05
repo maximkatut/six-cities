@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withSortMenu withSortMenu is rendered correctly 1`] = `
+<div>
+  <li
+    onClick={[Function]}
+  />
+</div>
+`;

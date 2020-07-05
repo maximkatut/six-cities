@@ -1,40 +1,11 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../actions/offers-actions';
-import SortItem from '../sort-item/sort-item.jsx';
+import React from 'react';
 import {SortType} from '../../const';
-import {extend} from '../../utils';
+import SortItem from '../sort-item/sort-item.jsx';
 
 class SortMenu extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isMenuHide: true,
-      sortType: SortType.POPULAR
-    };
-    this._hideDropdown = this._hideDropdown.bind(this);
-    this._handleDropdownClick = this._handleDropdownClick.bind(this);
-  }
-
-  _handleDropdownClick() {
-    this.setState((prevState) => {
-      return {
-        isMenuHide: !prevState.isMenuHide
-      };
-    });
-  }
-
-  _hideDropdown() {
-    this.setState({
-      isMenuHide: true
-    });
-  }
-
   render() {
-    const {onSortClick} = this.props;
-    const {isMenuHide, sortType} = this.state;
+    const {onSortClick, isMenuHide, sortType, handleDropdownClick} = this.props;
     const isMenuHideClass = isMenuHide ? `` : `places__options--opened`;
     return (
       <form className="places__sorting" action="#" method="get">
@@ -42,7 +13,7 @@ class SortMenu extends React.PureComponent {
         <span
           className="places__sorting-type"
           tabIndex={0}
-          onClick={this._handleDropdownClick}
+          onClick={handleDropdownClick}
         >
           {sortType}
           <svg className="places__sorting-arrow" width={7} height={4}>
@@ -55,13 +26,7 @@ class SortMenu extends React.PureComponent {
               <SortItem
                 key={sort + index}
                 sortType={sort}
-                onSortClick={(_sortType) => {
-                  this._hideDropdown();
-                  onSortClick(_sortType);
-                  this.setState({
-                    sortType: _sortType
-                  });
-                }}
+                onSortClick={onSortClick}
               />
             );
           })}
@@ -72,28 +37,10 @@ class SortMenu extends React.PureComponent {
 }
 
 SortMenu.propTypes = {
-  onSortClick: PropTypes.func.isRequired
+  onSortClick: PropTypes.func.isRequired,
+  isMenuHide: PropTypes.bool.isRequired,
+  sortType: PropTypes.string.isRequired,
+  handleDropdownClick: PropTypes.func.isRequired
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onSortClick(sortType, offersByCity) {
-    dispatch(ActionCreator.changeSortType(sortType, offersByCity));
-  }
-});
-
-const mapStateToProps = (state) => ({
-  offers: state.offers.offers
-});
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  return extend({
-    ownProps,
-    stateProps,
-    dispatchProps,
-    onSortClick(sortType, offersByCity = stateProps.offers) {
-      dispatchProps.onSortClick(sortType, offersByCity);
-    }
-  });
-};
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(SortMenu);
+export default SortMenu;
