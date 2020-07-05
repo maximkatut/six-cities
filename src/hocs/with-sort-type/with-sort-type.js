@@ -18,7 +18,7 @@ const withSortMenu = (Component) => {
 
       this._hideDropdown = this._hideDropdown.bind(this);
       this._handleDropdownClick = this._handleDropdownClick.bind(this);
-      this._onSortClick = this._onSortClick.bind(this);
+      this._handleSortClick = this._handleSortClick.bind(this);
     }
 
     _handleDropdownClick() {
@@ -35,7 +35,7 @@ const withSortMenu = (Component) => {
       });
     }
 
-    _onSortClick(_sortType) {
+    _handleSortClick(_sortType) {
       const {onSortClick} = this.props;
       this._hideDropdown();
       onSortClick(_sortType);
@@ -52,7 +52,7 @@ const withSortMenu = (Component) => {
           isMenuHide={isMenuHide}
           sortType={sortType}
           handleDropdownClick={this._handleDropdownClick}
-          onSortClick={this._onSortClick}
+          onSortClick={this._handleSortClick}
         />
       );
     }
