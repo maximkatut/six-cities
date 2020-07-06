@@ -24,15 +24,15 @@ describe(`CitiesList`, () => {
 
   it(`CitiesList should dispatch an action on button click`, () => {
     renderer.act(() => {
-      component.root.findByType(`a`).props.onClick();
+      component.root.findAllByType(`a`)[3].props.onClick();
     });
 
     expect(store.dispatch).toHaveBeenCalledTimes(2);
     expect(store.dispatch).toHaveBeenCalledWith(
-        ActionCreator.changeCity(`Gomel`)
+        ActionCreator.changeCity(`Amsterdam`)
     );
     expect(store.dispatch).toHaveBeenCalledWith(
-        ActionCreator.getOffers(`Gomel`)
+        ActionCreator.getOffers(`Amsterdam`)
     );
   });
 });

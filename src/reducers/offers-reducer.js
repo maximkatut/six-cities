@@ -6,7 +6,7 @@ const cities = getCitiesList(offers);
 const filteredOffers = getOffersByCity(cities[0].name, offers);
 
 export const initialState = {
-  activeCityName: cities[0].name,
+  activeCityName: `Paris`,
   activeOffer: null,
   cities,
   offers: filteredOffers,
