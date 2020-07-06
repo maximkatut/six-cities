@@ -7,8 +7,9 @@ const filteredOffers = getOffersByCity(cities[0].name, offers);
 
 export const initialState = {
   activeCityName: cities[0].name,
+  activeOffer: null,
+  cities,
   offers: filteredOffers,
-  cities
 };
 
 export default (state = initialState, action) => {
@@ -24,6 +25,10 @@ export default (state = initialState, action) => {
     case ActionType.CHANGE_SORT_TYPE:
       return extend(state, {
         offers: action.payload
+      });
+    case ActionType.CHANGE_ACTIVE_OFFER:
+      return extend(state, {
+        activeOffer: action.payload
       });
     default:
       return state;

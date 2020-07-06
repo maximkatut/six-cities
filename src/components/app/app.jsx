@@ -1,48 +1,30 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {offerPropType} from '../../types';
+import {offerFullPropType} from '../../types';
 import Main from '../main/main.jsx';
 import Offer from '../offer/offer.jsx';
-import {offers} from '../../mocks/offers';
+import {oneOf} from 'prop-types';
 
 class App extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeOffer: null
-    };
-
-    this._handleMainCardTitleClick = this._handleMainCardTitleClick.bind(this);
-  }
-
-  _handleMainCardTitleClick(offer) {
-    this.setState({
-      activeOffer: offer
-    });
-  }
-
   _renderApp() {
-    if (this.state.activeOffer) {
+    const {activeOffer} = this.props;
+    if (activeOffer) {
       return (
         <Offer
-          offer={this.state.activeOffer}
-          onMainCardTitleClick = {this._handleMainCardTitleClick}
+          offer={activeOffer}
         />
       );
     } else {
       return (
-        <Main
-          onMainCardTitleClick = {this._handleMainCardTitleClick}
-        />
+        <Main/>
       );
     }
 
   }
 
   render() {
+    const {activeOffer} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -51,8 +33,7 @@ class App extends React.PureComponent {
           </Route>
           <Route exact path="/dev-offer">
             <Offer
-              offer={offers[0]}
-              onMainCardTitleClick = {this._handleMainCardTitleClick}
+              offer={activeOffer}
             />
           </Route>
         </Switch>
@@ -62,11 +43,11 @@ class App extends React.PureComponent {
 }
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(offerPropType).isRequired,
+  activeOffer: oneOf([offerFullPropType, null])
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers.offers
+  activeOffer: state.offers.activeOffer
 });
 
 export default connect(mapStateToProps, null)(App);

@@ -38,7 +38,7 @@ class Map extends React.PureComponent {
     if (prevProps.activeCityName !== activeCityName) {
       this._activeCity = this._getActiveCity();
       this._markers.forEach((marker) => this._map.removeLayer(marker));
-      this._map.flyTo(this._activeCity.coords);
+      this._map.flyTo(this._activeCity.coords, MapData.MAP_ZOOM);
       this._renderMapMarkers(offers, this._icon, this._map);
     }
 

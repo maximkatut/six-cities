@@ -14,14 +14,16 @@ describe(`Reducer works correctly`, () => {
     expect(reducer({
       activeCityName: `Amsterdam`,
       offers,
-      cities
+      cities,
+      activeOffer: null
     }, {
       type: ActionType.CHANGE_CITY,
       payload: cities[0].name
     })).toEqual({
       activeCityName: `Gomel`,
       offers,
-      cities
+      cities,
+      activeOffer: null
     });
   });
 
@@ -29,14 +31,16 @@ describe(`Reducer works correctly`, () => {
     expect(reducer({
       activeCityName: `Amsterdam`,
       offers: [],
-      cities
+      cities,
+      activeOffer: null
     }, {
       type: ActionType.GET_OFFERS,
       payload: offers
     })).toEqual({
       activeCityName: `Amsterdam`,
       offers,
-      cities
+      cities,
+      activeOffer: null
     });
   });
 
@@ -44,14 +48,33 @@ describe(`Reducer works correctly`, () => {
     expect(reducer({
       activeCityName: `Amsterdam`,
       offers,
-      cities
+      cities,
+      activeOffer: null
     }, {
       type: ActionType.CHANGE_SORT_TYPE,
       payload: getOffersBySort(SortType.LOW_HIGHT, offers)
     })).toEqual({
       activeCityName: `Amsterdam`,
       offers: offers.slice().sort((leftOffer, rightOffer) => leftOffer.price - rightOffer.price),
-      cities
+      cities,
+      activeOffer: null
+    });
+  });
+
+  it(`Reducer should return new state with new active offer`, () => {
+    expect(reducer({
+      activeCityName: `Amsterdam`,
+      offers,
+      cities,
+      activeOffer: offers[1]
+    }, {
+      type: ActionType.CHANGE_ACTIVE_OFFER,
+      payload: offers[0]
+    })).toEqual({
+      activeCityName: `Amsterdam`,
+      offers: offers.slice().sort((leftOffer, rightOffer) => leftOffer.price - rightOffer.price),
+      cities,
+      activeOffer: offers[0]
     });
   });
 });

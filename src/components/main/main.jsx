@@ -6,9 +6,12 @@ import CitiesList from '../cities-list/cities-list.jsx';
 import Map from '../map/map.jsx';
 import OfferList from '../offers-list/offers-list.jsx';
 import SortMenu from '../sort-menu/sort-menu.jsx';
+import withSortType from '../../hocs/with-sort-type/with-sort-type';
+
+const SortMenuWrapped = withSortType(SortMenu);
 
 const Main = (props) => {
-  const {offers, onMainCardTitleClick, activeCityName} = props;
+  const {offers, activeCityName} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -46,10 +49,9 @@ const Main = (props) => {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offers.length} places to stay in {activeCityName}</b>
-              <SortMenu/>
+              <SortMenuWrapped/>
               <OfferList
                 offers = {offers}
-                onMainCardTitleClick = {onMainCardTitleClick}
               />
             </section>
             <div className="cities__right-section">
@@ -66,7 +68,6 @@ const Main = (props) => {
 
 Main.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
-  onMainCardTitleClick: PropTypes.func.isRequired,
   activeCityName: PropTypes.string.isRequired
 };
 
