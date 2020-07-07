@@ -1,5 +1,5 @@
-import {extend} from '../utils';
-import {ActionType} from '../actions/types';
+import {extend} from '../../utils';
+import {ActionType} from '../../actions/types';
 
 export const initialState = {
   cardIdOnHover: -1

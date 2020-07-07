@@ -1,8 +1,10 @@
 import {combineReducers} from 'redux';
-import offers from './offers-reducer';
-import map from './map-reducer';
+import offers from './offers/offers-reducer';
+import map from './map/map-reducer';
+import user from './user/user-reducer';
 
 export default combineReducers({
   offers,
-  map
+  map,
+  user
 });

@@ -1,6 +1,6 @@
-import {offers} from '../mocks/offers';
-import {extend, getCitiesList, getOffersByCity} from '../utils';
-import {ActionType} from '../actions/types';
+import {offers} from '../../mocks/offers';
+import {extend, getCitiesList, getOffersByCity} from '../../utils';
+import {ActionType} from '../../actions/types';
 
 const cities = getCitiesList(offers);
 const filteredOffers = getOffersByCity(cities[0].name, offers);

@@ -1,8 +1,8 @@
 import reducer, {initialState} from './offers-reducer';
-import {cities, offers} from '../test-data';
-import {ActionType} from '../actions/types';
-import {getOffersBySort} from '../utils';
-import {SortType} from '../const';
+import {cities, offers} from '../../test-data';
+import {ActionType} from '../../actions/types';
+import {getOffersBySort} from '../../utils';
+import {SortType} from '../../const';
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer has to return initial state if new state is undefined`, () => {

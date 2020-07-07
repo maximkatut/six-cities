@@ -1,5 +1,5 @@
 import reducer, {initialState} from './map-reducer';
-import {ActionType} from '../actions/types';
+import {ActionType} from '../../actions/types';
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer has to return initial state if new state is undefined`, () => {
