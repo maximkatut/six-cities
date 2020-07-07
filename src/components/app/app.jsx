@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {offerFullPropType} from '../../types';
 import Main from '../main/main.jsx';
 import Offer from '../offer/offer.jsx';
-import {oneOf} from 'prop-types';
+import {oneOfType, oneOf} from 'prop-types';
 
 class App extends React.PureComponent {
   _renderApp() {
@@ -43,7 +43,7 @@ class App extends React.PureComponent {
 }
 
 App.propTypes = {
-  activeOffer: oneOf([offerFullPropType, null])
+  activeOffer: oneOfType([offerFullPropType.isRequired, oneOf([null])])
 };
 
 const mapStateToProps = (state) => ({
