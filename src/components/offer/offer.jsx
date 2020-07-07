@@ -7,7 +7,7 @@ import Map from '../map/map.jsx';
 import OffersList from '../offers-list/offers-list.jsx';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
 
-const Offer = ({offer, offers, onMainCardTitleClick}) => {
+const Offer = ({offer, offers}) => {
   const {
     appliences,
     bedrooms,
@@ -200,8 +200,7 @@ const Offer = ({offer, offers, onMainCardTitleClick}) => {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <OffersList
-              offers = {offersClosest}
-              onMainCardTitleClick = {onMainCardTitleClick}
+              offersClosest = {offersClosest}
               isNearPlaces
             />
           </section>
@@ -213,8 +212,7 @@ const Offer = ({offer, offers, onMainCardTitleClick}) => {
 
 Offer.propTypes = {
   offer: offerFullPropType.isRequired,
-  offers: PropTypes.arrayOf(offerFullPropType.isRequired),
-  onMainCardTitleClick: PropTypes.func.isRequired
+  offers: PropTypes.arrayOf(offerFullPropType.isRequired)
 };
 
 const mapStateToProps = (state) => ({
