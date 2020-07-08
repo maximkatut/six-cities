@@ -5,6 +5,7 @@ import {offerPropType} from '../../types';
 import CitiesList from '../cities-list/cities-list.jsx';
 import Map from '../map/map.jsx';
 import OfferList from '../offers-list/offers-list.jsx';
+import NoOffers from '../no-offers/no-offers.jsx';
 import SortMenu from '../sort-menu/sort-menu.jsx';
 import withSortType from '../../hocs/with-sort-type/with-sort-type';
 
@@ -12,6 +13,32 @@ const SortMenuWrapped = withSortType(SortMenu);
 
 const Main = (props) => {
   const {offers, activeCityName} = props;
+
+  const renderOffersList = () => {
+    return (
+      <div className="cities__places-container container">
+        <section className="cities__places places">
+          <h2 className="visually-hidden">Places</h2>
+          <b className="places__found">{offers.length} places to stay in {activeCityName}</b>
+          <SortMenuWrapped/>
+          <OfferList/>
+        </section>
+        <div className="cities__right-section">
+          <section className="cities__map map">
+            <Map/>
+          </section>
+        </div>
+      </div>
+    );
+  };
+
+  const renderNoOffers = () => {
+    return (
+      <NoOffers/>
+    );
+  };
+
+  const isOffers = offers.length > 0;
 
   return (
     <div className="page page--gray page--main">
@@ -37,7 +64,7 @@ const Main = (props) => {
           </div>
         </div>
       </header>
-      <main className="page__main page__main--index">
+      <main className={`page__main page__main--index ${isOffers ? `` : `page__main--index-empty`}`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
@@ -45,21 +72,7 @@ const Main = (props) => {
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in {activeCityName}</b>
-              <SortMenuWrapped/>
-              <OfferList
-                offers = {offers}
-              />
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map/>
-              </section>
-            </div>
-          </div>
+          {isOffers ? renderOffersList() : renderNoOffers()}
         </div>
       </main>
     </div>

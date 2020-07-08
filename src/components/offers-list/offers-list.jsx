@@ -2,15 +2,16 @@ import OfferCard from '../offer-card/offer-card.jsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {offerPropType} from '../../types';
+import {connect} from 'react-redux';
 
 const OffersList = (props) => {
-  const {offers, isNearPlaces} = props;
+  const {offers, isNearPlaces, offersClosest} = props;
   const placeCardClass = isNearPlaces ? `near-places__` : `cities__places-`;
   const tabsContentClass = isNearPlaces ? `` : `tabs__content`;
 
   return (
     <div className={`${placeCardClass}list places__list ${tabsContentClass}`}>
-      {offers.map((offer) => {
+      {((offersClosest) ? offersClosest : offers).map((offer) => {
         return (
           <OfferCard
             isNearPlaces={isNearPlaces}
@@ -25,7 +26,12 @@ const OffersList = (props) => {
 
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
+  offersClosest: PropTypes.arrayOf(offerPropType),
   isNearPlaces: PropTypes.bool
 };
 
-export default OffersList;
+const mapStateToProps = (state) => ({
+  offers: state.offers.offers,
+});
+
+export default connect(mapStateToProps, null)(OffersList);

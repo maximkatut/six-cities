@@ -2,6 +2,10 @@ export const OfferTypes = [
   `Apartment`, `Room`, `House`, `Hotel`
 ];
 
+export const Cities = [
+  `Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`
+];
+
 // MAP CONSTS
 export const MapData = {
   MAP_ZOOM: 12,
