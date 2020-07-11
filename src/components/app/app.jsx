@@ -5,6 +5,7 @@ import {offerFullPropType} from '../../types';
 import Main from '../main/main.jsx';
 import Offer from '../offer/offer.jsx';
 import {oneOfType, oneOf} from 'prop-types';
+import {getActiveOffer} from '../../reducers/offers/selectors';
 
 class App extends React.PureComponent {
   _renderApp() {
@@ -47,7 +48,7 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeOffer: state.offers.activeOffer
+  activeOffer: getActiveOffer(state)
 });
 
 export default connect(mapStateToProps, null)(App);

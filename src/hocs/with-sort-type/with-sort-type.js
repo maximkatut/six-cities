@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {ActionCreator} from '../../actions/offers-actions';
 import {SortType} from '../../const';
-import {extend} from '../../utils';
+import {getOffersBySortType} from '../../reducers/data/selectors';
 
 const withSortMenu = (Component) => {
   class WithSortMenu extends React.PureComponent {
@@ -66,28 +66,17 @@ const withSortMenu = (Component) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onSortClick(sortType, offersByCity) {
-    dispatch(ActionCreator.changeSortType(sortType, offersByCity));
+  onSortClick(sortType) {
+    dispatch(ActionCreator.changeSortType(sortType));
   }
 });
 
 const mapStateToProps = (state) => ({
-  offers: state.offers.offers
+  offers: getOffersBySortType(state)
 });
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  return extend({
-    ownProps,
-    stateProps,
-    dispatchProps,
-    onSortClick(sortType, offersByCity = stateProps.offers) {
-      dispatchProps.onSortClick(sortType, offersByCity);
-    }
-  });
-};
-
 const composedWithSortMenu = compose(
-    connect(mapStateToProps, mapDispatchToProps, mergeProps),
+    connect(mapStateToProps, mapDispatchToProps),
     withSortMenu
 );
 

@@ -8,6 +8,8 @@ import OfferList from '../offers-list/offers-list.jsx';
 import NoOffers from '../no-offers/no-offers.jsx';
 import SortMenu from '../sort-menu/sort-menu.jsx';
 import withSortType from '../../hocs/with-sort-type/with-sort-type';
+import {getOffersBySortType} from '../../reducers/data/selectors';
+import {getActiveCity} from '../../reducers/offers/selectors';
 
 const SortMenuWrapped = withSortType(SortMenu);
 
@@ -85,8 +87,8 @@ Main.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers.offers,
-  activeCityName: state.offers.activeCityName
+  offers: getOffersBySortType(state),
+  activeCityName: getActiveCity(state)
 });
 
 export default connect(mapStateToProps, null)(Main);

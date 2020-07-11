@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import {MAX_COUNT_MARKERS} from '../../const';
-import {offerFullPropType} from '../../types';
+import {offerFullPropType, reviewPropTypes} from '../../types';
 import Map from '../map/map.jsx';
 import OffersList from '../offers-list/offers-list.jsx';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
+import {getReviews, getOffersNearby} from '../../reducers/data/selectors';
 
-const Offer = ({offer, offers}) => {
+const Offer = ({offer, reviews, offersNearby}) => {
   const {
     appliences,
     bedrooms,
@@ -19,11 +19,8 @@ const Offer = ({offer, offers}) => {
     premium,
     price,
     rate,
-    reviews,
     title
   } = offer;
-
-  const offersClosest = offers.filter((_offer) => _offer !== offer).splice(0, MAX_COUNT_MARKERS);
 
   return (
     <div className="page">
@@ -53,7 +50,7 @@ const Offer = ({offer, offers}) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {imagesGallery.map((image, index) => {
+              {imagesGallery.slice(0, 6).map((image, index) => {
                 return (
                   <div key={image + index} className="property__image-wrapper">
                     <img className="property__image" src={image} alt="Photo studio" />
@@ -116,7 +113,6 @@ const Offer = ({offer, offers}) => {
                       </li>
                     );
                   })}
-
                 </ul>
               </div>
               <div className="property__host">
@@ -130,13 +126,9 @@ const Offer = ({offer, offers}) => {
                   </span>
                 </div>
                 <div className="property__description">
-                  {description.map((sentence, index) => {
-                    return (
-                      <p key={index} className="property__text">
-                        {sentence}
-                      </p>
-                    );
-                  })}
+                  <p className="property__text">
+                    {description}
+                  </p>
                 </div>
               </div>
               <section className="property__reviews reviews">
@@ -192,7 +184,7 @@ const Offer = ({offer, offers}) => {
           <section className="property__map map">
             <Map
               activeOffer={offer}
-              offersClosest={offersClosest}
+              offersClosest={offersNearby}
             />
           </section>
         </section>
@@ -200,7 +192,7 @@ const Offer = ({offer, offers}) => {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <OffersList
-              offersClosest = {offersClosest}
+              offersClosest = {offersNearby}
               isNearPlaces
             />
           </section>
@@ -212,11 +204,13 @@ const Offer = ({offer, offers}) => {
 
 Offer.propTypes = {
   offer: offerFullPropType.isRequired,
-  offers: PropTypes.arrayOf(offerFullPropType.isRequired)
+  reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
+  offersNearby: PropTypes.arrayOf(offerFullPropType.isRequired)
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers.offers
+  reviews: getReviews(state) || [],
+  offersNearby: getOffersNearby(state) || []
 });
 
 export default connect(mapStateToProps, null)(Offer);
