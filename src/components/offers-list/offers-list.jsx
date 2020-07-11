@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {offerPropType} from '../../types';
 import {connect} from 'react-redux';
+import {getOffersBySortType} from '../../reducers/data/selectors.js';
 
 const OffersList = (props) => {
   const {offers, isNearPlaces, offersClosest} = props;
@@ -31,7 +32,7 @@ OffersList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers.offers,
+  offers: getOffersBySortType(state),
 });
 
 export default connect(mapStateToProps, null)(OffersList);

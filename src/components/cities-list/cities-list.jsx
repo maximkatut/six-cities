@@ -3,6 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../actions/offers-actions';
 import {Cities} from '../../const';
+import {getActiveCity} from '../../reducers/offers/selectors';
 
 const CitiesList = (props) => {
 
@@ -37,13 +38,12 @@ CitiesList.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeCityName: state.offers.activeCityName
+  activeCityName: getActiveCity(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCityClick(cityName) {
     dispatch(ActionCreator.changeCity(cityName));
-    dispatch(ActionCreator.getOffers(cityName));
   }
 });
 
