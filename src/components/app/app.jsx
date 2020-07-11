@@ -1,11 +1,15 @@
+import {bool, oneOf, oneOfType, shape, string} from 'prop-types';
 import React from 'react';
+import Notifications, {notify} from 'react-notify-toast';
 import {connect} from 'react-redux';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
+
+import {getErrorStatus} from '../../reducers/data/selectors';
+import {getActiveOffer} from '../../reducers/offers/selectors';
 import {offerFullPropType} from '../../types';
+
 import Main from '../main/main.jsx';
 import Offer from '../offer/offer.jsx';
-import {oneOfType, oneOf} from 'prop-types';
-import {getActiveOffer} from '../../reducers/offers/selectors';
 
 class App extends React.PureComponent {
   _renderApp() {
@@ -21,16 +25,17 @@ class App extends React.PureComponent {
         <Main/>
       );
     }
-
   }
 
   render() {
-    const {activeOffer} = this.props;
+    const {activeOffer, isError} = this.props;
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
+            <Notifications />
             {this._renderApp()}
+            {isError.status ? notify.show(`${isError.message}`, `error`) : ``}
           </Route>
           <Route exact path="/dev-offer">
             <Offer
@@ -44,11 +49,16 @@ class App extends React.PureComponent {
 }
 
 App.propTypes = {
-  activeOffer: oneOfType([offerFullPropType.isRequired, oneOf([null])])
+  activeOffer: oneOfType([offerFullPropType.isRequired, oneOf([null])]),
+  isError: shape({
+    status: bool.isRequired,
+    message: string.isRequired
+  }).isRequired
 };
 
 const mapStateToProps = (state) => ({
-  activeOffer: getActiveOffer(state)
+  activeOffer: getActiveOffer(state),
+  isError: getErrorStatus(state)
 });
 
 export default connect(mapStateToProps, null)(App);

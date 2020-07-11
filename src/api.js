@@ -1,10 +1,11 @@
 import axios from 'axios';
 
 const Error = {
-  UNAUTHORIZED: 401
+  UNAUTHORIZED: 401,
+  BAD_REQUEST: 404
 };
 
-export const createAPI = (onUnauthorized) => {
+export const createAPI = (onUnauthorized, onBadRequest) => {
 
   const api = axios.create({
     baseURL: `https://htmlacademy-react-3.appspot.com/six-cities`,
@@ -20,6 +21,9 @@ export const createAPI = (onUnauthorized) => {
     const {response} = err;
     if (response.status === Error.UNAUTHORIZED) {
       onUnauthorized();
+      throw err;
+    } else if (response.status === Error.BAD_REQUEST) {
+      onBadRequest(err);
       throw err;
     }
     throw err;

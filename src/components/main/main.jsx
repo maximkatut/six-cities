@@ -1,15 +1,19 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import {offerPropType} from '../../types';
-import CitiesList from '../cities-list/cities-list.jsx';
-import Map from '../map/map.jsx';
-import OfferList from '../offers-list/offers-list.jsx';
-import NoOffers from '../no-offers/no-offers.jsx';
-import SortMenu from '../sort-menu/sort-menu.jsx';
+
 import withSortType from '../../hocs/with-sort-type/with-sort-type';
+
 import {getOffersBySortType} from '../../reducers/data/selectors';
 import {getActiveCity} from '../../reducers/offers/selectors';
+import {offerPropType} from '../../types';
+
+import CitiesList from '../cities-list/cities-list.jsx';
+import Map from '../map/map.jsx';
+import NoOffers from '../no-offers/no-offers.jsx';
+import OfferList from '../offers-list/offers-list.jsx';
+import SortMenu from '../sort-menu/sort-menu.jsx';
+
 
 const SortMenuWrapped = withSortType(SortMenu);
 
@@ -36,7 +40,7 @@ const Main = (props) => {
 
   const renderNoOffers = () => {
     return (
-      <NoOffers/>
+      <NoOffers activeCityName={activeCityName}/>
     );
   };
 

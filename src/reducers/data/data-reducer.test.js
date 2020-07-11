@@ -45,6 +45,26 @@ describe(`Reducer works correctly`, () => {
       offersNearby: offers,
     });
   });
+
+  it(`Reducer should return new state with new isError`, () => {
+    expect(reducer({
+      isError: {
+        status: false,
+        message: ``
+      },
+    }, {
+      type: ActionType.CATCH_ERROR,
+      payload: {
+        status: true,
+        message: `error`
+      },
+    })).toEqual({
+      isError: {
+        status: true,
+        message: `error`
+      },
+    });
+  });
 });
 
 describe(`Operation work correctly`, () => {
