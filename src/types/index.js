@@ -1,7 +1,5 @@
 import {OfferTypes} from '../const.js';
-import PropTypes from 'prop-types';
-
-const {shape, string, number, bool, arrayOf, oneOf} = PropTypes;
+import {shape, string, number, bool, arrayOf, oneOf} from 'prop-types';
 
 export const offerPropType = shape({
   coordinates: arrayOf(number).isRequired,
@@ -18,13 +16,15 @@ export const offerFullPropType = shape({
   bedrooms: number.isRequired,
   city: shape({
     name: string.isRequired,
-    coords: arrayOf(number).isRequired
+    coords: arrayOf(number).isRequired,
+    zoom: number.isRequired
   }).isRequired,
   coordinates: arrayOf(number).isRequired,
   description: string.isRequired,
   guests: number.isRequired,
   host: shape({
     avatar: string.isRequired,
+    id: number.isRequired,
     name: string.isRequired,
     super: bool.isRequired
   }).isRequired,
@@ -35,7 +35,8 @@ export const offerFullPropType = shape({
   premium: bool.isRequired,
   price: number.isRequired,
   rate: number.isRequired,
-  title: string.isRequired
+  title: string.isRequired,
+  zoom: number.isRequired
 });
 
 export const reviewPropTypes = shape({

@@ -2,7 +2,6 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import renderer from 'react-test-renderer';
 import {store} from '../../test-data/store';
-import {offers} from '../../test-data';
 import {ActionCreator} from '../../actions/offers-actions';
 import {SortType} from '../../const.js';
 import withSortMenu from './with-sort-type';
@@ -13,7 +12,9 @@ const MockComponent = (props) => {
 
   return (
     <div>
-      <li onClick={onSortClick}></li>
+      <li onClick={() => {
+        onSortClick(SortType.POPULAR);
+      }}></li>
     </div>
   );
 };
@@ -53,7 +54,7 @@ describe(`withSortMenu`, () => {
 
     expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(
-        ActionCreator.changeSortType(SortType.POPULAR, offers)
+        ActionCreator.changeSortType(SortType.POPULAR)
     );
   });
 });

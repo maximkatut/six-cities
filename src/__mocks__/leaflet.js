@@ -12,7 +12,11 @@ leaflet.map = () => {
 
 leaflet.marker = () => {
   return {
-    addTo: () => {},
+    addTo: () => {
+      return {
+        bindPopup: () => {}
+      };
+    },
   };
 };
 

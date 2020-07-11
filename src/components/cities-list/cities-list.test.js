@@ -27,12 +27,9 @@ describe(`CitiesList`, () => {
       component.root.findAllByType(`a`)[3].props.onClick();
     });
 
-    expect(store.dispatch).toHaveBeenCalledTimes(2);
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
     expect(store.dispatch).toHaveBeenCalledWith(
         ActionCreator.changeCity(`Amsterdam`)
-    );
-    expect(store.dispatch).toHaveBeenCalledWith(
-        ActionCreator.getOffers(`Amsterdam`)
     );
   });
 });

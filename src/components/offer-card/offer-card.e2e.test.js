@@ -32,7 +32,7 @@ describe(`OfferCard e2e`, () => {
       component.root.findAllByType(`a`)[1].props.onClick();
     });
 
-    expect(store.dispatch).toHaveBeenCalledTimes(1);
+    expect(store.dispatch).toHaveBeenCalledTimes(3);
     expect(store.dispatch).toHaveBeenCalledWith(
         OffersActionCreator.changeActiveOffer(offers[0])
     );

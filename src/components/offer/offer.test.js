@@ -11,7 +11,6 @@ describe(`Offer`, () => {
         <Provider store={store}>
           <Offer
             offer = {offers[0]}
-            onMainCardTitleClick={() => { }}
           />
         </Provider>)
       .toJSON();
