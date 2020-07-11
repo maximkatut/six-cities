@@ -1,20 +1,7 @@
-import {MAX_COUNT_CITIES} from "../const";
 import {SortType} from '../const';
 
 export const extend = (a, b, c = {}, d = {}) => {
   return Object.assign({}, a, b, c, d);
-};
-
-export const getCitiesList = (offers) => {
-  const cities = offers.reduce((acc, offer, index) => {
-    acc[index] = offer.city;
-    return acc;
-  }, []);
-  const uniqueCities = [...new Set(cities)];
-  if (uniqueCities.length > MAX_COUNT_CITIES) {
-    return uniqueCities.slice(MAX_COUNT_CITIES);
-  }
-  return uniqueCities;
 };
 
 export const getOffersByCity = (city, offers) => {

@@ -21,7 +21,7 @@ export const offerFullPropType = shape({
     coords: arrayOf(number).isRequired
   }).isRequired,
   coordinates: arrayOf(number).isRequired,
-  description: arrayOf(string).isRequired,
+  description: string.isRequired,
   guests: number.isRequired,
   host: shape({
     avatar: string.isRequired,
@@ -35,21 +35,11 @@ export const offerFullPropType = shape({
   premium: bool.isRequired,
   price: number.isRequired,
   rate: number.isRequired,
-  reviews: arrayOf(shape({
-    id: string.isRequired,
-    user: shape({
-      userName: string.isRequired,
-      avatar: string.isRequired
-    }).isRequired,
-    content: string.isRequired,
-    rate: number.isRequired,
-    date: string.isRequired
-  }).isRequired).isRequired,
   title: string.isRequired
 });
 
 export const reviewPropTypes = shape({
-  id: string.isRequired,
+  id: number.isRequired,
   user: shape({
     userName: string.isRequired,
     avatar: string.isRequired
