@@ -1,7 +1,10 @@
-import moment from 'moment';
-
 export default (reviews) => {
+  const options = {
+    month: `long`, year: `numeric`
+  };
+
   return reviews.map((review) => {
+    const date = new Date(review.date);
     return {
       id: review.id,
       user: {
@@ -12,7 +15,7 @@ export default (reviews) => {
       },
       content: review.comment,
       rate: review.rating,
-      date: moment(review.date).format(`MMMM YYYY`)
+      date: new Intl.DateTimeFormat(`en-US`, options).format(date)
     };
   });
 };
