@@ -4,6 +4,7 @@ import {offerPropType} from '../../types';
 import {connect} from 'react-redux';
 import {ActionCreator as MapActionCreator} from '../../actions/map-actions';
 import {ActionCreator as OffersActionCreator} from '../../actions/offers-actions';
+import {Operation} from '../../reducers/data/data-reducer';
 
 const OfferCard = (props) => {
   const {offer, onMainCardTitleClick, onOfferCardHover, isNearPlaces} = props;
@@ -44,7 +45,7 @@ const OfferCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${rate * 20}%`}} />
+            <span style={{width: `${Math.floor(rate) * 20}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -77,6 +78,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onMainCardTitleClick(activeOffer) {
     dispatch(OffersActionCreator.changeActiveOffer(activeOffer));
+    dispatch(Operation.loadReviews());
+    dispatch(Operation.loadOffersNearby());
   }
 });
 
