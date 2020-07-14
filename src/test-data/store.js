@@ -15,11 +15,18 @@ export const store = mockStore({
     cardIdOnHover: offers[0].id
   },
   [NameSpace.USER]: {
-    authorizationStatus: `NO_AUTH`
+    authorizationStatus: `NO_AUTH`,
+    user: {
+      email: `max@max.ru`
+    }
   },
   [NameSpace.DATA]: {
     offers,
     reviews,
-    offersNearby: [offers[1]]
+    offersNearby: [offers[1]],
+    isError: {
+      status: false,
+      message: `hello`
+    }
   }
 });
