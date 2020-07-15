@@ -19,6 +19,10 @@ export const getErrorStatus = (state) => {
   return state[NameSpace.DATA].isError;
 };
 
+export const getStatusRequest = (state) => {
+  return state[NameSpace.DATA].isBusy;
+};
+
 export const getOffersByActiveCity = createSelector(
     getOffers,
     getActiveCity,

@@ -13,10 +13,22 @@ export const ActionCreator = {
       payload: reviews,
     };
   },
+  postReview: (reviews) => {
+    return {
+      type: ActionType.POST_REVIEW,
+      payload: reviews,
+    };
+  },
   loadOffersNearby: (offersNearby) => {
     return {
       type: ActionType.LOAD_OFFERS_NEARBY,
       payload: offersNearby,
+    };
+  },
+  setRequestStatusBusy: (isBusy) => {
+    return {
+      type: ActionType.SET_REQUEST_STATUS,
+      payload: isBusy,
     };
   },
   catchError: (status, err) => {
