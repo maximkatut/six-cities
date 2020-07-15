@@ -286,11 +286,133 @@ exports[`Offer Offer should render correctly 1`] = `
                 2
               </span>
             </h2>
-            
+            <ul
+              className="reviews__list"
+            >
+              <li
+                className="reviews__item"
+              >
+                <div
+                  className="reviews__user user"
+                >
+                  <div
+                    className="reviews__avatar-wrapper user__avatar-wrapper"
+                  >
+                    <img
+                      alt="Reviews avatar"
+                      className="reviews__avatar user__avatar"
+                      height={54}
+                      src="img/avatar-max.jpg"
+                      width={54}
+                    />
+                  </div>
+                  <span
+                    className="reviews__user-name"
+                  >
+                    Max
+                  </span>
+                </div>
+                <div
+                  className="reviews__info"
+                >
+                  <div
+                    className="reviews__rating rating"
+                  >
+                    <div
+                      className="reviews__stars rating__stars"
+                    >
+                      <span
+                        style={
+                          Object {
+                            "width": "80%",
+                          }
+                        }
+                      />
+                      <span
+                        className="visually-hidden"
+                      >
+                        Rating
+                      </span>
+                    </div>
+                  </div>
+                  <p
+                    className="reviews__text"
+                  >
+                    A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                  </p>
+                  <time
+                    className="reviews__time"
+                    dateTime="2019-04-24"
+                  >
+                    new Date()
+                  </time>
+                </div>
+              </li>
+              <li
+                className="reviews__item"
+              >
+                <div
+                  className="reviews__user user"
+                >
+                  <div
+                    className="reviews__avatar-wrapper user__avatar-wrapper"
+                  >
+                    <img
+                      alt="Reviews avatar"
+                      className="reviews__avatar user__avatar"
+                      height={54}
+                      src="img/avatar-max.jpg"
+                      width={54}
+                    />
+                  </div>
+                  <span
+                    className="reviews__user-name"
+                  >
+                    Alex
+                  </span>
+                </div>
+                <div
+                  className="reviews__info"
+                >
+                  <div
+                    className="reviews__rating rating"
+                  >
+                    <div
+                      className="reviews__stars rating__stars"
+                    >
+                      <span
+                        style={
+                          Object {
+                            "width": "60%",
+                          }
+                        }
+                      />
+                      <span
+                        className="visually-hidden"
+                      >
+                        Rating
+                      </span>
+                    </div>
+                  </div>
+                  <p
+                    className="reviews__text"
+                  >
+                    A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                  </p>
+                  <time
+                    className="reviews__time"
+                    dateTime="2019-04-24"
+                  >
+                    new Date()
+                  </time>
+                </div>
+              </li>
+            </ul>
             <form
               action="#"
               className="reviews__form form"
               method="post"
+              onSubmit={[Function]}
             >
               <label
                 className="reviews__label form__label"
@@ -302,10 +424,13 @@ exports[`Offer Offer should render correctly 1`] = `
                 className="reviews__rating-form form__rating"
               >
                 <input
+                  checked={false}
                   className="form__rating-input visually-hidden"
                   defaultValue={5}
+                  disabled={false}
                   id="5-stars"
                   name="rating"
+                  onChange={[Function]}
                   type="radio"
                 />
                 <label
@@ -324,16 +449,19 @@ exports[`Offer Offer should render correctly 1`] = `
                   </svg>
                 </label>
                 <input
+                  checked={false}
                   className="form__rating-input visually-hidden"
                   defaultValue={4}
+                  disabled={false}
                   id="4-stars"
                   name="rating"
+                  onChange={[Function]}
                   type="radio"
                 />
                 <label
                   className="reviews__rating-label form__rating-label"
                   htmlFor="4-stars"
-                  title="good"
+                  title="perfect"
                 >
                   <svg
                     className="form__star-image"
@@ -346,16 +474,19 @@ exports[`Offer Offer should render correctly 1`] = `
                   </svg>
                 </label>
                 <input
+                  checked={false}
                   className="form__rating-input visually-hidden"
                   defaultValue={3}
+                  disabled={false}
                   id="3-stars"
                   name="rating"
+                  onChange={[Function]}
                   type="radio"
                 />
                 <label
                   className="reviews__rating-label form__rating-label"
                   htmlFor="3-stars"
-                  title="not bad"
+                  title="perfect"
                 >
                   <svg
                     className="form__star-image"
@@ -368,16 +499,19 @@ exports[`Offer Offer should render correctly 1`] = `
                   </svg>
                 </label>
                 <input
+                  checked={false}
                   className="form__rating-input visually-hidden"
                   defaultValue={2}
+                  disabled={false}
                   id="2-stars"
                   name="rating"
+                  onChange={[Function]}
                   type="radio"
                 />
                 <label
                   className="reviews__rating-label form__rating-label"
                   htmlFor="2-stars"
-                  title="badly"
+                  title="perfect"
                 >
                   <svg
                     className="form__star-image"
@@ -390,16 +524,19 @@ exports[`Offer Offer should render correctly 1`] = `
                   </svg>
                 </label>
                 <input
+                  checked={false}
                   className="form__rating-input visually-hidden"
                   defaultValue={1}
-                  id="1-star"
+                  disabled={false}
+                  id="1-stars"
                   name="rating"
+                  onChange={[Function]}
                   type="radio"
                 />
                 <label
                   className="reviews__rating-label form__rating-label"
-                  htmlFor="1-star"
-                  title="terribly"
+                  htmlFor="1-stars"
+                  title="perfect"
                 >
                   <svg
                     className="form__star-image"
@@ -414,10 +551,14 @@ exports[`Offer Offer should render correctly 1`] = `
               </div>
               <textarea
                 className="reviews__textarea form__textarea"
-                defaultValue=""
+                disabled={false}
                 id="review"
+                maxLength="300"
+                minLength="50"
                 name="review"
+                onChange={[Function]}
                 placeholder="Tell how was your stay, what you like and what can be improved"
+                value=""
               />
               <div
                 className="reviews__button-wrapper"
@@ -431,11 +572,11 @@ exports[`Offer Offer should render correctly 1`] = `
                   >
                     rating
                   </span>
-                   and describe your stay with at least 
+                   and describe your stay with at least
                   <b
                     className="reviews__text-amount"
                   >
-                    50 characters
+                     50 characters
                   </b>
                   .
                 </p>

@@ -12,9 +12,15 @@ const api = createAPI(() => {});
 describe(`Reducer works correctly`, () => {
   it(`Reducer has to return initial state if new state is undefined`, () => {
     expect(reducer(undefined, {}))
-    .toEqual({offers: [], isError: {
-      status: false, message: ``
-    }});
+    .toEqual(
+        {
+          offers: [],
+          isError: {
+            status: false, message: ``
+          },
+          isBusy: false
+        }
+    );
   });
 
   it(`Reducer should return new state with new offers`, () => {
@@ -141,6 +147,43 @@ describe(`Operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_OFFERS_NEARBY,
           payload: offersAdapter(offersFromRequest),
+        });
+      });
+  });
+
+  it(`Should make a correct API call POST to comments/id`, function () {
+    const review = {"comment": `Hello`, "rating": 4};
+    const postReviewLoader = Operation.postReview(review);
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const getState = () => {
+      return {
+        OFFERS: {
+          activeOffer: {
+            id: 21
+          }
+        }
+      };
+    };
+
+    apiMock
+      .onPost(`/comments/21`)
+      .reply(200, reviewsFromRequest);
+
+    return postReviewLoader(dispatch, getState, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(3);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_REQUEST_STATUS,
+          payload: true,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.LOAD_REVIEWS,
+          payload: reviewsAdapter(reviewsFromRequest),
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
+          type: ActionType.SET_REQUEST_STATUS,
+          payload: false,
         });
       });
   });

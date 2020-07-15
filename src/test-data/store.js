@@ -27,6 +27,7 @@ export const store = mockStore({
     isError: {
       status: false,
       message: `hello`
-    }
+    },
+    isBusy: false
   }
 });

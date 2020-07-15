@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withReview withReview is rendered correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <input
+    onChange={[Function]}
+  />
+  <textarea
+    onChange={[Function]}
+    value=""
+  />
+</form>
+`;
