@@ -15,6 +15,10 @@ export const getOffersNearby = (state) => {
   return state[NameSpace.DATA].offersNearby;
 };
 
+export const getErrorStatus = (state) => {
+  return state[NameSpace.DATA].isError;
+};
+
 export const getOffersByActiveCity = createSelector(
     getOffers,
     getActiveCity,

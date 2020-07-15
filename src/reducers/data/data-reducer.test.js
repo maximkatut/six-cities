@@ -1,18 +1,20 @@
-import reducer from './data-reducer';
-import {ActionType} from '../../actions/types';
-import {offers, reviews, offersFromRequest, reviewsFromRequest} from '../../test-data';
 import MockAdapter from "axios-mock-adapter";
-import {createAPI} from "../../api.js";
-import {Operation} from '../data/data-reducer';
+import {ActionType} from '../../actions/types';
 import offersAdapter from '../../adapter/offers';
 import reviewsAdapter from '../../adapter/reviews';
+import {createAPI} from "../../api.js";
+import {offers, offersFromRequest, reviews, reviewsFromRequest} from '../../test-data';
+import {Operation} from '../data/data-reducer';
+import reducer from './data-reducer';
 
 const api = createAPI(() => {});
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer has to return initial state if new state is undefined`, () => {
     expect(reducer(undefined, {}))
-    .toEqual({offers: []});
+    .toEqual({offers: [], isError: {
+      status: false, message: ``
+    }});
   });
 
   it(`Reducer should return new state with new offers`, () => {
@@ -43,6 +45,26 @@ describe(`Reducer works correctly`, () => {
       payload: offers,
     })).toEqual({
       offersNearby: offers,
+    });
+  });
+
+  it(`Reducer should return new state with new isError`, () => {
+    expect(reducer({
+      isError: {
+        status: false,
+        message: ``
+      },
+    }, {
+      type: ActionType.CATCH_ERROR,
+      payload: {
+        status: true,
+        message: `error`
+      },
+    })).toEqual({
+      isError: {
+        status: true,
+        message: `error`
+      },
     });
   });
 });

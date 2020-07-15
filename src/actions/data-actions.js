@@ -19,4 +19,14 @@ export const ActionCreator = {
       payload: offersNearby,
     };
   },
+  catchError: (status, err) => {
+    const isError = {
+      status,
+      message: err.message
+    };
+    return {
+      type: ActionType.CATCH_ERROR,
+      payload: isError
+    };
+  },
 };

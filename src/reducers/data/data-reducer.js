@@ -7,6 +7,10 @@ import NameSpace from "../name-space";
 
 const initialState = {
   offers: [],
+  isError: {
+    status: false,
+    message: ``
+  }
 };
 
 export const Operation = {
@@ -48,6 +52,10 @@ export default (state = initialState, action) => {
     case ActionType.LOAD_OFFERS_NEARBY:
       return extend(state, {
         offersNearby: action.payload,
+      });
+    case ActionType.CATCH_ERROR:
+      return extend(state, {
+        isError: action.payload,
       });
   }
 

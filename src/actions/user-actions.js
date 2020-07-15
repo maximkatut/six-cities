@@ -6,5 +6,11 @@ export const ActionCreator = {
       type: ActionType.REQUIRED_AUTHORIZATION,
       payload: status
     };
+  },
+  getUser: (user) => {
+    return {
+      type: ActionType.GET_USER,
+      payload: user
+    };
   }
 };
