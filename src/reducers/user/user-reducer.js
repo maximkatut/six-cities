@@ -1,6 +1,9 @@
 import {ActionType} from '../../actions/types';
 import {ActionCreator} from '../../actions/user-actions';
 import {extend} from '../../utils';
+import {Operation as DataOperation} from '../data/data-reducer';
+import history from '../../history';
+import {AppRoute} from '../../const';
 
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -18,6 +21,7 @@ export const Operation = {
       .then((res) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.getUser(res.data));
+        dispatch(DataOperation.loadFavorites());
       })
       .catch((err) => {
         throw err;
@@ -32,6 +36,8 @@ export const Operation = {
       .then((res) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.getUser(res.data));
+        dispatch(DataOperation.loadFavorites());
+        history.push(`${AppRoute.ROOT}`);
       });
   },
 };

@@ -20,3 +20,10 @@ export const SortType = {
   HIGHT_LOW: `Price: high to low`,
   TOP: `Top rated first`
 };
+
+export const AppRoute = {
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`,
+  OFFER: `/offer`,
+  ROOT: `/`,
+};
