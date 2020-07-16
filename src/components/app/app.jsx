@@ -2,53 +2,48 @@ import {bool, oneOf, oneOfType, shape, string} from 'prop-types';
 import React from 'react';
 import Notifications, {notify} from 'react-notify-toast';
 import {connect} from 'react-redux';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Router, Route, Switch} from 'react-router-dom';
 
 import {getErrorStatus} from '../../reducers/data/selectors';
 import {getActiveOffer} from '../../reducers/offers/selectors';
-import {getUserStatus} from '../../reducers/user/selectors';
 import {offerFullPropType} from '../../types';
+import history from '../../history';
 
 import Main from '../main/main.jsx';
 import Offer from '../offer/offer.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
-import {AuthorizationStatus} from '../../reducers/user/user-reducer';
 
 class App extends React.PureComponent {
   _renderApp() {
-    const {activeOffer, userStatus} = this.props;
-    if (userStatus === AuthorizationStatus.AUTH) {
-      if (activeOffer) {
-        return (
-          <Offer
-            offer={activeOffer}
-          />
-        );
-      } else {
-        return (
-          <Main/>
-        );
-      }
+    const {activeOffer} = this.props;
+    if (activeOffer) {
+      return (
+        <Offer
+          offer={activeOffer}
+        />
+      );
     } else {
-      return <SignIn/>;
+      return (
+        <Main/>
+      );
     }
   }
 
   render() {
     const {isError} = this.props;
     return (
-      <BrowserRouter>
+      <Router history={history}>
+        <Notifications />
         <Switch>
-          <Route exact path="/login">
-            <SignIn/>
-          </Route>
           <Route exact path="/">
-            <Notifications />
             {this._renderApp()}
             {isError.status ? notify.show(`${isError.message}`, `error`) : ``}
           </Route>
+          <Route exact path="/login">
+            <SignIn/>
+          </Route>
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
@@ -58,14 +53,12 @@ App.propTypes = {
   isError: shape({
     status: bool.isRequired,
     message: string.isRequired
-  }).isRequired,
-  userStatus: string.isRequired
+  }).isRequired
 };
 
 const mapStateToProps = (state) => ({
   activeOffer: getActiveOffer(state),
-  isError: getErrorStatus(state),
-  userStatus: getUserStatus(state)
+  isError: getErrorStatus(state)
 });
 
 export default connect(mapStateToProps, null)(App);
