@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 
 import {ActionCreator as MapActionCreator} from '../../actions/map-actions';
 import {ActionCreator as OffersActionCreator} from '../../actions/offers-actions';

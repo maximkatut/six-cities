@@ -17,7 +17,8 @@ exports[`OfferCard OfferCard component should render right 1`] = `
     className="cities__image-wrapper place-card__image-wrapper"
   >
     <a
-      href="#"
+      href="/"
+      onClick={[Function]}
     >
       <img
         alt="Place image"
@@ -50,7 +51,8 @@ exports[`OfferCard OfferCard component should render right 1`] = `
         </span>
       </div>
       <button
-        className="place-card__bookmark-button button"
+        className="place-card__bookmark-button  button"
+        onClick={[Function]}
         type="button"
       >
         <svg
@@ -93,7 +95,7 @@ exports[`OfferCard OfferCard component should render right 1`] = `
       className="place-card__name"
     >
       <a
-        href="#"
+        href="/"
         onClick={[Function]}
       >
         Nice, cozy, warm big bed house

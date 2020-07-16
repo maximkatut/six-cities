@@ -6,6 +6,7 @@ import {store} from '../../test-data/store';
 import renderer from 'react-test-renderer';
 import {ActionCreator as MapActionCreator} from '../../actions/map-actions';
 import {ActionCreator as OffersActionCreator} from '../../actions/offers-actions';
+import {BrowserRouter} from 'react-router-dom';
 
 describe(`OfferCard e2e`, () => {
   let component;
@@ -14,11 +15,13 @@ describe(`OfferCard e2e`, () => {
     store.dispatch = jest.fn();
 
     component = renderer.create(
-        <Provider store={store}>
-          <OfferCard
-            offer={offers[0]}
-          />
-        </Provider>);
+        <BrowserRouter>
+          <Provider store={store}>
+            <OfferCard
+              offer={offers[0]}
+            />
+          </Provider>
+        </BrowserRouter>);
   });
 
   it(`Card title should dispatch an action`, () => {
@@ -27,7 +30,7 @@ describe(`OfferCard e2e`, () => {
     });
 
     expect(store.dispatch).toHaveBeenCalledTimes(3);
-    expect(store.dispatch).toHaveBeenCalledWith(
+    expect(store.dispatch).toHaveBeenNthCalledWith(1,
         OffersActionCreator.changeActiveOffer(offers[0])
     );
   });
