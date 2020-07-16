@@ -17,8 +17,8 @@ exports[`OfferCard OfferCard component should render right 1`] = `
     className="cities__image-wrapper place-card__image-wrapper"
   >
     <a
-      href="/"
       onClick={[Function]}
+      to="/"
     >
       <img
         alt="Place image"
@@ -95,8 +95,8 @@ exports[`OfferCard OfferCard component should render right 1`] = `
       className="place-card__name"
     >
       <a
-        href="/"
         onClick={[Function]}
+        to="/"
       >
         Nice, cozy, warm big bed house
       </a>

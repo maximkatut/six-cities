@@ -260,8 +260,8 @@ Array [
                   className="cities__image-wrapper place-card__image-wrapper"
                 >
                   <a
-                    href="/"
                     onClick={[Function]}
+                    to="/"
                   >
                     <img
                       alt="Place image"
@@ -338,8 +338,8 @@ Array [
                     className="place-card__name"
                   >
                     <a
-                      href="/"
                       onClick={[Function]}
+                      to="/"
                     >
                       Nice, cozy, warm big bed apartment
                     </a>
