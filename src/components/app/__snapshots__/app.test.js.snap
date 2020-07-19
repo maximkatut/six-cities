@@ -6,7 +6,7 @@ Array [
     id="notification-wrapper"
   />,
   <div
-    className="page page--gray page--login"
+    className="page page--gray page--main"
   >
     <header
       className="header"
@@ -64,83 +64,311 @@ Array [
       </div>
     </header>
     <main
-      className="page__main page__main--login"
+      className="page__main page__main--index "
     >
+      <h1
+        className="visually-hidden"
+      >
+        Cities
+      </h1>
       <div
-        className="page__login-container container"
+        className="tabs"
       >
         <section
-          className="login"
+          className="locations container"
         >
-          <h1
-            className="login__title"
+          <ul
+            className="locations__list tabs__list "
           >
-            Sign in
-          </h1>
-          <form
-            action="#"
-            className="login__form form"
-            method="post"
-            onSubmit={[Function]}
-          >
-            <div
-              className="login__input-wrapper form__input-wrapper"
+            <li
+              className="locations__item"
             >
-              <label
-                className="visually-hidden"
+              <a
+                className="locations__item-link tabs__item "
+                href="#"
+                onClick={[Function]}
               >
-                E-mail
-              </label>
-              <input
-                autoComplete="username"
-                className="login__input form__input"
-                name="email"
-                placeholder="Email"
-                required={true}
-                type="email"
-              />
-            </div>
-            <div
-              className="login__input-wrapper form__input-wrapper"
+                <span>
+                  Paris
+                </span>
+              </a>
+            </li>
+            <li
+              className="locations__item"
             >
-              <label
-                className="visually-hidden"
+              <a
+                className="locations__item-link tabs__item "
+                href="#"
+                onClick={[Function]}
               >
-                Password
-              </label>
-              <input
-                autoComplete="current-password"
-                className="login__input form__input"
-                name="password"
-                placeholder="Password"
-                required={true}
-                type="password"
-              />
-            </div>
-            <button
-              className="login__submit form__submit button"
-              type="submit"
+                <span>
+                  Cologne
+                </span>
+              </a>
+            </li>
+            <li
+              className="locations__item"
             >
-              Sign in
-            </button>
-          </form>
+              <a
+                className="locations__item-link tabs__item "
+                href="#"
+                onClick={[Function]}
+              >
+                <span>
+                  Brussels
+                </span>
+              </a>
+            </li>
+            <li
+              className="locations__item"
+            >
+              <a
+                className="locations__item-link tabs__item "
+                href="#"
+                onClick={[Function]}
+              >
+                <span>
+                  Amsterdam
+                </span>
+              </a>
+            </li>
+            <li
+              className="locations__item"
+            >
+              <a
+                className="locations__item-link tabs__item "
+                href="#"
+                onClick={[Function]}
+              >
+                <span>
+                  Hamburg
+                </span>
+              </a>
+            </li>
+            <li
+              className="locations__item"
+            >
+              <a
+                className="locations__item-link tabs__item "
+                href="#"
+                onClick={[Function]}
+              >
+                <span>
+                  Dusseldorf
+                </span>
+              </a>
+            </li>
+          </ul>
         </section>
-        <section
-          className="locations locations--login locations--current"
+      </div>
+      <div
+        className="cities"
+      >
+        <div
+          className="cities__places-container container"
         >
-          <div
-            className="locations__item"
+          <section
+            className="cities__places places"
           >
-            <a
-              className="locations__item-link"
-              href="#"
+            <h2
+              className="visually-hidden"
             >
-              <span>
-                Amsterdam
+              Places
+            </h2>
+            <b
+              className="places__found"
+            >
+              1
+               places to stay in 
+              Gomel
+            </b>
+            <form
+              action="#"
+              className="places__sorting"
+              method="get"
+            >
+              <span
+                className="places__sorting-caption"
+              >
+                Sort by 
               </span>
-            </a>
+              <span
+                className="places__sorting-type"
+                onClick={[Function]}
+                tabIndex={0}
+              >
+                Popular
+                <svg
+                  className="places__sorting-arrow"
+                  height={4}
+                  width={7}
+                >
+                  <use
+                    xlinkHref="#icon-arrow-select"
+                  />
+                </svg>
+              </span>
+              <ul
+                className="places__options places__options--custom "
+              >
+                <li
+                  className="places__option"
+                  onClick={[Function]}
+                  tabIndex={0}
+                >
+                  Popular
+                </li>
+                <li
+                  className="places__option"
+                  onClick={[Function]}
+                  tabIndex={0}
+                >
+                  Price: low to high
+                </li>
+                <li
+                  className="places__option"
+                  onClick={[Function]}
+                  tabIndex={0}
+                >
+                  Price: high to low
+                </li>
+                <li
+                  className="places__option"
+                  onClick={[Function]}
+                  tabIndex={0}
+                >
+                  Top rated first
+                </li>
+              </ul>
+            </form>
+            <div
+              className="cities__places-list places__list tabs__content"
+            >
+              <article
+                className="cities__place-card place-card"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+              >
+                <div
+                  className="place-card__mark"
+                >
+                  <span>
+                    Premium
+                  </span>
+                </div>
+                <div
+                  className="cities__image-wrapper place-card__image-wrapper"
+                >
+                  <a
+                    onClick={[Function]}
+                    to="/"
+                  >
+                    <img
+                      alt="Place image"
+                      className="place-card__image"
+                      height={200}
+                      src="img/apartment-02.jpg"
+                      width={260}
+                    />
+                  </a>
+                </div>
+                <div
+                  className="place-card__info"
+                >
+                  <div
+                    className="place-card__price-wrapper"
+                  >
+                    <div
+                      className="place-card__price"
+                    >
+                      <b
+                        className="place-card__price-value"
+                      >
+                        €
+                        300
+                      </b>
+                      <span
+                        className="place-card__price-text"
+                      >
+                        / night
+                      </span>
+                    </div>
+                    <button
+                      className="place-card__bookmark-button  button"
+                      onClick={[Function]}
+                      type="button"
+                    >
+                      <svg
+                        className="place-card__bookmark-icon"
+                        height={19}
+                        width={18}
+                      >
+                        <use
+                          xlinkHref="#icon-bookmark"
+                        />
+                      </svg>
+                      <span
+                        className="visually-hidden"
+                      >
+                        To bookmarks
+                      </span>
+                    </button>
+                  </div>
+                  <div
+                    className="place-card__rating rating"
+                  >
+                    <div
+                      className="place-card__stars rating__stars"
+                    >
+                      <span
+                        style={
+                          Object {
+                            "width": "80%",
+                          }
+                        }
+                      />
+                      <span
+                        className="visually-hidden"
+                      >
+                        Rating
+                      </span>
+                    </div>
+                  </div>
+                  <h2
+                    className="place-card__name"
+                  >
+                    <a
+                      onClick={[Function]}
+                      to="/"
+                    >
+                      Nice, cozy, warm big bed apartment
+                    </a>
+                  </h2>
+                  <p
+                    className="place-card__type"
+                  >
+                    Apartment
+                  </p>
+                </div>
+              </article>
+            </div>
+          </section>
+          <div
+            className="cities__right-section"
+          >
+            <section
+              className="cities__map map"
+            >
+              <div
+                style={
+                  Object {
+                    "height": "100%",
+                  }
+                }
+              />
+            </section>
           </div>
-        </section>
+        </div>
       </div>
     </main>
   </div>,

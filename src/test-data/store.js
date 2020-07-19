@@ -21,6 +21,7 @@ export const store = mockStore({
     }
   },
   [NameSpace.DATA]: {
+    favorites: [],
     offers,
     reviews,
     offersNearby: [offers[1]],

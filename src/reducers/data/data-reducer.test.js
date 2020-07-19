@@ -14,6 +14,7 @@ describe(`Reducer works correctly`, () => {
     expect(reducer(undefined, {}))
     .toEqual(
         {
+          favorites: [],
           offers: [],
           isError: {
             status: false, message: ``

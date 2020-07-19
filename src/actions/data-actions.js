@@ -13,6 +13,18 @@ export const ActionCreator = {
       payload: reviews,
     };
   },
+  loadFavorites: (favorites) => {
+    return {
+      type: ActionType.LOAD_FAVORITES,
+      payload: favorites,
+    };
+  },
+  postFavorite: (favorite) => {
+    return {
+      type: ActionType.POST_FAVORITE,
+      payload: favorite,
+    };
+  },
   postReview: (reviews) => {
     return {
       type: ActionType.POST_REVIEW,

@@ -11,7 +11,7 @@ import {offerPropType} from '../../types';
 import CitiesList from '../cities-list/cities-list.jsx';
 import Map from '../map/map.jsx';
 import NoOffers from '../no-offers/no-offers.jsx';
-import OfferList from '../offers-list/offers-list.jsx';
+import OffersList from '../offers-list/offers-list.jsx';
 import SortMenu from '../sort-menu/sort-menu.jsx';
 import Header from '../header/header.jsx';
 
@@ -28,7 +28,9 @@ const Main = (props) => {
           <h2 className="visually-hidden">Places</h2>
           <b className="places__found">{offers.length} places to stay in {activeCityName}</b>
           <SortMenuWrapped/>
-          <OfferList/>
+          <OffersList
+            offers={offers}
+          />
         </section>
         <div className="cities__right-section">
           <section className="cities__map map">

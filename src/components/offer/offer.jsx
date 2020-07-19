@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 
 import {getOffersNearby, getReviews} from '../../reducers/data/selectors';
 import {offerFullPropType, reviewPropTypes} from '../../types';
+import {getUserStatus} from '../../reducers/user/selectors';
+import {Operation} from '../../reducers/data/data-reducer';
 
 import Header from '../header/header.jsx';
 import Map from '../map/map.jsx';
@@ -12,16 +14,17 @@ import ReviewsList from '../reviews-list/reviews-list.jsx';
 import ReviewForm from '../review-form/review-form.jsx';
 import withReview from '../../hocs/with-review/with-review';
 
-import {getUserStatus} from '../../reducers/user/selectors';
 
 const ReviewFormWrapped = withReview(ReviewForm);
 
-const Offer = ({offer, reviews, offersNearby, userStatus}) => {
+const Offer = ({offer, reviews, offersNearby, userStatus, onFavotireButtonClick}) => {
   const {
     appliences,
     bedrooms,
     description,
     guests,
+    id,
+    isFavorite,
     host,
     imagesGallery,
     offerType,
@@ -30,6 +33,8 @@ const Offer = ({offer, reviews, offersNearby, userStatus}) => {
     rate,
     title
   } = offer;
+
+  const favoriteButtonActiveClass = isFavorite ? `property__bookmark-button--active` : ``;
 
   return (
     <div className="page">
@@ -61,7 +66,13 @@ const Offer = ({offer, reviews, offersNearby, userStatus}) => {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button
+                  className={`property__bookmark-button ${favoriteButtonActiveClass} button`}
+                  type="button"
+                  onClick={() => {
+                    onFavotireButtonClick(id, isFavorite);
+                  }}
+                >
                   <svg className="property__bookmark-icon" width={31} height={33}>
                     <use xlinkHref="#icon-bookmark" />
                   </svg>
@@ -126,7 +137,6 @@ const Offer = ({offer, reviews, offersNearby, userStatus}) => {
                 {userStatus ?
                   <ReviewFormWrapped/> : ``
                 }
-
               </section>
             </div>
           </div>
@@ -141,7 +151,7 @@ const Offer = ({offer, reviews, offersNearby, userStatus}) => {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <OffersList
-              offersClosest = {offersNearby}
+              offers = {offersNearby}
               isNearPlaces
             />
           </section>
@@ -155,7 +165,8 @@ Offer.propTypes = {
   offer: offerFullPropType.isRequired,
   reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
   offersNearby: PropTypes.arrayOf(offerFullPropType.isRequired),
-  userStatus: PropTypes.string.isRequired
+  userStatus: PropTypes.string.isRequired,
+  onFavotireButtonClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -164,4 +175,10 @@ const mapStateToProps = (state) => ({
   userStatus: getUserStatus(state)
 });
 
-export default connect(mapStateToProps, null)(Offer);
+const mapDispatchToProps = (dispatch) => ({
+  onFavotireButtonClick(id, isFavorite) {
+    dispatch(Operation.postFavoriteActiveOffer(id, isFavorite));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Offer);
