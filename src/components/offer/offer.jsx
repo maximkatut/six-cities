@@ -52,6 +52,10 @@ class Offer extends React.PureComponent {
       this._offer = offers.find((offer) => offer.id === id);
       getOfferData(id);
     }
+
+    if (prevProps.location !== location) {
+      window.scrollTo(0, 0);
+    }
   }
 
   renderSpinner() {
