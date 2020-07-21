@@ -1,15 +1,18 @@
 import React from 'react';
-import {func} from 'prop-types';
+import {func, string} from 'prop-types';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
-import {Operation} from '../../reducers/user/user-reducer';
+import {Operation, AuthorizationStatus} from '../../reducers/user/user-reducer';
+import {getUserStatus} from '../../reducers/user/selectors';
+import history from '../../history';
+import {AppRoute} from '../../const';
 
 import Header from '../header/header.jsx';
 
 class SignIn extends React.PureComponent {
   constructor(props) {
     super(props);
-
     this._inputEmail = React.createRef();
     this._inputPassword = React.createRef();
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -19,6 +22,12 @@ class SignIn extends React.PureComponent {
     const {loginUser} = this.props;
     evt.preventDefault();
     loginUser({login: this._inputEmail.current.value, password: this._inputPassword.current.value});
+  }
+
+  componentDidUpdate() {
+    if (this.props.userStatus === AuthorizationStatus.AUTH) {
+      history.push(AppRoute.ROOT);
+    }
   }
 
   render() {
@@ -43,9 +52,9 @@ class SignIn extends React.PureComponent {
             </section>
             <section className="locations locations--login locations--current">
               <div className="locations__item">
-                <a className="locations__item-link" href="#">
+                <Link className="locations__item-link" to={`${AppRoute.ROOT}amsterdam`}>
                   <span>Amsterdam</span>
-                </a>
+                </Link>
               </div>
             </section>
           </div>
@@ -56,8 +65,13 @@ class SignIn extends React.PureComponent {
 }
 
 SignIn.propTypes = {
-  loginUser: func.isRequired
+  loginUser: func.isRequired,
+  userStatus: string.isRequired
 };
+
+const mapStateToProps = (state) => ({
+  userStatus: getUserStatus(state)
+});
 
 const mapDispatchToProps = (dispatch) => ({
   loginUser(authData) {
@@ -65,4 +79,4 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
