@@ -1,5 +1,5 @@
-import {func} from 'prop-types';
 import React from 'react';
+import {func, bool, number} from 'prop-types';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 
@@ -14,6 +14,7 @@ const withReview = (Component) => {
       super(props);
 
       this.state = {
+        id: props.offerId,
         review: ``,
         rating: 0,
         isDisabled: true
@@ -26,9 +27,9 @@ const withReview = (Component) => {
 
     _handleFormSubmit(evt) {
       const {postNewReview} = this.props;
-      const {review, rating} = this.state;
+      const {review, rating, id} = this.state;
       evt.preventDefault();
-      postNewReview({comment: review, rating});
+      postNewReview({comment: review, rating, id});
       this.setState({
         review: ``,
         rating: 0
@@ -57,10 +58,12 @@ const withReview = (Component) => {
 
     render() {
       const {isDisabled, review, rating} = this.state;
+      const {isBusy} = this.props;
       return (
         <Component
           {...this.props}
           isDisabled={isDisabled}
+          isBusy={isBusy}
           review={review}
           rating={rating}
           onFormSubmit={this._handleFormSubmit}
@@ -72,7 +75,9 @@ const withReview = (Component) => {
   }
 
   WithReview.propTypes = {
-    postNewReview: func.isRequired
+    postNewReview: func.isRequired,
+    isBusy: bool.isRequired,
+    offerId: number.isRequired
   };
 
   return WithReview;

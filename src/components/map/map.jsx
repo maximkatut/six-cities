@@ -1,12 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
-import {offerFullPropType} from '../../types';
-import {MapData} from '../../const.js';
+import PropTypes from 'prop-types';
+import React from 'react';
 import {connect} from 'react-redux';
+
+import {MapData} from '../../const.js';
 import {getOffersBySortType} from '../../reducers/data/selectors';
-import {getActiveCity} from '../../reducers/offers/selectors';
 import {getCardIdOnHover} from '../../reducers/map/selectors';
+import {getActiveCity} from '../../reducers/offers/selectors';
+import {offerFullPropType} from '../../types';
 
 class Map extends React.PureComponent {
   constructor(props) {

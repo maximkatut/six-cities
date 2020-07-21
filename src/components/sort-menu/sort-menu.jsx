@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+
 import {SortType} from '../../const';
+
 import SortItem from '../sort-item/sort-item.jsx';
 
 class SortMenu extends React.PureComponent {

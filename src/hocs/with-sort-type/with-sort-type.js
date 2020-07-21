@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
+
 import {ActionCreator} from '../../actions/offers-actions';
 import {SortType} from '../../const';
 import {getOffersBySortType} from '../../reducers/data/selectors';

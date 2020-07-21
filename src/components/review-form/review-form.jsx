@@ -62,7 +62,6 @@ const ReviewForm = (props) => {
   );
 };
 
-
 ReviewForm.propTypes = {
   isBusy: bool.isRequired,
   isDisabled: bool.isRequired,

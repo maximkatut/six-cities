@@ -13,7 +13,10 @@ import {AuthorizationStatus, Operation as UserOperation} from './reducers/user/u
 
 const onUnauthorized = () => {
   store.dispatch(UserActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
-  history.push(`${AppRoute.LOGIN}`);
+  store.dispatch(UserActionCreator.getUser({}));
+  if (history.location.pathname === AppRoute.FAVORITES) {
+    history.push(AppRoute.LOGIN);
+  }
 };
 
 const onBadRequest = (err) => {

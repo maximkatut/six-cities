@@ -1,7 +1,9 @@
 import React from 'react';
-import {reviewPropTypes} from '../../types';
-import Review from '../review/review.jsx';
 import {arrayOf} from 'prop-types';
+
+import {reviewPropTypes} from '../../types';
+
+import Review from '../review/review.jsx';
 
 const ReviewsList = ({reviews}) => {
 
