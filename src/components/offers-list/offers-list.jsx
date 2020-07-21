@@ -4,20 +4,21 @@ import PropTypes from 'prop-types';
 import OfferCard from '../offer-card/offer-card.jsx';
 
 import {offerPropType} from '../../types';
+import {Pages} from '../../const.js';
 
 const OffersList = (props) => {
-  const {offers, isNearPlaces} = props;
-  const placeCardClass = isNearPlaces ? `near-places__` : `cities__places-`;
-  const tabsContentClass = isNearPlaces ? `` : `tabs__content`;
+  const {offers, page} = props;
+  const placeCardClass = (page === Pages.OFFER) ? `near-places__` : `cities__places-`;
+  const tabsContentClass = (page === Pages.OFFER) ? `` : `tabs__content`;
 
   return (
     <div className={`${placeCardClass}list places__list ${tabsContentClass}`}>
       {offers.map((offer) => {
         return (
           <OfferCard
-            isNearPlaces={isNearPlaces}
             key={offer.id}
             offer={offer}
+            page={page}
           />
         );
       })}
@@ -27,7 +28,7 @@ const OffersList = (props) => {
 
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
-  isNearPlaces: PropTypes.bool
+  page: PropTypes.string.isRequired
 };
 
 export default OffersList;

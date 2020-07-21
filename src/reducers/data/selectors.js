@@ -23,6 +23,19 @@ export const getStatusRequest = (state) => {
   return state[NameSpace.DATA].isBusy;
 };
 
+export const getFavoritesCity = (state) => {
+  return state[NameSpace.DATA].favorites.reduce((cities, offer) => {
+    if (cities.indexOf(offer.city.name) < 0) {
+      cities.push(offer.city.name);
+    }
+    return cities;
+  }, []);
+};
+
+export const getFavorites = (state) => {
+  return state[NameSpace.DATA].favorites;
+};
+
 export const getOffersByActiveCity = createSelector(
     getOffers,
     getActiveCity,

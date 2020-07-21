@@ -1,11 +1,10 @@
 import produce from 'immer';
-import {extend} from "../../utils";
+
 import {ActionCreator} from '../../actions/data-actions';
-import {ActionCreator as OffersActionCreator} from '../../actions/offers-actions';
 import {ActionType} from '../../actions/types';
 import getAdaptedOffers, {adaptData as getAdaptedOffer} from '../../adapter/offers';
 import getAdaptedReviews from '../../adapter/reviews';
-import NameSpace from "../name-space";
+import {extend} from "../../utils";
 
 const initialState = {
   favorites: [],
@@ -19,15 +18,18 @@ const initialState = {
 
 export const Operation = {
   loadOffers: () => (dispatch, getState, api) => {
+    dispatch(ActionCreator.setRequestStatusBusy(true));
     return api.get(`/hotels`)
       .then((response) => {
         const adaptedData = getAdaptedOffers(response.data);
         dispatch(ActionCreator.loadOffers(adaptedData));
+      })
+      .then(()=> {
+        dispatch(ActionCreator.setRequestStatusBusy(false));
       });
   },
 
-  loadReviews: () => (dispatch, getState, api) => {
-    const id = getState()[NameSpace.OFFERS].activeOffer.id;
+  loadReviews: (id) => (dispatch, getState, api) => {
     return api.get(`/comments/${id}`)
       .then((response) => {
         const adaptedData = getAdaptedReviews(response.data);
@@ -35,8 +37,8 @@ export const Operation = {
       });
   },
 
-  postReview: ({comment, rating}) => (dispatch, getState, api) => {
-    const id = getState()[NameSpace.OFFERS].activeOffer.id;
+  postReview: ({comment, id, rating}) => (dispatch, getState, api) => {
+    dispatch(ActionCreator.setRequestStatusBusy(true));
     return api.post(`/comments/${id}`,
         {
           "comment": comment,
@@ -44,7 +46,6 @@ export const Operation = {
         }
     )
       .then((response) => {
-        dispatch(ActionCreator.setRequestStatusBusy(true));
         const adaptedData = getAdaptedReviews(response.data);
         dispatch(ActionCreator.loadReviews(adaptedData));
       })
@@ -53,8 +54,7 @@ export const Operation = {
       });
   },
 
-  loadOffersNearby: () => (dispatch, getState, api) => {
-    const id = getState()[NameSpace.OFFERS].activeOffer.id;
+  loadOffersNearby: (id) => (dispatch, getState, api) => {
     return api.get(`/hotels/${id}/nearby`)
       .then((response) => {
         const adapatedData = getAdaptedOffers(response.data);
@@ -90,7 +90,6 @@ export const Operation = {
         const adaptedOffer = getAdaptedOffer(response.data);
         dispatch(ActionCreator.postFavorite(adaptedOffer));
         dispatch(Operation.loadFavorites());
-        dispatch(OffersActionCreator.changeActiveOffer(adaptedOffer));
       });
   }
 };

@@ -8,6 +8,14 @@ export const getOffersByCity = (city, offers) => {
   return offers.filter((offer) => offer.city.name === city);
 };
 
+export const capitalize = (item) => {
+  return item.charAt(0).toUpperCase() + item.slice(1);
+};
+
+export const uncapitalize = (item) => {
+  return item.toLowerCase();
+};
+
 export const getOffersBySort = (sortType, offers) => {
   switch (sortType) {
     case SortType.POPULAR:
