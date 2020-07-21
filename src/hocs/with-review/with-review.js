@@ -25,6 +25,15 @@ const withReview = (Component) => {
       this._handleInputChange = this._handleInputChange.bind(this);
     }
 
+    static getDerivedStateFromProps(props, state) {
+      if (props.offerId !== state.id) {
+        return {
+          id: props.offerId
+        };
+      }
+      return null;
+    }
+
     _handleFormSubmit(evt) {
       const {postNewReview} = this.props;
       const {review, rating, id} = this.state;
