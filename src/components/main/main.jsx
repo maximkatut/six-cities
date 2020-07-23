@@ -78,7 +78,7 @@ class Main extends React.PureComponent {
   }
 
   render() {
-    const {offers, match, isBusy} = this.props;
+    const {offers, isBusy} = this.props;
     const isOffers = offers.length > 0;
 
     return (
@@ -88,9 +88,7 @@ class Main extends React.PureComponent {
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
             <section className="locations container">
-              <CitiesList
-                city={match.params.city}
-              />
+              <CitiesList/>
             </section>
           </div>
           <div className="cities">

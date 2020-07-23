@@ -12,7 +12,7 @@ const CitiesList = (props) => {
   return (
     <ul className="locations__list tabs__list ">
       {Cities.map((city, index) => {
-        const activeClass = (activeCityName === city) && `tabs__item--active`;
+        const activeClass = (activeCityName === city) ? `tabs__item--active` : ``;
         return (
           <li key={city + index} className="locations__item">
             <Link

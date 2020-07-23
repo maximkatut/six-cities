@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link, Redirect} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import {ActionCreator as MapActionCreator} from '../../actions/map-actions';
 import {Operation} from '../../reducers/data/data-reducer';

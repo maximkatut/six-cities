@@ -232,7 +232,7 @@ Offer.propTypes = {
   getOfferData: PropTypes.func.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string.isRequired
+      id: PropTypes.string
     }).isRequired
   }).isRequired,
   location: PropTypes.object.isRequired
