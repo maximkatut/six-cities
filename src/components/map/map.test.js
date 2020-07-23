@@ -1,8 +1,10 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import renderer from 'react-test-renderer';
-import {offers} from '../../test-data';
+
 import Map from './map.jsx';
+
+import {offers} from '../../test-data';
 import {store} from '../../test-data/store';
 
 describe(`Map`, () => {

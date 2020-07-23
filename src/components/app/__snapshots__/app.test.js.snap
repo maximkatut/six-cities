@@ -29,7 +29,7 @@ Array [
                 alt="6 cities logo"
                 className="header__logo"
                 height={41}
-                src="img/logo.svg"
+                src="/img/logo.svg"
                 width={81}
               />
             </a>
@@ -45,11 +45,16 @@ Array [
               >
                 <a
                   className="header__nav-link header__nav-link--profile"
-                  href="/login"
+                  href="/favorites"
                   onClick={[Function]}
                 >
                   <div
                     className="header__avatar-wrapper user__avatar-wrapper"
+                    style={
+                      Object {
+                        "backgroundImage": undefined,
+                      }
+                    }
                   />
                   <span
                     className="header__login"
@@ -85,7 +90,7 @@ Array [
             >
               <a
                 className="locations__item-link tabs__item "
-                href="#"
+                href="/paris"
                 onClick={[Function]}
               >
                 <span>
@@ -98,7 +103,7 @@ Array [
             >
               <a
                 className="locations__item-link tabs__item "
-                href="#"
+                href="/cologne"
                 onClick={[Function]}
               >
                 <span>
@@ -111,7 +116,7 @@ Array [
             >
               <a
                 className="locations__item-link tabs__item "
-                href="#"
+                href="/brussels"
                 onClick={[Function]}
               >
                 <span>
@@ -124,7 +129,7 @@ Array [
             >
               <a
                 className="locations__item-link tabs__item "
-                href="#"
+                href="/amsterdam"
                 onClick={[Function]}
               >
                 <span>
@@ -137,7 +142,7 @@ Array [
             >
               <a
                 className="locations__item-link tabs__item "
-                href="#"
+                href="/hamburg"
                 onClick={[Function]}
               >
                 <span>
@@ -150,7 +155,7 @@ Array [
             >
               <a
                 className="locations__item-link tabs__item "
-                href="#"
+                href="/dusseldorf"
                 onClick={[Function]}
               >
                 <span>
@@ -260,8 +265,8 @@ Array [
                   className="cities__image-wrapper place-card__image-wrapper"
                 >
                   <a
+                    href="/offer/2"
                     onClick={[Function]}
-                    to="/"
                   >
                     <img
                       alt="Place image"
@@ -273,7 +278,7 @@ Array [
                   </a>
                 </div>
                 <div
-                  className="place-card__info"
+                  className=" place-card__info"
                 >
                   <div
                     className="place-card__price-wrapper"
@@ -338,8 +343,8 @@ Array [
                     className="place-card__name"
                   >
                     <a
+                      href="/offer/2"
                       onClick={[Function]}
-                      to="/"
                     >
                       Nice, cozy, warm big bed apartment
                     </a>
@@ -372,6 +377,5 @@ Array [
       </div>
     </main>
   </div>,
-  "",
 ]
 `;

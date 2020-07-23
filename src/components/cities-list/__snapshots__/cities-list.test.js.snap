@@ -9,7 +9,7 @@ exports[`CitiesList CitiesList component should render correctly 1`] = `
   >
     <a
       className="locations__item-link tabs__item "
-      href="#"
+      href="/paris"
       onClick={[Function]}
     >
       <span>
@@ -22,7 +22,7 @@ exports[`CitiesList CitiesList component should render correctly 1`] = `
   >
     <a
       className="locations__item-link tabs__item "
-      href="#"
+      href="/cologne"
       onClick={[Function]}
     >
       <span>
@@ -35,7 +35,7 @@ exports[`CitiesList CitiesList component should render correctly 1`] = `
   >
     <a
       className="locations__item-link tabs__item "
-      href="#"
+      href="/brussels"
       onClick={[Function]}
     >
       <span>
@@ -48,7 +48,7 @@ exports[`CitiesList CitiesList component should render correctly 1`] = `
   >
     <a
       className="locations__item-link tabs__item "
-      href="#"
+      href="/amsterdam"
       onClick={[Function]}
     >
       <span>
@@ -61,7 +61,7 @@ exports[`CitiesList CitiesList component should render correctly 1`] = `
   >
     <a
       className="locations__item-link tabs__item "
-      href="#"
+      href="/hamburg"
       onClick={[Function]}
     >
       <span>
@@ -74,7 +74,7 @@ exports[`CitiesList CitiesList component should render correctly 1`] = `
   >
     <a
       className="locations__item-link tabs__item "
-      href="#"
+      href="/dusseldorf"
       onClick={[Function]}
     >
       <span>

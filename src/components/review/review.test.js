@@ -1,7 +1,9 @@
-import Review from './review.jsx';
 import React from 'react';
-import {reviews} from '../../test-data';
 import renderer from 'react-test-renderer';
+
+import {reviews} from '../../test-data';
+
+import Review from './review.jsx';
 
 describe(`Review`, () => {
   it(`Review should render correctly`, () => {

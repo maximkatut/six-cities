@@ -1,23 +1,23 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import renderer from 'react-test-renderer';
-import {BrowserRouter} from 'react-router-dom';
+import {Router, Route} from 'react-router-dom';
 
 import Main from './main.jsx';
 
 import {store} from '../../test-data/store';
+import history from '../../history.js';
 
 describe(`Main`, () => {
 
   it(`Main component should render correctly`, () => {
     const tree = renderer.create(
-        <BrowserRouter>
+        <Router history={history}>
           <Provider store={store}>
-            <Main
-              onMainCardTitleClick={() => { }}
-            />
+            <Route component={Main}/>
           </Provider>
-        </BrowserRouter>
+        </Router>,
+        {createNodeMock: () => document.createElement(`div`)}
     ).toJSON();
 
     expect(tree).toMatchSnapshot();
