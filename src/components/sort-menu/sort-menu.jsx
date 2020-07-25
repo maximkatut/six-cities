@@ -7,7 +7,7 @@ import SortItem from '../sort-item/sort-item.jsx';
 
 class SortMenu extends React.PureComponent {
   render() {
-    const {onSortClick, isMenuHide, sortType, handleDropdownClick} = this.props;
+    const {onSortClick, isMenuHide, sortType, handleDropdownClick, listRef} = this.props;
     const isMenuHideClass = isMenuHide ? `` : `places__options--opened`;
     return (
       <form className="places__sorting" action="#" method="get">
@@ -22,7 +22,10 @@ class SortMenu extends React.PureComponent {
             <use xlinkHref="#icon-arrow-select" />
           </svg>
         </span>
-        <ul className={`places__options places__options--custom ${isMenuHideClass}`}>
+        <ul
+          className={`places__options places__options--custom ${isMenuHideClass}`}
+          ref={listRef}
+        >
           {Object.values(SortType).map((sort, index) => {
             return (
               <SortItem
@@ -42,7 +45,8 @@ SortMenu.propTypes = {
   onSortClick: PropTypes.func.isRequired,
   isMenuHide: PropTypes.bool.isRequired,
   sortType: PropTypes.string.isRequired,
-  handleDropdownClick: PropTypes.func.isRequired
+  handleDropdownClick: PropTypes.func.isRequired,
+  listRef: PropTypes.object.isRequired
 };
 
 export default SortMenu;

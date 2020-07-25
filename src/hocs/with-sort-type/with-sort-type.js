@@ -5,12 +5,13 @@ import {compose} from 'redux';
 
 import {ActionCreator} from '../../actions/offers-actions';
 import {SortType} from '../../const';
-import {getOffersBySortType} from '../../reducers/data/selectors';
 
 const withSortMenu = (Component) => {
   class WithSortMenu extends React.PureComponent {
     constructor(props) {
       super(props);
+
+      this._sortListRef = React.createRef();
 
       this.state = {
         isMenuHide: true,
@@ -20,6 +21,15 @@ const withSortMenu = (Component) => {
       this._hideDropdown = this._hideDropdown.bind(this);
       this._handleDropdownClick = this._handleDropdownClick.bind(this);
       this._handleSortClick = this._handleSortClick.bind(this);
+      this._handleClickOutside = this._handleClickOutside.bind(this);
+    }
+
+    _handleClickOutside(event) {
+      if (this._sortListRef && !this._sortListRef.current.contains(event.target) && !this.state.isMenuHide) {
+        this.setState({
+          isMenuHide: true
+        });
+      }
     }
 
     _handleDropdownClick() {
@@ -45,11 +55,20 @@ const withSortMenu = (Component) => {
       });
     }
 
+    componentDidMount() {
+      document.addEventListener(`mousedown`, this._handleClickOutside);
+    }
+
+    componentWillUnmount() {
+      document.removeEventListener(`mousedown`, this._handleClickOutside);
+    }
+
     render() {
       const {isMenuHide, sortType} = this.state;
       return (
         <Component
           {...this.props}
+          listRef={this._sortListRef}
           isMenuHide={isMenuHide}
           sortType={sortType}
           handleDropdownClick={this._handleDropdownClick}
@@ -72,14 +91,10 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-const mapStateToProps = (state) => ({
-  offers: getOffersBySortType(state)
-});
-
 const composedWithSortMenu = compose(
-    connect(mapStateToProps, mapDispatchToProps),
+    connect(null, mapDispatchToProps),
     withSortMenu
 );
 
-
+export {withSortMenu};
 export default composedWithSortMenu;
