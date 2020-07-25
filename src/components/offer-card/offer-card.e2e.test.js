@@ -9,11 +9,12 @@ import {store} from '../../test-data/store';
 
 import OfferCard from './offer-card.jsx';
 import {Pages} from '../../const';
+import {AuthorizationStatus} from '../../reducers/user/user-reducer';
 
 describe(`OfferCard e2e`, () => {
   let component;
-  beforeEach(() => {
 
+  beforeEach(() => {
     store.dispatch = jest.fn();
 
     component = renderer.create(
@@ -22,12 +23,13 @@ describe(`OfferCard e2e`, () => {
             <OfferCard
               offer={offers[0]}
               page={Pages.MAIN}
+              userStatus={AuthorizationStatus.AUTH}
             />
           </Provider>
         </BrowserRouter>);
   });
 
-  it(`MouseOver should dispatch an action`, () => {
+  it(`MouseOver should dispatch an action with card id`, () => {
     renderer.act(() => {
       component.root.findByType(`article`).props.onMouseEnter();
     });
@@ -37,4 +39,16 @@ describe(`OfferCard e2e`, () => {
         MapActionCreator.changeCardIdOnHover(1)
     );
   });
+
+  it(`MouseLeave should dispatch an action with "-1"`, () => {
+    renderer.act(() => {
+      component.root.findByType(`article`).props.onMouseLeave();
+    });
+
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
+    expect(store.dispatch).toHaveBeenCalledWith(
+        MapActionCreator.changeCardIdOnHover(-1)
+    );
+  });
+
 });

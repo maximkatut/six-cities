@@ -1,21 +1,20 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {Provider} from 'react-redux';
 
 import CitiesList from './cities-list.jsx';
 
-import {store} from '../../test-data/store';
 import {BrowserRouter} from 'react-router-dom';
 
 describe(`CitiesList`, () => {
   it(`CitiesList component should render correctly`, () => {
 
     const component = renderer.create(
-        <Provider store={store}>
-          <BrowserRouter>
-            <CitiesList/>
-          </BrowserRouter>
-        </Provider>);
+        <BrowserRouter>
+          <CitiesList
+            activeCityName={`Gomel`}
+          />
+        </BrowserRouter>
+    );
 
     expect(component.toJSON()).toMatchSnapshot();
   });

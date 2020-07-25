@@ -8,9 +8,10 @@ import {SortType} from '../../const.js';
 describe(`SortMenu`, () => {
 
   it(`SortMenu component should render correctly`, () => {
-
+    const listRef = React.createRef();
     const component = renderer.create(
         <SortMenu
+          listRef={listRef}
           isMenuHide={true}
           sortType={SortType.POPULAR}
           handleDropdownClick={()=>{}}
