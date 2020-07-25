@@ -17,6 +17,7 @@ export const offers = [
       super: true
     },
     id: 1,
+    isFavorite: true,
     imagesGallery: [
       `img/apartment-01.jpg`,
       `img/apartment-02.jpg`,

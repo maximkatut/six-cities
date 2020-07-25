@@ -154,4 +154,5 @@ const mapStateToProps = (state) => ({
   cardIdOnHover: getCardIdOnHover(state)
 });
 
+export {Map};
 export default connect(mapStateToProps, null)(Map);

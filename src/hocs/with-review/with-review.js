@@ -107,5 +107,5 @@ const composedWithReview = compose(
     withReview
 );
 
-
+export {withReview};
 export default composedWithReview;

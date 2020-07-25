@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import {getActiveCity} from '../../reducers/offers/selectors';
 import {uncapitalize} from '../../utils';
 import {Cities} from '../../const';
 
@@ -33,8 +31,4 @@ CitiesList.propTypes = {
   activeCityName: PropTypes.string.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  activeCityName: getActiveCity(state)
-});
-
-export default connect(mapStateToProps)(CitiesList);
+export default CitiesList;

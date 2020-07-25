@@ -11,8 +11,8 @@ const ReviewForm = (props) => {
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {new Array(COUNT_OF_STARS).fill(``).map((_, id) => {
-          id = id + 1;
+        {new Array(COUNT_OF_STARS).fill(``).map((_, index) => {
+          const id = index + 1;
           return (
             <React.Fragment key={id}>
               <input

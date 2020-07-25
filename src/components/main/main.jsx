@@ -78,7 +78,7 @@ class Main extends React.PureComponent {
   }
 
   render() {
-    const {offers, isBusy} = this.props;
+    const {offers, isBusy, activeCityName} = this.props;
     const isOffers = offers.length > 0;
 
     return (
@@ -88,7 +88,9 @@ class Main extends React.PureComponent {
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
             <section className="locations container">
-              <CitiesList/>
+              <CitiesList
+                activeCityName={activeCityName}
+              />
             </section>
           </div>
           <div className="cities">
@@ -128,4 +130,5 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
+export {Main};
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
