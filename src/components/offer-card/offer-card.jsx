@@ -11,8 +11,7 @@ import {getUserStatus} from '../../reducers/user/selectors';
 import {AuthorizationStatus} from '../../reducers/user/user-reducer';
 import history from '../../history';
 
-const OfferCard = (props) => {
-  const {offer, onOfferCardHover, onFavotireButtonClick, page, userStatus} = props;
+const OfferCard = ({offer, onOfferCardHover, onFavotireButtonClick, page, userStatus}) => {
   const {title, offerType, mainImage, premium, price, rate, isFavorite} = offer;
 
   return (

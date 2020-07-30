@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const SortItem = (props) => {
-  const {onSortClick, sortType} = props;
+const SortItem = ({onSortClick, sortType}) => {
   return (
     <li
       className="places__option"

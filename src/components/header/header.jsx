@@ -7,8 +7,7 @@ import {getUser, getUserStatus} from '../../reducers/user/selectors';
 import {AuthorizationStatus} from '../../reducers/user/user-reducer';
 import {AppRoute} from '../../const';
 
-const Header = (props) => {
-  const {user, userStatus} = props;
+const Header = ({user, userStatus}) => {
   const isUserLogged = (userStatus === AuthorizationStatus.AUTH) ? true : false;
   return (
     <header className="header">

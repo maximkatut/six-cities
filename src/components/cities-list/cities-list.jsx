@@ -5,8 +5,7 @@ import {Link} from 'react-router-dom';
 import {uncapitalize} from '../../utils';
 import {Cities} from '../../const';
 
-const CitiesList = (props) => {
-  const {activeCityName} = props;
+const CitiesList = ({activeCityName}) => {
   return (
     <ul className="locations__list tabs__list ">
       {Cities.map((city, index) => {

@@ -8,9 +8,7 @@ import {getUserStatus} from "../../reducers/user/selectors";
 import {AppRoute} from "../../const.js";
 
 
-const PrivateRoute = (props) => {
-  const {render, path, exact, userStatus} = props;
-
+const PrivateRoute = ({render, path, exact, userStatus}) => {
   return (
     <Route
       path={path}

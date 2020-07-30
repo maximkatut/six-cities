@@ -13,30 +13,27 @@ import SignIn from '../sign-in/sign-in.jsx';
 import FavoritesList from '../favorites-list/favorites-list.jsx';
 import PrivateRoute from '../private-route/private-route.jsx';
 
-class App extends React.PureComponent {
-  render() {
-    const {isError} = this.props;
-    return (
-      <Router history={history}>
-        <Notifications />
-        {isError.status && notify.show(`${isError.message}`, `error`)}
-        <Switch>
-          <PrivateRoute
-            exact
-            path="/favorites"
-            render={(props) => {
-              return <FavoritesList {...props} />;
-            }}
-          />
-          <Route exact path="/offer/:id?" component={Offer} />
-          <Route exact path="/login" component={SignIn} />
-          <Route exact path="/:city?" component={Main} />
-          <Redirect path="" to="/" />
-        </Switch>
-      </Router>
-    );
-  }
-}
+const App = ({isError}) => {
+  return (
+    <Router history={history}>
+      <Notifications />
+      {isError.status && notify.show(`${isError.message}`, `error`)}
+      <Switch>
+        <PrivateRoute
+          exact
+          path="/favorites"
+          render={(props) => {
+            return <FavoritesList {...props} />;
+          }}
+        />
+        <Route exact path="/offer/:id?" component={Offer} />
+        <Route exact path="/login" component={SignIn} />
+        <Route exact path="/:city?" component={Main} />
+        <Redirect path="" to="/" />
+      </Switch>
+    </Router>
+  );
+};
 
 App.propTypes = {
   isError: shape({

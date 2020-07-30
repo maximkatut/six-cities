@@ -3,8 +3,7 @@ import {func, bool, string, number} from 'prop-types';
 
 const COUNT_OF_STARS = 5;
 
-const ReviewForm = (props) => {
-  const {isBusy, isDisabled, review, rating, onFormSubmit, onRadioChange, onInputChange} = props;
+const ReviewForm = ({isBusy, isDisabled, review, rating, onFormSubmit, onRadioChange, onInputChange}) => {
   return (
     <form className="reviews__form form" action="#" method="post"
       onSubmit={onFormSubmit}

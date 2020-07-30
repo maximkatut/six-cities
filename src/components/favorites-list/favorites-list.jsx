@@ -11,7 +11,6 @@ import {uncapitalize} from '../../utils/index.js';
 import {AppRoute} from '../../const.js';
 
 const FavoritesList = ({cities, favorites}) => {
-
   const isEmpty = favorites.length === 0;
   return (
     <div className="page">
