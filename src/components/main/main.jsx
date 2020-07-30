@@ -4,9 +4,13 @@ import {connect} from 'react-redux';
 
 import withSortType from '../../hocs/with-sort-type/with-sort-type';
 
-import {getOffersBySortType} from '../../reducers/data/selectors';
+import {ActionCreator} from '../../actions/offers-actions';
+import {getOffersBySortType, getStatusRequest} from '../../reducers/data/selectors';
 import {getActiveCity} from '../../reducers/offers/selectors';
 import {offerPropType} from '../../types';
+import {Pages, Cities, AppRoute} from '../../const';
+import {capitalize} from '../../utils';
+import history from '../../history';
 
 import CitiesList from '../cities-list/cities-list.jsx';
 import Map from '../map/map.jsx';
@@ -14,14 +18,37 @@ import NoOffers from '../no-offers/no-offers.jsx';
 import OffersList from '../offers-list/offers-list.jsx';
 import SortMenu from '../sort-menu/sort-menu.jsx';
 import Header from '../header/header.jsx';
-
+import Spinner from '../spinner/spinner.jsx';
 
 const SortMenuWrapped = withSortType(SortMenu);
 
-const Main = (props) => {
-  const {offers, activeCityName} = props;
+class Main extends React.PureComponent {
+  componentDidMount() {
+    const {setActiveCity, match} = this.props;
+    const city = match.params.city;
 
-  const renderOffersList = () => {
+    if (city) {
+      const capitalizedCity = capitalize(city);
+
+      if (!Cities.includes(capitalizedCity)) {
+        history.push(AppRoute.ROOT);
+        return;
+      }
+      setActiveCity(capitalizedCity);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const {setActiveCity, match} = this.props;
+    const city = match.params.city;
+    if (prevProps.match.params.city !== city && city) {
+      setActiveCity(capitalize(city));
+    }
+  }
+
+  renderOffersList() {
+    const {offers, activeCityName} = this.props;
+
     return (
       <div className="cities__places-container container">
         <section className="cities__places places">
@@ -30,6 +57,7 @@ const Main = (props) => {
           <SortMenuWrapped/>
           <OffersList
             offers={offers}
+            page={Pages.MAIN}
           />
         </section>
         <div className="cities__right-section">
@@ -39,42 +67,68 @@ const Main = (props) => {
         </div>
       </div>
     );
-  };
+  }
 
-  const renderNoOffers = () => {
+  renderNoOffers() {
+    const {activeCityName} = this.props;
+
     return (
       <NoOffers activeCityName={activeCityName}/>
     );
-  };
+  }
 
-  const isOffers = offers.length > 0;
+  render() {
+    const {offers, isBusy, activeCityName} = this.props;
+    const isOffers = offers.length > 0;
 
-  return (
-    <div className="page page--gray page--main">
-      <Header/>
-      <main className={`page__main page__main--index ${isOffers ? `` : `page__main--index-empty`}`}>
-        <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <CitiesList/>
-          </section>
-        </div>
-        <div className="cities">
-          {isOffers ? renderOffersList() : renderNoOffers()}
-        </div>
-      </main>
-    </div>
-  );
-};
+    return (
+      <div className="page page--gray page--main">
+        <Header/>
+        <main className={`page__main page__main--index ${isOffers ? `` : `page__main--index-empty`}`}>
+          <h1 className="visually-hidden">Cities</h1>
+          <div className="tabs">
+            <section className="locations container">
+              <CitiesList
+                activeCityName={activeCityName}
+              />
+            </section>
+          </div>
+          <div className="cities">
+            {{
+              'true-false': this.renderOffersList(),
+              'false-true': <Spinner/>,
+              'false-false': this.renderNoOffers(),
+            }[`${isOffers}-${isBusy}`]}
+          </div>
+        </main>
+      </div>
+    );
+  }
+}
 
 Main.propTypes = {
   offers: PropTypes.arrayOf(offerPropType).isRequired,
-  activeCityName: PropTypes.string.isRequired
+  activeCityName: PropTypes.string.isRequired,
+  isBusy: PropTypes.bool.isRequired,
+  setActiveCity: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      city: PropTypes.string
+    })
+  })
 };
 
 const mapStateToProps = (state) => ({
   offers: getOffersBySortType(state),
-  activeCityName: getActiveCity(state)
+  activeCityName: getActiveCity(state),
+  isBusy: getStatusRequest(state)
 });
 
-export default connect(mapStateToProps, null)(Main);
+const mapDispatchToProps = (dispatch) => ({
+  setActiveCity(cityName) {
+    dispatch(ActionCreator.changeCity(cityName));
+  }
+});
+
+export {Main};
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

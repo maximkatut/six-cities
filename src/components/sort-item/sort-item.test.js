@@ -1,6 +1,8 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+
 import SortItem from './sort-item.jsx';
+
 import {SortType} from '../../const.js';
 
 describe(`SortItem`, () => {

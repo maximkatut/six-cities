@@ -36,7 +36,7 @@ describe(`withReview`, () => {
   it(`withReview is rendered correctly`, () => {
     const component = renderer.create((
       <Provider store={store}>
-        <MockComponentWrapped/>
+        <MockComponentWrapped offerId={1}/>
       </Provider>
     ), {
       createNodeMock() {
@@ -58,7 +58,7 @@ describe(`withReview`, () => {
 
     const wrapper = mount(
         <Provider store={store}>
-          <MockComponentWrapped/>
+          <MockComponentWrapped offerId={1}/>
         </Provider>
     );
 

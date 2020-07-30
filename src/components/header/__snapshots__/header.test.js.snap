@@ -22,7 +22,7 @@ exports[`Header Header component should render correctly 1`] = `
             alt="6 cities logo"
             className="header__logo"
             height={41}
-            src="img/logo.svg"
+            src="/img/logo.svg"
             width={81}
           />
         </a>
@@ -38,11 +38,16 @@ exports[`Header Header component should render correctly 1`] = `
           >
             <a
               className="header__nav-link header__nav-link--profile"
-              href="/login"
+              href="/favorites"
               onClick={[Function]}
             >
               <div
                 className="header__avatar-wrapper user__avatar-wrapper"
+                style={
+                  Object {
+                    "backgroundImage": undefined,
+                  }
+                }
               />
               <span
                 className="header__login"

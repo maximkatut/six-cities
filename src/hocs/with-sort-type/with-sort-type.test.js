@@ -1,11 +1,13 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import renderer from 'react-test-renderer';
+import PropTypes from 'prop-types';
+
 import {store} from '../../test-data/store';
 import {ActionCreator} from '../../actions/offers-actions';
 import {SortType} from '../../const.js';
+
 import withSortMenu from './with-sort-type';
-import PropTypes from 'prop-types';
 
 const MockComponent = (props) => {
   const {onSortClick} = props;

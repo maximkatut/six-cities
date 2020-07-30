@@ -1,15 +1,15 @@
 import MockAdapter from "axios-mock-adapter";
 import {ActionType} from '../../actions/types';
-import offersAdapter from '../../adapter/offers';
+import offersAdapter, {adaptData as offerAdapter} from '../../adapter/offers';
 import reviewsAdapter from '../../adapter/reviews';
 import {createAPI} from "../../api.js";
 import {offers, offersFromRequest, reviews, reviewsFromRequest} from '../../test-data';
 import {Operation} from '../data/data-reducer';
 import reducer from './data-reducer';
 
-const api = createAPI(() => {});
 
 describe(`Reducer works correctly`, () => {
+
   it(`Reducer has to return initial state if new state is undefined`, () => {
     expect(reducer(undefined, {}))
     .toEqual(
@@ -76,7 +76,8 @@ describe(`Reducer works correctly`, () => {
   });
 });
 
-describe(`Operation work correctly`, () => {
+describe(`Operations work correctly`, () => {
+  const api = createAPI(() => {}, () => {});
   it(`Should make a correct API call to hotels`, function () {
     const hotelsLoader = Operation.loadOffers();
     const apiMock = new MockAdapter(api);
@@ -88,27 +89,28 @@ describe(`Operation work correctly`, () => {
 
     hotelsLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_REQUEST_STATUS,
+          payload: true,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.LOAD_OFFERS,
           payload: offersAdapter(offersFromRequest),
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
+          type: ActionType.SET_REQUEST_STATUS,
+          payload: false,
         });
       });
   });
 
   it(`Should make a correct API call to comments/id`, function () {
-    const reviewsLoader = Operation.loadReviews();
+    const id = 21;
+    const reviewsLoader = Operation.loadReviews(id);
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const getState = () => {
-      return {
-        OFFERS: {
-          activeOffer: {
-            id: 21
-          }
-        }
-      };
-    };
+    const getState = () => {};
 
     apiMock
       .onGet(`/comments/21`)
@@ -124,19 +126,12 @@ describe(`Operation work correctly`, () => {
       });
   });
 
-  it(`Should make a correct API call to hotels/id/nearby`, function () {
-    const hotelsNearbyLoader = Operation.loadOffersNearby();
+  it(`Should make a correct API call hotels/id/nearby`, function () {
+    const id = 21;
+    const hotelsNearbyLoader = Operation.loadOffersNearby(id);
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const getState = () => {
-      return {
-        OFFERS: {
-          activeOffer: {
-            id: 21
-          }
-        }
-      };
-    };
+    const getState = () => {};
 
     apiMock
       .onGet(`/hotels/21/nearby`)
@@ -153,19 +148,11 @@ describe(`Operation work correctly`, () => {
   });
 
   it(`Should make a correct API call POST to comments/id`, function () {
-    const review = {"comment": `Hello`, "rating": 4};
+    const review = {"comment": `Hello`, "rating": 4, "id": 21};
     const postReviewLoader = Operation.postReview(review);
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const getState = () => {
-      return {
-        OFFERS: {
-          activeOffer: {
-            id: 21
-          }
-        }
-      };
-    };
+    const getState = () => {};
 
     apiMock
       .onPost(`/comments/21`)
@@ -185,6 +172,72 @@ describe(`Operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.SET_REQUEST_STATUS,
           payload: false,
+        });
+      });
+  });
+
+
+  it(`Should make a correct API call to /favorite`, function () {
+    const loadFavoritesLoader = Operation.loadFavorites();
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const getState = () => {};
+
+    apiMock
+      .onGet(`/favorite`)
+      .reply(200, offersFromRequest);
+
+    return loadFavoritesLoader(dispatch, getState, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.LOAD_FAVORITES,
+          payload: offersAdapter(offersFromRequest),
+        });
+      });
+  });
+
+  it(`Should make a correct API call POST to favorite/id/0`, function () {
+    const id = 21;
+    const isFavorite = true;
+    const isOfferPage = false;
+    const postFavoriteLoader = Operation.postFavorite(id, isFavorite, isOfferPage);
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const getState = () => {};
+
+    apiMock
+      .onPost(`/favorite/21/0`)
+      .reply(200, offersFromRequest[0]);
+
+    return postFavoriteLoader(dispatch, getState, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.POST_FAVORITE,
+          payload: offerAdapter(offersFromRequest[0]),
+        });
+      });
+  });
+
+  it(`Should make a correct API call POST to favorite-id-0`, function () {
+    const isFavorite = true;
+    const id = 21;
+    const postFavoriteActiveOfferLoader = Operation.postFavoriteActiveOffer(id, isFavorite);
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const getState = () => {};
+
+    apiMock
+      .onPost(`/favorite/21/0`)
+      .reply(200, offersFromRequest[0]);
+
+    return postFavoriteActiveOfferLoader(dispatch, getState, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.POST_FAVORITE,
+          payload: offerAdapter(offersFromRequest[0]),
         });
       });
   });

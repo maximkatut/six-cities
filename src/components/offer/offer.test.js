@@ -1,23 +1,21 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import {BrowserRouter} from 'react-router-dom';
+import {Router, Route} from 'react-router-dom';
 import renderer from 'react-test-renderer';
 
-import {offers} from '../../test-data';
 import {store} from '../../test-data/store';
+import history from '../../history';
 
 import Offer from './offer.jsx';
 
 describe(`Offer`, () => {
   it(`Offer should render correctly`, () => {
     const tree = renderer.create(
-        <BrowserRouter>
+        <Router history={history}>
           <Provider store={store}>
-            <Offer
-              offer = {offers[0]}
-            />
+            <Route component={Offer}/>
           </Provider>
-        </BrowserRouter>
+        </Router>
     )
       .toJSON();
 

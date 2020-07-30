@@ -9,7 +9,7 @@ import {createAPI} from "../../api.js";
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
     authorizationStatus: AuthorizationStatus.NO_AUTH,
-    user: ``
+    user: {}
   });
 });
 
@@ -67,19 +67,21 @@ describe(`Action creators work correctly`, () => {
 
 describe(`Operation works correctly`, () => {
   const api = createAPI(() => {}, () => {});
-  const user = {
-    login: `max@amx.max`,
-    password: `123`
-  };
 
-  it(`Should make a correct API call to /login POST request`, () => {
+  it(`Should make a correct API call to -login POST request`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const loginLoader = Operation.login(user);
+    const loginLoader = Operation.login({login: `max@max.ru`, password: 123});
+    const user = {email: `max@amx.max`, avatar: `avatar`};
 
     apiMock
       .onPost(`/login`)
-      .reply(200, user);
+      .reply(200, {
+        email: `max@amx.max`,
+        // eslint-disable-next-line camelcase
+        avatar_url: `avatar`
+      }
+      );
 
     return loginLoader(dispatch, () => {}, api)
       .then(() => {
@@ -95,16 +97,17 @@ describe(`Operation works correctly`, () => {
       });
   });
 
-  it(`Should make a correct API call to /login GET request`, () => {
+  it(`Should make a correct API call to -login GET request`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const loginLoader = Operation.checkAuth();
+    const checkAuthLoader = Operation.checkAuth();
+    const user = {};
 
     apiMock
       .onGet(`/login`)
       .reply(200, user);
 
-    return loginLoader(dispatch, () => {}, api)
+    return checkAuthLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {

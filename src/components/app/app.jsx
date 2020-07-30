@@ -1,55 +1,41 @@
-import {bool, oneOf, oneOfType, shape, string} from 'prop-types';
+import {bool, shape, string} from 'prop-types';
 import React from 'react';
 import Notifications, {notify} from 'react-notify-toast';
 import {connect} from 'react-redux';
-import {Router, Route, Switch} from 'react-router-dom';
+import {Router, Route, Switch, Redirect} from 'react-router-dom';
 
 import {getErrorStatus} from '../../reducers/data/selectors';
-import {getActiveOffer} from '../../reducers/offers/selectors';
-import {offerFullPropType} from '../../types';
 import history from '../../history';
 
 import Main from '../main/main.jsx';
 import Offer from '../offer/offer.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
+import FavoritesList from '../favorites-list/favorites-list.jsx';
+import PrivateRoute from '../private-route/private-route.jsx';
 
-class App extends React.PureComponent {
-  _renderApp() {
-    const {activeOffer} = this.props;
-    if (activeOffer) {
-      return (
-        <Offer
-          offer={activeOffer}
+const App = ({isError}) => {
+  return (
+    <Router history={history}>
+      <Notifications />
+      {isError.status && notify.show(`${isError.message}`, `error`)}
+      <Switch>
+        <PrivateRoute
+          exact
+          path="/favorites"
+          render={(props) => {
+            return <FavoritesList {...props} />;
+          }}
         />
-      );
-    } else {
-      return (
-        <Main/>
-      );
-    }
-  }
-
-  render() {
-    const {isError} = this.props;
-    return (
-      <Router history={history}>
-        <Notifications />
-        <Switch>
-          <Route exact path="/">
-            {this._renderApp()}
-            {isError.status ? notify.show(`${isError.message}`, `error`) : ``}
-          </Route>
-          <Route exact path="/login">
-            <SignIn/>
-          </Route>
-        </Switch>
-      </Router>
-    );
-  }
-}
+        <Route exact path="/offer/:id?" component={Offer} />
+        <Route exact path="/login" component={SignIn} />
+        <Route exact path="/:city?" component={Main} />
+        <Redirect path="" to="/" />
+      </Switch>
+    </Router>
+  );
+};
 
 App.propTypes = {
-  activeOffer: oneOfType([offerFullPropType.isRequired, oneOf([null])]),
   isError: shape({
     status: bool.isRequired,
     message: string.isRequired
@@ -57,7 +43,6 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  activeOffer: getActiveOffer(state),
   isError: getErrorStatus(state)
 });
 

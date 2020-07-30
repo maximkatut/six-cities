@@ -3,16 +3,15 @@ import {func, bool, string, number} from 'prop-types';
 
 const COUNT_OF_STARS = 5;
 
-const ReviewForm = (props) => {
-  const {isBusy, isDisabled, review, rating, onFormSubmit, onRadioChange, onInputChange} = props;
+const ReviewForm = ({isBusy, isDisabled, review, rating, onFormSubmit, onRadioChange, onInputChange}) => {
   return (
     <form className="reviews__form form" action="#" method="post"
       onSubmit={onFormSubmit}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {new Array(COUNT_OF_STARS).fill(``).map((_, id) => {
-          id = id + 1;
+        {new Array(COUNT_OF_STARS).fill(``).map((_, index) => {
+          const id = index + 1;
           return (
             <React.Fragment key={id}>
               <input
@@ -61,7 +60,6 @@ const ReviewForm = (props) => {
     </form>
   );
 };
-
 
 ReviewForm.propTypes = {
   isBusy: bool.isRequired,

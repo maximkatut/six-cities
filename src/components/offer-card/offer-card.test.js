@@ -1,10 +1,13 @@
-import OfferCard from './offer-card.jsx';
 import React from 'react';
-import {offers} from '../../test-data';
-import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
-import {store} from '../../test-data/store';
 import {BrowserRouter} from 'react-router-dom';
+import renderer from 'react-test-renderer';
+
+import {offers} from '../../test-data';
+import {store} from '../../test-data/store';
+
+import OfferCard from './offer-card.jsx';
+import {Pages} from '../../const';
 
 describe(`OfferCard`, () => {
   it(`OfferCard component should render right`, () => {
@@ -13,8 +16,7 @@ describe(`OfferCard`, () => {
           <Provider store={store}>
             <OfferCard
               offer={offers[0]}
-              onOfferCardHover={() => { }}
-              onMainCardTitleClick={() => { }}
+              page={Pages.MAIN}
             />
           </Provider>
         </BrowserRouter>)

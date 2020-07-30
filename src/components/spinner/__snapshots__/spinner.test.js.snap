@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spinner Spinner component should render correctly 1`] = `
+<div
+  className="sk-chase"
+>
+  <div
+    className="sk-chase-dot"
+  />
+  <div
+    className="sk-chase-dot"
+  />
+  <div
+    className="sk-chase-dot"
+  />
+  <div
+    className="sk-chase-dot"
+  />
+  <div
+    className="sk-chase-dot"
+  />
+  <div
+    className="sk-chase-dot"
+  />
+</div>
+`;

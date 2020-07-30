@@ -1,17 +1,20 @@
-import OfferCard from './offer-card.jsx';
 import React from 'react';
-import {offers} from '../../test-data';
 import {Provider} from 'react-redux';
-import {store} from '../../test-data/store';
-import renderer from 'react-test-renderer';
-import {ActionCreator as MapActionCreator} from '../../actions/map-actions';
-import {ActionCreator as OffersActionCreator} from '../../actions/offers-actions';
 import {BrowserRouter} from 'react-router-dom';
+import renderer from 'react-test-renderer';
+
+import {ActionCreator as MapActionCreator} from '../../actions/map-actions';
+import {offers} from '../../test-data';
+import {store} from '../../test-data/store';
+
+import OfferCard from './offer-card.jsx';
+import {Pages} from '../../const';
+import {AuthorizationStatus} from '../../reducers/user/user-reducer';
 
 describe(`OfferCard e2e`, () => {
   let component;
-  beforeEach(() => {
 
+  beforeEach(() => {
     store.dispatch = jest.fn();
 
     component = renderer.create(
@@ -19,23 +22,14 @@ describe(`OfferCard e2e`, () => {
           <Provider store={store}>
             <OfferCard
               offer={offers[0]}
+              page={Pages.MAIN}
+              userStatus={AuthorizationStatus.AUTH}
             />
           </Provider>
         </BrowserRouter>);
   });
 
-  it(`Card title should dispatch an action`, () => {
-    renderer.act(() => {
-      component.root.findAllByType(`a`)[1].props.onClick();
-    });
-
-    expect(store.dispatch).toHaveBeenCalledTimes(3);
-    expect(store.dispatch).toHaveBeenNthCalledWith(1,
-        OffersActionCreator.changeActiveOffer(offers[0])
-    );
-  });
-
-  it(`MouseOver should dispatch an action`, () => {
+  it(`MouseOver should dispatch an action with card id`, () => {
     renderer.act(() => {
       component.root.findByType(`article`).props.onMouseEnter();
     });
@@ -45,4 +39,16 @@ describe(`OfferCard e2e`, () => {
         MapActionCreator.changeCardIdOnHover(1)
     );
   });
+
+  it(`MouseLeave should dispatch an action with "-1"`, () => {
+    renderer.act(() => {
+      component.root.findByType(`article`).props.onMouseLeave();
+    });
+
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
+    expect(store.dispatch).toHaveBeenCalledWith(
+        MapActionCreator.changeCardIdOnHover(-1)
+    );
+  });
+
 });

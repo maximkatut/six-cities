@@ -1,9 +1,9 @@
 import {ActionType} from '../../actions/types';
 import {ActionCreator} from '../../actions/user-actions';
+import {AppRoute} from '../../const';
+import history from '../../history';
 import {extend} from '../../utils';
 import {Operation as DataOperation} from '../data/data-reducer';
-import history from '../../history';
-import {AppRoute} from '../../const';
 
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -12,7 +12,7 @@ export const AuthorizationStatus = {
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  user: ``
+  user: {}
 };
 
 export const Operation = {
@@ -20,11 +20,8 @@ export const Operation = {
     return api.get(`/login`)
       .then((res) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-        dispatch(ActionCreator.getUser(res.data));
+        dispatch(ActionCreator.getUser({email: res.data.email, avatar: res.data.avatar_url}));
         dispatch(DataOperation.loadFavorites());
-      })
-      .catch((err) => {
-        throw err;
       });
   },
 
@@ -35,9 +32,9 @@ export const Operation = {
     })
       .then((res) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-        dispatch(ActionCreator.getUser(res.data));
+        dispatch(ActionCreator.getUser({email: res.data.email, avatar: res.data.avatar_url}));
         dispatch(DataOperation.loadFavorites());
-        history.push(`${AppRoute.ROOT}`);
+        history.push(AppRoute.ROOT);
       });
   },
 };

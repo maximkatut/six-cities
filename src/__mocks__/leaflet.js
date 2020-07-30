@@ -6,7 +6,10 @@ leaflet.map = () => {
   return {
     setView: () => {},
     remove: () => {},
-    once: () => {}
+    once: () => {},
+    removeLayer: () => {},
+    flyTo: () => {},
+    scrollWheelZoom: () => {}
   };
 };
 
