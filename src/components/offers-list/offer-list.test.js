@@ -6,7 +6,7 @@ import renderer from 'react-test-renderer';
 import {offers} from '../../test-data';
 import {store} from '../../test-data/store';
 
-import OffersList from './offers-list.jsx';
+import OffersList from './offers-list';
 import {Pages} from '../../const';
 
 describe(`OffersList`, () => {

@@ -3,7 +3,7 @@ import {arrayOf} from 'prop-types';
 
 import {reviewPropTypes} from '../../types';
 
-import Review from '../review/review.jsx';
+import Review from '../review/review';
 
 const ReviewsList = ({reviews}) => {
 

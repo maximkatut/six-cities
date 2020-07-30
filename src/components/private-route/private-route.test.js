@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import {AuthorizationStatus} from "../../reducers/user/user-reducer";
 
-import {PrivateRoute} from './private-route.jsx';
+import {PrivateRoute} from './private-route';
 
 configure({
   adapter: new Adapter()

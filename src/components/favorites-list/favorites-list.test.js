@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 
-import FavoritesList from './favorites-list.jsx';
+import FavoritesList from './favorites-list';
 
 import {store} from '../../test-data/store';
 import {BrowserRouter} from 'react-router-dom';

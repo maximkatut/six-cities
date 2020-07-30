@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 
-import Header from './header.jsx';
+import Header from './header';
 
 import {store} from '../../test-data/store';
 

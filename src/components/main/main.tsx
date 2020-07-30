@@ -12,13 +12,13 @@ import {Pages, Cities, AppRoute} from '../../const';
 import {capitalize} from '../../utils';
 import history from '../../history';
 
-import CitiesList from '../cities-list/cities-list.jsx';
-import Map from '../map/map.jsx';
-import NoOffers from '../no-offers/no-offers.jsx';
-import OffersList from '../offers-list/offers-list.jsx';
-import SortMenu from '../sort-menu/sort-menu.jsx';
-import Header from '../header/header.jsx';
-import Spinner from '../spinner/spinner.jsx';
+import CitiesList from '../cities-list/cities-list';
+import Map from '../map/map';
+import NoOffers from '../no-offers/no-offers';
+import OffersList from '../offers-list/offers-list';
+import SortMenu from '../sort-menu/sort-menu';
+import Header from '../header/header';
+import Spinner from '../spinner/spinner';
 
 const SortMenuWrapped = withSortType(SortMenu);
 
@@ -54,7 +54,7 @@ class Main extends React.PureComponent {
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
           <b className="places__found">{offers.length} places to stay in {activeCityName}</b>
-          <SortMenuWrapped/>
+          <SortMenuWrapped />
           <OffersList
             offers={offers}
             page={Pages.MAIN}
@@ -62,7 +62,7 @@ class Main extends React.PureComponent {
         </section>
         <div className="cities__right-section">
           <section className="cities__map map">
-            <Map/>
+            <Map />
           </section>
         </div>
       </div>
@@ -73,7 +73,7 @@ class Main extends React.PureComponent {
     const {activeCityName} = this.props;
 
     return (
-      <NoOffers activeCityName={activeCityName}/>
+      <NoOffers activeCityName={activeCityName} />
     );
   }
 
@@ -83,7 +83,7 @@ class Main extends React.PureComponent {
 
     return (
       <div className="page page--gray page--main">
-        <Header/>
+        <Header />
         <main className={`page__main page__main--index ${isOffers ? `` : `page__main--index-empty`}`}>
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
@@ -96,7 +96,7 @@ class Main extends React.PureComponent {
           <div className="cities">
             {{
               'true-false': this.renderOffersList(),
-              'false-true': <Spinner/>,
+              'false-true': <Spinner />,
               'false-false': this.renderNoOffers(),
             }[`${isOffers}-${isBusy}`]}
           </div>

@@ -3,7 +3,7 @@ import React from 'react';
 
 import {SortType} from '../../const';
 
-import SortItem from '../sort-item/sort-item.jsx';
+import SortItem from '../sort-item/sort-item';
 
 const SortMenu = ({onSortClick, isMenuHide, sortType, handleDropdownClick, listRef}) => {
   const isMenuHideClass = isMenuHide ? `` : `places__options--opened`;

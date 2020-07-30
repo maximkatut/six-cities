@@ -5,7 +5,7 @@ import {MemoryRouter, Router} from 'react-router-dom';
 import {createMemoryHistory} from "history";
 import {act} from 'react-dom/test-utils';
 
-import CitiesList from './cities-list.jsx';
+import CitiesList from './cities-list';
 
 describe(`CitiesList e2e`, () => {
   const root = document.createElement(`div`);

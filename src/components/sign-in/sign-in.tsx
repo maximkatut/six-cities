@@ -8,7 +8,7 @@ import {getUserStatus} from '../../reducers/user/selectors';
 import history from '../../history';
 import {AppRoute} from '../../const';
 
-import Header from '../header/header.jsx';
+import Header from '../header/header';
 
 class SignIn extends React.PureComponent {
   constructor(props) {

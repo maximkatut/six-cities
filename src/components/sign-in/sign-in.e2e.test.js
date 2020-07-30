@@ -8,7 +8,7 @@ import {createMemoryHistory} from "history";
 import {render, unmountComponentAtNode} from "react-dom";
 import {act} from 'react-dom/test-utils';
 
-import SignIn from './sign-in.jsx';
+import SignIn from './sign-in';
 
 import {store} from '../../test-data/store';
 

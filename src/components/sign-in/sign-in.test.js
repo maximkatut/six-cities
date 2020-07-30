@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 
-import SignIn from './sign-in.jsx';
+import SignIn from './sign-in';
 
 import {store} from '../../test-data/store';
 

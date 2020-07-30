@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import ReviewForm from './review-form.jsx';
+import ReviewForm from './review-form';
 
 describe(`ReviewForm`, () => {
   it(`ReviewForm should render correctly`, () => {

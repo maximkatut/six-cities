@@ -11,12 +11,12 @@ import {AuthorizationStatus} from '../../reducers/user/user-reducer';
 import {offerFullPropType, reviewPropTypes} from '../../types';
 import history from '../../history';
 
-import Header from '../header/header.jsx';
-import OffersList from '../offers-list/offers-list.jsx';
-import ReviewForm from '../review-form/review-form.jsx';
-import ReviewsList from '../reviews-list/reviews-list.jsx';
-import Spinner from '../spinner/spinner.jsx';
-import Map from '../map/map.jsx';
+import Header from '../header/header';
+import OffersList from '../offers-list/offers-list';
+import ReviewForm from '../review-form/review-form';
+import ReviewsList from '../reviews-list/reviews-list';
+import Spinner from '../spinner/spinner';
+import Map from '../map/map';
 
 const ReviewFormWrapped = withReview(ReviewForm);
 
@@ -61,7 +61,7 @@ class Offer extends React.PureComponent {
   renderSpinner() {
     return (
       <div style={{display: `flex`, height: `100vh`}}>
-        <Spinner/>
+        <Spinner />
       </div>
     );
   }
@@ -89,7 +89,7 @@ class Offer extends React.PureComponent {
 
     return (
       <>
-        <Header/>
+        <Header />
         <main className="page__main page__main--property">
           <section className="property">
             <div className="property__gallery-container container">
@@ -189,7 +189,7 @@ class Offer extends React.PureComponent {
                   <ReviewsList
                     reviews={reviews}
                   />
-                  {(userStatus === AuthorizationStatus.AUTH) && <ReviewFormWrapped offerId={id}/>}
+                  {(userStatus === AuthorizationStatus.AUTH) && <ReviewFormWrapped offerId={id} />}
                 </section>
               </div>
             </div>
@@ -204,7 +204,7 @@ class Offer extends React.PureComponent {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <OffersList
-                offers = {offersNearby}
+                offers={offersNearby}
                 page={Pages.OFFER}
               />
             </section>

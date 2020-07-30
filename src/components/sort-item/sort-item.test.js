@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import SortItem from './sort-item.jsx';
+import SortItem from './sort-item';
 
 import {SortType} from '../../const.js';
 

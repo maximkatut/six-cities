@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 
 import {reviews} from '../../test-data';
 
-import Review from './review.jsx';
+import Review from './review';
 
 describe(`Review`, () => {
   it(`Review should render correctly`, () => {

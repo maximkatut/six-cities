@@ -3,8 +3,8 @@ import React from 'react';
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import {Offer} from './offer.jsx';
-import Spinner from '../spinner/spinner.jsx';
+import {Offer} from './offer';
+import Spinner from '../spinner/spinner';
 
 import {offers, reviews} from '../../test-data/index';
 import {AuthorizationStatus} from '../../reducers/user/user-reducer.js';

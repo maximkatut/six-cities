@@ -6,7 +6,7 @@ import renderer from 'react-test-renderer';
 import {store} from '../../test-data/store';
 import history from '../../history';
 
-import Offer from './offer.jsx';
+import Offer from './offer';
 
 describe(`Offer`, () => {
   it(`Offer should render correctly`, () => {

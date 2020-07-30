@@ -3,7 +3,7 @@ import {Provider} from 'react-redux';
 import renderer from 'react-test-renderer';
 import {Router, Route} from 'react-router-dom';
 
-import Main from './main.jsx';
+import Main from './main';
 
 import {store} from '../../test-data/store';
 import history from '../../history.js';

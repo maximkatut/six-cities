@@ -6,7 +6,7 @@ import renderer from 'react-test-renderer';
 import {offers} from '../../test-data';
 import {store} from '../../test-data/store';
 
-import OfferCard from './offer-card.jsx';
+import OfferCard from './offer-card';
 import {Pages} from '../../const';
 
 describe(`OfferCard`, () => {

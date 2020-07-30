@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import CitiesList from './cities-list.jsx';
+import CitiesList from './cities-list';
 
 import {BrowserRouter} from 'react-router-dom';
 

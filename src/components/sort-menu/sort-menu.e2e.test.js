@@ -5,7 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import {SortType} from '../../const';
 
-import SortMenu from './sort-menu.jsx';
+import SortMenu from './sort-menu';
 
 configure({
   adapter: new Adapter()

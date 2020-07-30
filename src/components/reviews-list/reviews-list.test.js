@@ -3,7 +3,7 @@ import React from 'react';
 
 import {reviews} from '../../test-data';
 
-import ReviewsList from './reviews-list.jsx';
+import ReviewsList from './reviews-list';
 
 describe(`ReviewsList`, () => {
   it(`ReviewsList should render correctly`, () => {

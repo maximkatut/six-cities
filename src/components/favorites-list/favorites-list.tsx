@@ -3,8 +3,8 @@ import {array} from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
-import Header from '../header/header.jsx';
-import OfferCard from '../offer-card/offer-card.jsx';
+import Header from '../header/header';
+import OfferCard from '../offer-card/offer-card';
 
 import {getFavoritesCity, getFavorites} from '../../reducers/data/selectors';
 import {uncapitalize} from '../../utils/index.js';

@@ -3,7 +3,7 @@ import React from 'react';
 import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import ReviewForm from './review-form.jsx';
+import ReviewForm from './review-form';
 
 configure({
   adapter: new Adapter()

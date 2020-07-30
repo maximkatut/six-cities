@@ -7,11 +7,11 @@ import {Router, Route, Switch, Redirect} from 'react-router-dom';
 import {getErrorStatus} from '../../reducers/data/selectors';
 import history from '../../history';
 
-import Main from '../main/main.jsx';
-import Offer from '../offer/offer.jsx';
-import SignIn from '../sign-in/sign-in.jsx';
-import FavoritesList from '../favorites-list/favorites-list.jsx';
-import PrivateRoute from '../private-route/private-route.jsx';
+import Main from '../main/main';
+import Offer from '../offer/offer';
+import SignIn from '../sign-in/sign-in';
+import FavoritesList from '../favorites-list/favorites-list';
+import PrivateRoute from '../private-route/private-route';
 
 const App = ({isError}) => {
   return (
