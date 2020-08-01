@@ -1,12 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import OfferCard from '../offer-card/offer-card';
 
-import {offerPropType} from '../../types';
+import {offerTypes} from '../../types';
 import {Pages} from '../../const.js';
 
-const OffersList = ({offers, page}) => {
+interface Props {
+  offers: offerTypes[];
+  page: typeof Pages;
+}
+
+const OffersList: React.FC<Props> = ({offers, page}: Props) => {
   const placeCardClass = (page === Pages.OFFER) ? `near-places__` : `cities__places-`;
   const tabsContentClass = (page === Pages.OFFER) ? `` : `tabs__content`;
 
@@ -23,11 +27,6 @@ const OffersList = ({offers, page}) => {
       })}
     </div>
   );
-};
-
-OffersList.propTypes = {
-  offers: PropTypes.arrayOf(offerPropType).isRequired,
-  page: PropTypes.string.isRequired
 };
 
 export default OffersList;

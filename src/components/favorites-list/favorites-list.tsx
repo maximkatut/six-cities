@@ -1,5 +1,4 @@
 import React from 'react';
-import {array} from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
@@ -9,8 +8,14 @@ import OfferCard from '../offer-card/offer-card';
 import {getFavoritesCity, getFavorites} from '../../reducers/data/selectors';
 import {uncapitalize} from '../../utils/index.js';
 import {AppRoute} from '../../const.js';
+import {offerTypes} from '../../types';
 
-const FavoritesList = ({cities, favorites}) => {
+interface Props {
+  cities: [];
+  favorites: [];
+}
+
+const FavoritesList: React.FC<Props> = ({cities, favorites}: Props) => {
   const isEmpty = favorites.length === 0;
   return (
     <div className="page">
@@ -37,7 +42,7 @@ const FavoritesList = ({cities, favorites}) => {
                         </div>
                       </div>
                       <div className="favorites__places">
-                        {favorites.map((offer) => {
+                        {favorites.map((offer: offerTypes) => {
                           if (offer.city.name === city) {
                             return (
                               <OfferCard
@@ -65,11 +70,6 @@ const FavoritesList = ({cities, favorites}) => {
       </footer>
     </div>
   );
-};
-
-FavoritesList.propTypes = {
-  cities: array.isRequired,
-  favorites: array.isRequired
 };
 
 const mapStateToProps = (state) => ({

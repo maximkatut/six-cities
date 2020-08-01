@@ -1,11 +1,18 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import {SortType} from '../../const';
 
 import SortItem from '../sort-item/sort-item';
 
-const SortMenu = ({onSortClick, isMenuHide, sortType, handleDropdownClick, listRef}) => {
+interface Props {
+  onSortClick: () => {};
+  isMenuHide: boolean;
+  sortType: string;
+  handleDropdownClick: () => {};
+  listRef: React.LegacyRef<HTMLUListElement>;
+}
+
+const SortMenu: React.FC<Props> = ({onSortClick, isMenuHide, sortType, handleDropdownClick, listRef}: Props) => {
   const isMenuHideClass = isMenuHide ? `` : `places__options--opened`;
   return (
     <form className="places__sorting" action="#" method="get">
@@ -24,7 +31,7 @@ const SortMenu = ({onSortClick, isMenuHide, sortType, handleDropdownClick, listR
         className={`places__options places__options--custom ${isMenuHideClass}`}
         ref={listRef}
       >
-        {Object.values(SortType).map((sort, index) => {
+        {Object.values(SortType).map((sort: string, index) => {
           return (
             <SortItem
               key={sort + index}
@@ -36,14 +43,6 @@ const SortMenu = ({onSortClick, isMenuHide, sortType, handleDropdownClick, listR
       </ul>
     </form>
   );
-};
-
-SortMenu.propTypes = {
-  onSortClick: PropTypes.func.isRequired,
-  isMenuHide: PropTypes.bool.isRequired,
-  sortType: PropTypes.string.isRequired,
-  handleDropdownClick: PropTypes.func.isRequired,
-  listRef: PropTypes.object.isRequired
 };
 
 export default SortMenu;

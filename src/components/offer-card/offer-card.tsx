@@ -1,17 +1,24 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import {ActionCreator as MapActionCreator} from '../../actions/map-actions';
 import {Operation} from '../../reducers/data/data-reducer';
-import {offerPropType} from '../../types';
+import {offerTypes} from '../../types';
 import {Pages, PlaceCardClasses, ImageWrapperClasses, PlaceCardInfoClasses, ImageSizes, AppRoute} from '../../const';
 import {getUserStatus} from '../../reducers/user/selectors';
 import {AuthorizationStatus} from '../../reducers/user/user-reducer';
 import history from '../../history';
 
-const OfferCard = ({offer, onOfferCardHover, onFavotireButtonClick, page, userStatus}) => {
+interface Props {
+  offer?: offerTypes;
+  onOfferCardHover: (id: number) => void;
+  onFavotireButtonClick: (id: number, isFavorite: boolean, page: typeof Pages) => void;
+  page: string;
+  userStatus: string;
+}
+
+const OfferCard: React.FC<Props> = ({offer, onOfferCardHover, onFavotireButtonClick, page, userStatus}: Props) => {
   const {title, offerType, mainImage, premium, price, rate, isFavorite} = offer;
 
   return (
@@ -75,14 +82,6 @@ const OfferCard = ({offer, onOfferCardHover, onFavotireButtonClick, page, userSt
       </div>
     </article>
   );
-};
-
-OfferCard.propTypes = {
-  offer: offerPropType,
-  onOfferCardHover: PropTypes.func.isRequired,
-  onFavotireButtonClick: PropTypes.func.isRequired,
-  page: PropTypes.string.isRequired,
-  userStatus: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({

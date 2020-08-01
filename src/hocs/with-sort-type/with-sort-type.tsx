@@ -1,13 +1,28 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
+import {Subtract} from "utility-types";
 
 import {ActionCreator} from '../../actions/offers-actions';
 import {SortType} from '../../const';
 
+interface InjectingProps {
+  onSortClick: (sortType: string) => void;
+}
+interface State {
+  isMenuHide: boolean;
+  sortType: typeof SortType;
+}
+
+
 const withSortMenu = (Component) => {
-  class WithSortMenu extends React.PureComponent {
+
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectingProps>;
+
+  class WithSortMenu extends React.PureComponent<T, State> {
+    _sortListRef: React.RefObject<HTMLDListElement>;
+
     constructor(props) {
       super(props);
 
@@ -77,11 +92,6 @@ const withSortMenu = (Component) => {
       );
     }
   }
-
-  WithSortMenu.propTypes = {
-    onSortClick: PropTypes.func.isRequired
-  };
-
   return WithSortMenu;
 };
 

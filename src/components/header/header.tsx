@@ -1,5 +1,4 @@
 import React from 'react';
-import {string, shape} from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
@@ -7,7 +6,15 @@ import {getUser, getUserStatus} from '../../reducers/user/selectors';
 import {AuthorizationStatus} from '../../reducers/user/user-reducer';
 import {AppRoute} from '../../const';
 
-const Header = ({user, userStatus}) => {
+interface Props {
+  userStatus: string;
+  user: {
+    email?: string;
+    avatar?: string;
+  };
+}
+
+const Header: React.FC<Props> = ({user, userStatus}: Props) => {
   const isUserLogged = (userStatus === AuthorizationStatus.AUTH) ? true : false;
   return (
     <header className="header">
@@ -35,14 +42,6 @@ const Header = ({user, userStatus}) => {
       </div>
     </header>
   );
-};
-
-Header.propTypes = {
-  userStatus: string.isRequired,
-  user: shape({
-    email: string,
-    avatar: string
-  })
 };
 
 const mapStateToProps = (state) => ({

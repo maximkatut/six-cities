@@ -1,16 +1,31 @@
 import React from 'react';
-import {func, bool, number} from 'prop-types';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
+import {Subtract} from "utility-types";
 
 import {Operation} from '../../reducers/data/data-reducer';
 import {getStatusRequest} from '../../reducers/data/selectors';
+import {MESSAGE_LENGTH} from '../../const';
 
-const MESSAGE_LENGTH = 49;
+interface InjectingProps {
+  postNewReview: ({}) => void;
+  isBusy: boolean;
+  offerId: number;
+}
+interface State {
+  id: number;
+  review: string;
+  rating: number;
+  isDisabled: boolean;
+}
 
 const withReview = (Component) => {
-  class WithReview extends React.PureComponent {
-    constructor(props) {
+
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectingProps>;
+
+  class WithReview extends React.PureComponent<T, State> {
+    constructor(props: T) {
       super(props);
 
       this.state = {
@@ -82,13 +97,6 @@ const withReview = (Component) => {
       );
     }
   }
-
-  WithReview.propTypes = {
-    postNewReview: func.isRequired,
-    isBusy: bool.isRequired,
-    offerId: number.isRequired
-  };
-
   return WithReview;
 };
 

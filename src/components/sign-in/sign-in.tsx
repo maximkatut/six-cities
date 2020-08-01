@@ -1,5 +1,4 @@
 import React from 'react';
-import {func, string} from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
@@ -10,7 +9,15 @@ import {AppRoute} from '../../const';
 
 import Header from '../header/header';
 
-class SignIn extends React.PureComponent {
+interface Props {
+  loginUser: ({ }) => void;
+  userStatus: string;
+}
+
+class SignIn extends React.PureComponent<Props> {
+  _inputEmail: React.RefObject<HTMLInputElement>;
+  _inputPassword: React.RefObject<HTMLInputElement>;
+
   constructor(props) {
     super(props);
     this._inputEmail = React.createRef();
@@ -63,11 +70,6 @@ class SignIn extends React.PureComponent {
     );
   }
 }
-
-SignIn.propTypes = {
-  loginUser: func.isRequired,
-  userStatus: string.isRequired
-};
 
 const mapStateToProps = (state) => ({
   userStatus: getUserStatus(state)

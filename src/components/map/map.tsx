@@ -1,5 +1,4 @@
-import leaflet from 'leaflet';
-import PropTypes from 'prop-types';
+import leaflet, {Map as MapType, Icon, Marker, LatLngExpression} from 'leaflet';
 import React from 'react';
 import {connect} from 'react-redux';
 
@@ -7,9 +6,28 @@ import {MapData} from '../../const.js';
 import {getOffersBySortType} from '../../reducers/data/selectors';
 import {getCardIdOnHover} from '../../reducers/map/selectors';
 import {getActiveCity} from '../../reducers/offers/selectors';
-import {offerFullPropType} from '../../types';
+import {offerTypes} from '../../types';
 
-class Map extends React.PureComponent {
+interface Props {
+  activeOffer?: offerTypes;
+  offers: offerTypes[];
+  offersClosest?: offerTypes[];
+  activeCityName: string;
+  cardIdOnHover: number;
+}
+
+class Map extends React.PureComponent<Props> {
+  _divRef: React.RefObject<HTMLDivElement>;
+  _activeCity: {
+    name: string;
+    coords: LatLngExpression;
+    zoom: number;
+  };
+  _activeIcon: Icon;
+  _icon: Icon;
+  _map: MapType;
+  _markers: Marker[];
+
   constructor(props) {
     super(props);
     this._divRef = React.createRef();
@@ -82,7 +100,6 @@ class Map extends React.PureComponent {
       zoom,
       scrollWheelZoom: false,
       zoomControl: false,
-      marker: true,
       layers: [
         leaflet.tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
           attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
@@ -139,14 +156,6 @@ class Map extends React.PureComponent {
     );
   }
 }
-
-Map.propTypes = {
-  activeOffer: offerFullPropType,
-  offers: PropTypes.arrayOf(offerFullPropType.isRequired).isRequired,
-  offersClosest: PropTypes.arrayOf(offerFullPropType.isRequired),
-  activeCityName: PropTypes.string.isRequired,
-  cardIdOnHover: PropTypes.number.isRequired
-};
 
 const mapStateToProps = (state) => ({
   activeCityName: getActiveCity(state),

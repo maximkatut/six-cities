@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 
@@ -8,8 +7,9 @@ import {Operation} from '../../reducers/data/data-reducer';
 import {getOffers, getOffersNearby, getReviews} from '../../reducers/data/selectors';
 import {getUserStatus} from '../../reducers/user/selectors';
 import {AuthorizationStatus} from '../../reducers/user/user-reducer';
-import {offerFullPropType, reviewPropTypes} from '../../types';
+import {offerTypes, reviewTypes} from "../../types";
 import history from '../../history';
+import {MAX_COUNT_OFFER_IMAGES} from '../../const';
 
 import Header from '../header/header';
 import OffersList from '../offers-list/offers-list';
@@ -20,7 +20,23 @@ import Map from '../map/map';
 
 const ReviewFormWrapped = withReview(ReviewForm);
 
-class Offer extends React.PureComponent {
+interface Props {
+  offers: offerTypes[];
+  offersNearby: offerTypes[];
+  reviews: reviewTypes[];
+  getOfferData: (id: number) => void;
+  onFavotireButtonClick: (id: number, isFavorite: boolean) => void;
+  match: {
+    params: {
+      id?: string;
+    };
+  };
+  location: {};
+  userStatus: string;
+}
+
+class Offer extends React.PureComponent<Props> {
+  _offer: offerTypes | null;
   constructor(props) {
     super(props);
     this._offer = null;
@@ -44,7 +60,7 @@ class Offer extends React.PureComponent {
     if (prevProps.location !== location || prevProps.offers !== offers) {
       const regex = /^\d+$/;
 
-      if (!regex.test(id) || id > offers.length) {
+      if (!regex.test(match.params.id) || id > offers.length) {
         history.push(AppRoute.ROOT);
         return;
       }
@@ -94,7 +110,7 @@ class Offer extends React.PureComponent {
           <section className="property">
             <div className="property__gallery-container container">
               <div className="property__gallery">
-                {imagesGallery.slice(0, 6).map((image, index) => {
+                {imagesGallery.slice(0, MAX_COUNT_OFFER_IMAGES).map((image, index) => {
                   return (
                     <div key={image + index} className="property__image-wrapper">
                       <img className="property__image" src={image} alt="Photo studio" />
@@ -222,21 +238,6 @@ class Offer extends React.PureComponent {
     );
   }
 }
-
-Offer.propTypes = {
-  offers: PropTypes.arrayOf(offerFullPropType).isRequired,
-  reviews: PropTypes.arrayOf(reviewPropTypes).isRequired,
-  offersNearby: PropTypes.arrayOf(offerFullPropType.isRequired),
-  userStatus: PropTypes.string.isRequired,
-  onFavotireButtonClick: PropTypes.func.isRequired,
-  getOfferData: PropTypes.func.isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string
-    }).isRequired
-  }).isRequired,
-  location: PropTypes.object.isRequired
-};
 
 const mapStateToProps = (state) => ({
   reviews: getReviews(state) || [],

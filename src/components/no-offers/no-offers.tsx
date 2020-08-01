@@ -1,7 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const NoOffers = ({activeCityName}) => {
+interface Props {
+  activeCityName: string;
+}
+
+const NoOffers: React.FC<Props> = ({activeCityName}: Props) => {
   return (
     <div className="cities__places-container cities__places-container--empty container">
       <section className="cities__no-places">
@@ -13,10 +16,6 @@ const NoOffers = ({activeCityName}) => {
       <div className="cities__right-section" />
     </div>
   );
-};
-
-NoOffers.propTypes = {
-  activeCityName: PropTypes.string.isRequired
 };
 
 export default NoOffers;

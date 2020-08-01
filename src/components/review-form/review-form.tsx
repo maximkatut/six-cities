@@ -1,9 +1,20 @@
 import React from 'react';
-import {func, bool, string, number} from 'prop-types';
+
+interface Props {
+  isBusy: boolean;
+  isDisabled: boolean;
+  review: string;
+  rating: number;
+  onFormSubmit: () => void;
+  onRadioChange: () => void;
+  onInputChange: () => void;
+}
 
 const COUNT_OF_STARS = 5;
+const MAX_LENGTH = 300;
+const MIN_LENGTH = 50;
 
-const ReviewForm = ({isBusy, isDisabled, review, rating, onFormSubmit, onRadioChange, onInputChange}) => {
+const ReviewForm: React.FC<Props> = ({isBusy, isDisabled, review, rating, onFormSubmit, onRadioChange, onInputChange}: Props) => {
   return (
     <form className="reviews__form form" action="#" method="post"
       onSubmit={onFormSubmit}
@@ -31,7 +42,7 @@ const ReviewForm = ({isBusy, isDisabled, review, rating, onFormSubmit, onRadioCh
               </label>
             </React.Fragment>
           );
-        }).sort((a, b) => {
+        }).sort((a: any, b: any) => {
           return b.key - a.key;
         })}
       </div>
@@ -43,8 +54,8 @@ const ReviewForm = ({isBusy, isDisabled, review, rating, onFormSubmit, onRadioCh
         value={review}
         onChange={onInputChange}
         disabled={isBusy}
-        minLength="50"
-        maxLength="300"
+        minLength={MIN_LENGTH}
+        maxLength={MAX_LENGTH}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least
@@ -59,16 +70,6 @@ const ReviewForm = ({isBusy, isDisabled, review, rating, onFormSubmit, onRadioCh
       </div>
     </form>
   );
-};
-
-ReviewForm.propTypes = {
-  isBusy: bool.isRequired,
-  isDisabled: bool.isRequired,
-  review: string.isRequired,
-  rating: number.isRequired,
-  onFormSubmit: func.isRequired,
-  onRadioChange: func.isRequired,
-  onInputChange: func.isRequired
 };
 
 export default ReviewForm;

@@ -1,4 +1,3 @@
-import {bool, shape, string} from 'prop-types';
 import React from 'react';
 import Notifications, {notify} from 'react-notify-toast';
 import {connect} from 'react-redux';
@@ -13,7 +12,14 @@ import SignIn from '../sign-in/sign-in';
 import FavoritesList from '../favorites-list/favorites-list';
 import PrivateRoute from '../private-route/private-route';
 
-const App = ({isError}) => {
+interface Props {
+  isError: {
+    status: boolean;
+    message: string;
+  };
+}
+
+const App: React.FC<Props> = ({isError}: Props) => {
   return (
     <Router history={history}>
       <Notifications />
@@ -22,8 +28,8 @@ const App = ({isError}) => {
         <PrivateRoute
           exact
           path="/favorites"
-          render={(props) => {
-            return <FavoritesList {...props} />;
+          render={() => {
+            return <FavoritesList />;
           }}
         />
         <Route exact path="/offer/:id?" component={Offer} />
@@ -33,13 +39,6 @@ const App = ({isError}) => {
       </Switch>
     </Router>
   );
-};
-
-App.propTypes = {
-  isError: shape({
-    status: bool.isRequired,
-    message: string.isRequired
-  }).isRequired
 };
 
 const mapStateToProps = (state) => ({

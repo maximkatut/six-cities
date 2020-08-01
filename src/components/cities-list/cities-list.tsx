@@ -1,11 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 import {uncapitalize} from '../../utils';
 import {Cities} from '../../const';
 
-const CitiesList = ({activeCityName}) => {
+interface Props {
+  activeCityName: string;
+}
+
+const CitiesList: React.FC<Props> = ({activeCityName}: Props) => {
   return (
     <ul className="locations__list tabs__list ">
       {Cities.map((city, index) => {
@@ -23,11 +26,6 @@ const CitiesList = ({activeCityName}) => {
       })}
     </ul>
   );
-};
-
-
-CitiesList.propTypes = {
-  activeCityName: PropTypes.string.isRequired
 };
 
 export default CitiesList;

@@ -1,7 +1,11 @@
 import React from 'react';
-import {reviewPropTypes} from '../../types';
+import {reviewTypes} from '../../types';
 
-const Review = ({review}) => {
+interface Props {
+  review?: reviewTypes;
+}
+
+const Review: React.FC<Props> = ({review}: Props) => {
 
   return (
     <li className="reviews__item">
@@ -27,10 +31,6 @@ const Review = ({review}) => {
       </div>
     </li>
   );
-};
-
-Review.propTypes = {
-  review: reviewPropTypes
 };
 
 export default Review;

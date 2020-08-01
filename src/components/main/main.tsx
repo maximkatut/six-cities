@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
 
@@ -7,7 +6,7 @@ import withSortType from '../../hocs/with-sort-type/with-sort-type';
 import {ActionCreator} from '../../actions/offers-actions';
 import {getOffersBySortType, getStatusRequest} from '../../reducers/data/selectors';
 import {getActiveCity} from '../../reducers/offers/selectors';
-import {offerPropType} from '../../types';
+import {offerTypes} from '../../types';
 import {Pages, Cities, AppRoute} from '../../const';
 import {capitalize} from '../../utils';
 import history from '../../history';
@@ -22,7 +21,19 @@ import Spinner from '../spinner/spinner';
 
 const SortMenuWrapped = withSortType(SortMenu);
 
-class Main extends React.PureComponent {
+interface Props {
+  offers: offerTypes[];
+  activeCityName: string;
+  isBusy: boolean;
+  setActiveCity: (city: string) => void;
+  match: {
+    params: {
+      city: string;
+    };
+  };
+}
+
+class Main extends React.PureComponent<Props> {
   componentDidMount() {
     const {setActiveCity, match} = this.props;
     const city = match.params.city;
@@ -105,18 +116,6 @@ class Main extends React.PureComponent {
     );
   }
 }
-
-Main.propTypes = {
-  offers: PropTypes.arrayOf(offerPropType).isRequired,
-  activeCityName: PropTypes.string.isRequired,
-  isBusy: PropTypes.bool.isRequired,
-  setActiveCity: PropTypes.func.isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      city: PropTypes.string
-    })
-  })
-};
 
 const mapStateToProps = (state) => ({
   offers: getOffersBySortType(state),

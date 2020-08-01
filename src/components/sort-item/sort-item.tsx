@@ -1,7 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const SortItem = ({onSortClick, sortType}) => {
+interface Props {
+  onSortClick: (sortType: string) => void;
+  sortType?: string;
+}
+
+const SortItem: React.FC<Props> = ({onSortClick, sortType}: Props) => {
   return (
     <li
       className="places__option"
@@ -13,11 +17,6 @@ const SortItem = ({onSortClick, sortType}) => {
       {sortType}
     </li>
   );
-};
-
-SortItem.propTypes = {
-  onSortClick: PropTypes.func.isRequired,
-  sortType: PropTypes.string
 };
 
 export default SortItem;

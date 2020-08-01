@@ -1,11 +1,14 @@
 import React from 'react';
-import {arrayOf} from 'prop-types';
 
-import {reviewPropTypes} from '../../types';
+import {reviewTypes} from '../../types';
 
 import Review from '../review/review';
 
-const ReviewsList = ({reviews}) => {
+interface Props {
+  reviews?: reviewTypes[];
+}
+
+const ReviewsList: React.FC<Props> = ({reviews}: Props) => {
 
   return (
     <ul className="reviews__list">
@@ -17,10 +20,6 @@ const ReviewsList = ({reviews}) => {
       })}
     </ul>
   );
-};
-
-ReviewsList.propTypes = {
-  reviews: arrayOf(reviewPropTypes)
 };
 
 export default ReviewsList;
