@@ -2,8 +2,8 @@ import {applyMiddleware, createStore} from 'redux';
 import {composeWithDevTools} from "redux-devtools-extension";
 import thunk from 'redux-thunk';
 
-import {ActionCreator as DataActionCreator} from './actions/data-actions.js';
-import {ActionCreator as UserActionCreator} from './actions/user-actions.js';
+import {ActionCreator as DataActionCreator} from './actions/data-actions';
+import {ActionCreator as UserActionCreator} from './actions/user-actions';
 import {createAPI} from './api';
 import {AppRoute} from './const';
 import history from './history';

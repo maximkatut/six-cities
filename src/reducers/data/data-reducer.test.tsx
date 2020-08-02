@@ -2,11 +2,10 @@ import MockAdapter from "axios-mock-adapter";
 import {ActionType} from '../../actions/types';
 import offersAdapter, {adaptData as offerAdapter} from '../../adapter/offers';
 import reviewsAdapter from '../../adapter/reviews';
-import {createAPI} from "../../api.js";
+import {createAPI} from "../../api";
 import {offers, offersFromRequest, reviews, reviewsFromRequest} from '../../test-data';
-import {Operation} from '../data/data-reducer';
+import {Operation} from './data-reducer';
 import reducer from './data-reducer';
-
 
 describe(`Reducer works correctly`, () => {
 
@@ -77,7 +76,11 @@ describe(`Reducer works correctly`, () => {
 });
 
 describe(`Operations work correctly`, () => {
-  const api = createAPI(() => {}, () => {});
+  const onUnauthorized = jest.fn();
+  const onBadRequest = jest.fn();
+  const api = createAPI(onUnauthorized, onBadRequest);
+
+  const getState = jest.fn();
   it(`Should make a correct API call to hotels`, function () {
     const hotelsLoader = Operation.loadOffers();
     const apiMock = new MockAdapter(api);
@@ -87,7 +90,7 @@ describe(`Operations work correctly`, () => {
       .onGet(`/hotels`)
       .reply(200, offersFromRequest);
 
-    hotelsLoader(dispatch, () => {}, api)
+    hotelsLoader(dispatch, getState, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -110,7 +113,6 @@ describe(`Operations work correctly`, () => {
     const reviewsLoader = Operation.loadReviews(id);
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const getState = () => {};
 
     apiMock
       .onGet(`/comments/21`)
@@ -131,7 +133,6 @@ describe(`Operations work correctly`, () => {
     const hotelsNearbyLoader = Operation.loadOffersNearby(id);
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const getState = () => {};
 
     apiMock
       .onGet(`/hotels/21/nearby`)
@@ -152,7 +153,6 @@ describe(`Operations work correctly`, () => {
     const postReviewLoader = Operation.postReview(review);
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const getState = () => {};
 
     apiMock
       .onPost(`/comments/21`)
@@ -181,7 +181,6 @@ describe(`Operations work correctly`, () => {
     const loadFavoritesLoader = Operation.loadFavorites();
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const getState = () => {};
 
     apiMock
       .onGet(`/favorite`)
@@ -204,7 +203,6 @@ describe(`Operations work correctly`, () => {
     const postFavoriteLoader = Operation.postFavorite(id, isFavorite, isOfferPage);
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const getState = () => {};
 
     apiMock
       .onPost(`/favorite/21/0`)
@@ -226,7 +224,6 @@ describe(`Operations work correctly`, () => {
     const postFavoriteActiveOfferLoader = Operation.postFavoriteActiveOffer(id, isFavorite);
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
-    const getState = () => {};
 
     apiMock
       .onPost(`/favorite/21/0`)

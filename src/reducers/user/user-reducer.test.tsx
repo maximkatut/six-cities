@@ -2,8 +2,8 @@ import MockAdapter from "axios-mock-adapter";
 import reducer, {AuthorizationStatus} from "./user-reducer";
 import {ActionCreator} from '../../actions/user-actions';
 import {ActionType} from '../../actions/types';
-import {Operation} from '../../reducers/user/user-reducer';
-import {createAPI} from "../../api.js";
+import {Operation} from './user-reducer';
+import {createAPI} from "../../api";
 
 
 it(`Reducer without additional parameters should return initial state`, () => {
@@ -66,24 +66,26 @@ describe(`Action creators work correctly`, () => {
 });
 
 describe(`Operation works correctly`, () => {
-  const api = createAPI(() => {}, () => {});
+  const onUnauthorized = jest.fn();
+  const onBadRequest = jest.fn();
+  const api = createAPI(onUnauthorized, onBadRequest);
 
   it(`Should make a correct API call to -login POST request`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
+    const getState = jest.fn();
     const loginLoader = Operation.login({login: `max@max.ru`, password: 123});
     const user = {email: `max@amx.max`, avatar: `avatar`};
 
     apiMock
       .onPost(`/login`)
       .reply(200, {
-        email: `max@amx.max`,
-        // eslint-disable-next-line camelcase
-        avatar_url: `avatar`
+        "email": `max@amx.max`,
+        "avatar_url": `avatar`
       }
       );
 
-    return loginLoader(dispatch, () => {}, api)
+    return loginLoader(dispatch, getState, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -100,6 +102,7 @@ describe(`Operation works correctly`, () => {
   it(`Should make a correct API call to -login GET request`, () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
+    const getState = jest.fn();
     const checkAuthLoader = Operation.checkAuth();
     const user = {};
 
@@ -107,7 +110,7 @@ describe(`Operation works correctly`, () => {
       .onGet(`/login`)
       .reply(200, user);
 
-    return checkAuthLoader(dispatch, () => {}, api)
+    return checkAuthLoader(dispatch, getState, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {

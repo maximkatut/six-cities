@@ -22,8 +22,8 @@ describe(`Private Route`, () => {
     const wrapper = mount(
         <MemoryRouter initialEntries={[`/favorites`]}>
           <PrivateRoute
-            render={(props) => {
-              return <Component {...props}/>;
+            render={() => {
+              return <Component />;
             }}
             path={`/favorites`}
             exact
@@ -39,8 +39,8 @@ describe(`Private Route`, () => {
     const wrapper = mount(
         <MemoryRouter initialEntries={[`/favorites`]}>
           <PrivateRoute
-            render={(props) => {
-              return <Component {...props}/>;
+            render={() => {
+              return <Component/>;
             }}
             path={`/favorites`}
             exact

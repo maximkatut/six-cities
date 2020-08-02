@@ -18,7 +18,7 @@ describe(`SortMenu e2e`, () => {
   const sortType = SortType.POPULAR;
   const onSortClick = jest.fn();
   const onDropdownClick = jest.fn();
-  const listRef = React.createRef();
+  const listRef: React.RefObject<HTMLUListElement> = React.createRef();
 
   beforeEach(() => {
     wrapper = mount(
@@ -47,7 +47,7 @@ describe(`SortMenu e2e`, () => {
   });
 
   it(`SortMenu should called cb on click`, () => {
-    let arrow = wrapper.find(`.places__sorting-type`);
+    const arrow = wrapper.find(`.places__sorting-type`);
 
     arrow.simulate(`click`);
 

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import {store} from '../../test-data/store';
 import {ActionCreator} from '../../actions/offers-actions';
-import {SortType} from '../../const.js';
+import {SortType} from '../../const';
 
 import withSortMenu from './with-sort-type';
 
@@ -35,7 +35,7 @@ describe(`withSortMenu`, () => {
   beforeEach(() => {
     component = renderer.create((
       <Provider store={store}>
-        <MockComponentWrapped/>
+        <MockComponentWrapped />
       </Provider>
     ), {
       createNodeMock() {

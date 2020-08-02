@@ -34,9 +34,14 @@ const MockComponentWrapped = withReview(MockComponent);
 
 describe(`withReview`, () => {
   it(`withReview is rendered correctly`, () => {
+    const postNewReview = jest.fn();
     const component = renderer.create((
       <Provider store={store}>
-        <MockComponentWrapped offerId={1}/>
+        <MockComponentWrapped
+          offerId={1}
+          postNewReview={postNewReview}
+          isBusy={false}
+        />
       </Provider>
     ), {
       createNodeMock() {
@@ -49,21 +54,22 @@ describe(`withReview`, () => {
   });
 
   it(`withReview should dispatch an operation after form submit`, () => {
-
-    store.dispatch = jest.fn();
+    const postNewReview = jest.fn();
 
     const mockEvent = {
-      preventDefault() {}
+      preventDefault() {
+        return undefined;
+      }
     };
 
     const wrapper = mount(
         <Provider store={store}>
-          <MockComponentWrapped offerId={1}/>
+          <MockComponentWrapped offerId={1} postNewReview={postNewReview} isBusy={false}/>
         </Provider>
     );
 
     wrapper.find(`form`).at(0).simulate(`submit`, mockEvent);
 
-    expect(store.dispatch).toHaveBeenCalledTimes(1);
+    expect(postNewReview).toHaveBeenCalledTimes(1);
   });
 });

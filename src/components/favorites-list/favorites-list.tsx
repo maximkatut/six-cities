@@ -6,8 +6,8 @@ import Header from '../header/header';
 import OfferCard from '../offer-card/offer-card';
 
 import {getFavoritesCity, getFavorites} from '../../reducers/data/selectors';
-import {uncapitalize} from '../../utils/index.js';
-import {AppRoute} from '../../const.js';
+import {uncapitalize} from '../../utils/index';
+import {AppRoute} from '../../const';
 import {offerTypes} from '../../types';
 
 interface Props {

@@ -2,9 +2,9 @@ import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import {withSortMenu} from './with-sort-type.js';
+import {withSortMenu} from './with-sort-type';
 
-import {SortType} from '../../const.js';
+import {SortType} from '../../const';
 
 Enzyme.configure({
   adapter: new Adapter()

@@ -20,7 +20,9 @@ describe(`Sign In e2e`, () => {
 
   it(`Sign In should dispatch an action on button click`, () => {
     const mockEvent = {
-      preventDefault() {}
+      preventDefault() {
+        return undefined;
+      }
     };
 
     store.dispatch = jest.fn();

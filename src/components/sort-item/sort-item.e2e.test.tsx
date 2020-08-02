@@ -33,7 +33,7 @@ describe(`SortItem e2e`, () => {
   });
 
   it(`SortItem should called with cb`, () => {
-    let item = wrapper.find(`li`).at(0);
+    const item = wrapper.find(`li`).at(0);
     expect(item.hasClass(`places__option`)).toBe(true);
 
     item.simulate(`click`);
@@ -43,7 +43,7 @@ describe(`SortItem e2e`, () => {
   });
 
   it(`SortItem should called cb with different props`, () => {
-    let item = wrapper.find(`li`).at(0);
+    const item = wrapper.find(`li`).at(0);
     wrapper.setProps({sortType: SortType.TOP});
     item.simulate(`click`);
 

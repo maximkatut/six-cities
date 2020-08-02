@@ -1,6 +1,6 @@
 import {createSelector} from "reselect";
 import {getOffersByCity, getOffersBySort} from '../../utils';
-import NameSpace from "../name-space.js";
+import NameSpace from "../name-space";
 import {getActiveCity, getSortType} from '../offers/selectors';
 
 export const getOffers = (state) => {

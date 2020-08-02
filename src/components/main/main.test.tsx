@@ -6,7 +6,7 @@ import {Router, Route} from 'react-router-dom';
 import Main from './main';
 
 import {store} from '../../test-data/store';
-import history from '../../history.js';
+import history from '../../history';
 
 describe(`Main`, () => {
 
@@ -14,7 +14,7 @@ describe(`Main`, () => {
     const tree = renderer.create(
         <Router history={history}>
           <Provider store={store}>
-            <Route component={Main}/>
+            <Route component={Main} />
           </Provider>
         </Router>,
         {createNodeMock: () => document.createElement(`div`)}

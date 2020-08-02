@@ -76,7 +76,7 @@ describe(`ReviewForm`, () => {
   it(`ReviewForm should post on submit`, () => {
     const form = wrapper.find(`form`);
 
-    form.simulate(`submit`, {preventDefault: ()=>{}});
+    form.simulate(`submit`, {preventDefault: ()=>undefined});
 
     expect(onFormSubmit).toHaveBeenCalledTimes(1);
   });
@@ -84,7 +84,7 @@ describe(`ReviewForm`, () => {
   it(`ReviewForm textarea should call function on change`, () => {
     const input = wrapper.find(`textarea`);
 
-    input.simulate(`change`, {preventDefault: ()=>{}});
+    input.simulate(`change`, {preventDefault: ()=>undefined});
 
     expect(onInputChange).toHaveBeenCalledTimes(1);
   });
@@ -93,8 +93,8 @@ describe(`ReviewForm`, () => {
     const inputStar1 = wrapper.find(`input[name="rating"]`).at(0);
     const inputStar2 = wrapper.find(`input[name="rating"]`).at(1);
 
-    inputStar1.simulate(`change`, {preventDefault: ()=>{}});
-    inputStar2.simulate(`change`, {preventDefault: ()=>{}});
+    inputStar1.simulate(`change`, {preventDefault: ()=>undefined});
+    inputStar2.simulate(`change`, {preventDefault: ()=>undefined});
 
     expect(onRadioChange).toHaveBeenCalledTimes(2);
   });

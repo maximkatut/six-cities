@@ -24,7 +24,7 @@ exports[`ReviewsList ReviewsList should render correctly 1`] = `
       <span
         className="reviews__user-name"
       >
-        Max
+        Alex
       </span>
     </div>
     <div
@@ -39,7 +39,7 @@ exports[`ReviewsList ReviewsList should render correctly 1`] = `
           <span
             style={
               Object {
-                "width": "80%",
+                "width": "60%",
               }
             }
           />
@@ -83,7 +83,7 @@ exports[`ReviewsList ReviewsList should render correctly 1`] = `
       <span
         className="reviews__user-name"
       >
-        Alex
+        Max
       </span>
     </div>
     <div
@@ -98,7 +98,7 @@ exports[`ReviewsList ReviewsList should render correctly 1`] = `
           <span
             style={
               Object {
-                "width": "60%",
+                "width": "80%",
               }
             }
           />

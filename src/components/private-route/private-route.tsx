@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 
 import {AuthorizationStatus} from "../../reducers/user/user-reducer";
 import {getUserStatus} from "../../reducers/user/selectors";
-import {AppRoute} from "../../const.js";
+import {AppRoute} from "../../const";
 
 type Props = RouteProps & {
   userStatus: string;

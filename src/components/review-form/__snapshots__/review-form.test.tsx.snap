@@ -5,7 +5,7 @@ exports[`ReviewForm ReviewForm should render correctly 1`] = `
   action="#"
   className="reviews__form form"
   method="post"
-  onSubmit={[Function]}
+  onSubmit={[MockFunction]}
 >
   <label
     className="reviews__label form__label"
@@ -23,7 +23,7 @@ exports[`ReviewForm ReviewForm should render correctly 1`] = `
       disabled={false}
       id="5-stars"
       name="rating"
-      onChange={[Function]}
+      onChange={[MockFunction]}
       type="radio"
     />
     <label
@@ -48,7 +48,7 @@ exports[`ReviewForm ReviewForm should render correctly 1`] = `
       disabled={false}
       id="4-stars"
       name="rating"
-      onChange={[Function]}
+      onChange={[MockFunction]}
       type="radio"
     />
     <label
@@ -73,7 +73,7 @@ exports[`ReviewForm ReviewForm should render correctly 1`] = `
       disabled={false}
       id="3-stars"
       name="rating"
-      onChange={[Function]}
+      onChange={[MockFunction]}
       type="radio"
     />
     <label
@@ -98,7 +98,7 @@ exports[`ReviewForm ReviewForm should render correctly 1`] = `
       disabled={false}
       id="2-stars"
       name="rating"
-      onChange={[Function]}
+      onChange={[MockFunction]}
       type="radio"
     />
     <label
@@ -123,7 +123,7 @@ exports[`ReviewForm ReviewForm should render correctly 1`] = `
       disabled={false}
       id="1-stars"
       name="rating"
-      onChange={[Function]}
+      onChange={[MockFunction]}
       type="radio"
     />
     <label
@@ -146,10 +146,10 @@ exports[`ReviewForm ReviewForm should render correctly 1`] = `
     className="reviews__textarea form__textarea"
     disabled={false}
     id="review"
-    maxLength="300"
-    minLength="50"
+    maxLength={300}
+    minLength={50}
     name="review"
-    onChange={[Function]}
+    onChange={[MockFunction]}
     placeholder="Tell how was your stay, what you like and what can be improved"
     value="hello"
   />

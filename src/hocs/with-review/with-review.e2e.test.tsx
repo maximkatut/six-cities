@@ -2,7 +2,7 @@ import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import {withReview} from './with-review.js';
+import withReview from './with-review';
 
 Enzyme.configure({
   adapter: new Adapter()
@@ -108,7 +108,9 @@ describe(`HOC withSortType`, () => {
     expect(wrapper.state(`review`)).toEqual(`Lorem ipsum dolor sit amet, pro solum dolore deneff`);
     expect(wrapper.state(`rating`)).toEqual(5);
 
-    wrapper.instance()._handleFormSubmit({preventDefault: ()=>{}});
+    wrapper.instance()._handleFormSubmit({preventDefault: ()=>{
+      return undefined;
+    }});
     wrapper.update();
 
     expect(wrapper.state(`review`)).toEqual(``);

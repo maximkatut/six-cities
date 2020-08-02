@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 
 import SortItem from './sort-item';
 
-import {SortType} from '../../const.js';
+import {SortType} from '../../const';
 
 describe(`SortItem`, () => {
 

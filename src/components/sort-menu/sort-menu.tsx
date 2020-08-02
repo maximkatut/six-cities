@@ -5,11 +5,11 @@ import {SortType} from '../../const';
 import SortItem from '../sort-item/sort-item';
 
 interface Props {
-  onSortClick: () => {};
+  onSortClick: () => void;
   isMenuHide: boolean;
   sortType: string;
-  handleDropdownClick: () => {};
-  listRef: React.LegacyRef<HTMLUListElement>;
+  handleDropdownClick: () => void;
+  listRef: React.RefObject<HTMLUListElement>;
 }
 
 const SortMenu: React.FC<Props> = ({onSortClick, isMenuHide, sortType, handleDropdownClick, listRef}: Props) => {

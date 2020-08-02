@@ -1,4 +1,4 @@
-import {OfferTypes} from '../const.js';
+import {OfferTypes} from '../const';
 import {LatLngExpression} from 'leaflet';
 
 export interface offerTypes {

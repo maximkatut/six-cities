@@ -3,7 +3,7 @@ import React from 'react';
 import OfferCard from '../offer-card/offer-card';
 
 import {offerTypes} from '../../types';
-import {Pages} from '../../const.js';
+import {Pages} from '../../const';
 
 interface Props {
   offers: offerTypes[];

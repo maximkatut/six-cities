@@ -9,7 +9,6 @@ import {store} from '../../test-data/store';
 
 import OfferCard from './offer-card';
 import {Pages} from '../../const';
-import {AuthorizationStatus} from '../../reducers/user/user-reducer';
 
 describe(`OfferCard e2e`, () => {
   let component;
@@ -23,7 +22,6 @@ describe(`OfferCard e2e`, () => {
             <OfferCard
               offer={offers[0]}
               page={Pages.MAIN}
-              userStatus={AuthorizationStatus.AUTH}
             />
           </Provider>
         </BrowserRouter>);

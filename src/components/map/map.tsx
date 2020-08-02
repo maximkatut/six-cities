@@ -2,7 +2,7 @@ import leaflet, {Map as MapType, Icon, Marker, LatLngExpression} from 'leaflet';
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {MapData} from '../../const.js';
+import {MapData} from '../../const';
 import {getOffersBySortType} from '../../reducers/data/selectors';
 import {getCardIdOnHover} from '../../reducers/map/selectors';
 import {getActiveCity} from '../../reducers/offers/selectors';

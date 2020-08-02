@@ -7,7 +7,7 @@ import {Offer} from './offer';
 import Spinner from '../spinner/spinner';
 
 import {offers, reviews} from '../../test-data/index';
-import {AuthorizationStatus} from '../../reducers/user/user-reducer.js';
+import {AuthorizationStatus} from '../../reducers/user/user-reducer';
 
 configure({
   adapter: new Adapter()
@@ -36,6 +36,8 @@ describe(`Offer e2e`, () => {
           match={match}
           location={{loc: `location`}}
           getOfferData={getOfferData}
+          isBusy={false}
+          postNewReview={() => undefined}
         />
     );
   });
