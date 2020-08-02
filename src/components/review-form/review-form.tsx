@@ -21,8 +21,8 @@ const ReviewForm: React.FC<Props> = ({isBusy, isDisabled, review, rating, onForm
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {new Array(COUNT_OF_STARS).fill(``).map((_, index) => {
-          const id = index + 1;
+        {new Array(COUNT_OF_STARS).fill(``).map((_, index, array) => {
+          const id = array.length - index;
           return (
             <React.Fragment key={id}>
               <input
@@ -42,8 +42,6 @@ const ReviewForm: React.FC<Props> = ({isBusy, isDisabled, review, rating, onForm
               </label>
             </React.Fragment>
           );
-        }).sort((a: any, b: any) => {
-          return b.key - a.key;
         })}
       </div>
       <textarea
