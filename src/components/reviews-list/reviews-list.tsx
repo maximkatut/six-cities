@@ -17,7 +17,7 @@ const ReviewsList: React.FC<Props> = ({reviews}: Props) => {
           key={review.id}
           review={review}
         />;
-      })}
+      }).reverse().slice(0, 10)}
     </ul>
   );
 };
