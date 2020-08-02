@@ -6,6 +6,7 @@ import withReview from '../../hocs/with-review/with-review';
 import {Operation} from '../../reducers/data/data-reducer';
 import {getOffers, getOffersNearby, getReviews} from '../../reducers/data/selectors';
 import {getUserStatus} from '../../reducers/user/selectors';
+import {getStatusRequest} from '../../reducers/data/selectors';
 import {AuthorizationStatus} from '../../reducers/user/user-reducer';
 import {offerTypes, reviewTypes} from "../../types";
 import history from '../../history';
@@ -33,6 +34,8 @@ interface Props {
   };
   location: {};
   userStatus: string;
+  isBusy: boolean;
+  postNewReview: () => void;
 }
 
 class Offer extends React.PureComponent<Props> {
@@ -83,7 +86,7 @@ class Offer extends React.PureComponent<Props> {
   }
 
   renderOffer() {
-    const {reviews, offersNearby, userStatus, onFavotireButtonClick} = this.props;
+    const {reviews, offersNearby, userStatus, onFavotireButtonClick, isBusy, postNewReview} = this.props;
 
     const {
       appliences,
@@ -205,7 +208,7 @@ class Offer extends React.PureComponent<Props> {
                   <ReviewsList
                     reviews={reviews}
                   />
-                  {(userStatus === AuthorizationStatus.AUTH) && <ReviewFormWrapped offerId={id} />}
+                  {(userStatus === AuthorizationStatus.AUTH) && <ReviewFormWrapped offerId={id} isBusy={isBusy} postNewReview={postNewReview}/>}
                 </section>
               </div>
             </div>
@@ -243,7 +246,8 @@ const mapStateToProps = (state) => ({
   reviews: getReviews(state) || [],
   offersNearby: getOffersNearby(state) || [],
   userStatus: getUserStatus(state),
-  offers: getOffers(state)
+  offers: getOffers(state),
+  isBusy: getStatusRequest(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -254,6 +258,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(Operation.loadReviews(id));
     dispatch(Operation.loadOffersNearby(id));
   },
+  postNewReview(review) {
+    dispatch(Operation.postReview(review));
+  }
 });
 
 export {Offer};

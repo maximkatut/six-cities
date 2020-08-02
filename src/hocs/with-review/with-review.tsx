@@ -1,10 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
 import {Subtract} from "utility-types";
 
-import {Operation} from '../../reducers/data/data-reducer';
-import {getStatusRequest} from '../../reducers/data/selectors';
 import {MESSAGE_LENGTH} from '../../const';
 
 interface InjectingProps {
@@ -100,20 +96,4 @@ const withReview = (Component) => {
   return WithReview;
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  postNewReview(review) {
-    dispatch(Operation.postReview(review));
-  }
-});
-
-const mapStateToProps = (state) => ({
-  isBusy: getStatusRequest(state)
-});
-
-const composedWithReview = compose(
-    connect(mapStateToProps, mapDispatchToProps),
-    withReview
-);
-
-export {withReview};
-export default composedWithReview;
+export default withReview;
