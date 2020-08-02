@@ -1,4 +1,6 @@
-export const offers = [
+
+import {offerTypes, reviewTypes} from '../types';
+export const offers: offerTypes[] = [
   {
     appliences: [`Wi-Fi`, `Microwave`],
     bedrooms: 3,
@@ -50,6 +52,7 @@ export const offers = [
       super: false
     },
     id: 2,
+    isFavorite: false,
     imagesGallery: [
       `img/apartment-01.jpg`,
       `img/apartment-03.jpg`,
@@ -67,7 +70,7 @@ export const offers = [
 
 export const cities = [{coords: [52.38333, 4.9], name: `Gomel`}];
 
-export const reviews = [
+export const reviews: reviewTypes[] = [
   {
     id: 0,
     user: {
