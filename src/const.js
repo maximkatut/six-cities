@@ -1,3 +1,7 @@
+export const MAX_COUNT_OFFER_IMAGES = 6;
+
+export const MESSAGE_LENGTH = 49;
+
 export const OfferTypes = [
   `Apartment`, `Room`, `House`, `Hotel`
 ];
