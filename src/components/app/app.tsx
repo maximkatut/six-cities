@@ -5,6 +5,7 @@ import {Router, Route, Switch, Redirect} from 'react-router-dom';
 
 import {getErrorStatus} from '../../reducers/data/selectors';
 import history from '../../history';
+import {AppRoute} from '../../const';
 
 import Main from '../main/main';
 import Offer from '../offer/offer';
@@ -27,15 +28,15 @@ const App: React.FC<Props> = ({isError}: Props) => {
       <Switch>
         <PrivateRoute
           exact
-          path="/favorites"
+          path={AppRoute.FAVORITES}
           render={() => {
             return <FavoritesList />;
           }}
         />
-        <Route exact path="/offer/:id?" component={Offer} />
-        <Route exact path="/login" component={SignIn} />
-        <Route exact path="/:city?" component={Main} />
-        <Redirect path="" to="/" />
+        <Route exact path={`${AppRoute.OFFER}/:id?`} component={Offer} />
+        <Route exact path={AppRoute.LOGIN} component={SignIn} />
+        <Route exact path={`${AppRoute.ROOT}:city?`} component={Main} />
+        <Redirect path="" to={AppRoute.ROOT} />
       </Switch>
     </Router>
   );

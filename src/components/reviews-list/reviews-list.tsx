@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {reviewTypes} from '../../types';
+import {MAX_COUNT_REVIEWS} from '../../const';
 
 import Review from '../review/review';
 
@@ -17,7 +18,7 @@ const ReviewsList: React.FC<Props> = ({reviews}: Props) => {
           key={review.id}
           review={review}
         />;
-      }).reverse().slice(0, 10)}
+      }).reverse().slice(0, MAX_COUNT_REVIEWS)}
     </ul>
   );
 };
